@@ -14,6 +14,7 @@ public class Order {
 	private int OrderID;
 	private double GST = 0;
 	private double ServiceTax = 0;
+	private double Discount = 0;
 	
 	//constructor
 	public Order(Staff staff,String TableID, int OrderID) {
@@ -60,6 +61,10 @@ public class Order {
 		return this.Items;
 	}
 	
+	public double getDiscount() {
+		return this.Discount;
+	}
+	
 	//operations
 	
 	//adding items
@@ -96,17 +101,18 @@ public class Order {
 		System.out.println(this.getTableID());
 		System.out.println("Qty MenuItem");
 		for(MenuItem i : Items.keySet()) {
-				System.out.println(i.getName() + Items.get);
+				System.out.println(i.getName() + Items.get(i));
 		}
 	}
 
 	//calculating the total price
-	public void CalculateTotalPriceWithoutTax() {
+	public void CalculateTotalPriceWithoutTax(double discount) {
 		double price = 0;
 		for(MenuItem i : Items.keySet()) {
 			price += i.getPrice() * Items.get(i);
 		}
-		this.TotalPriceWithoutTax = price;
+		this.Discount = price *discount;
+		this.TotalPriceWithoutTax = price - this.Discount;
 	}
 	
 	public void CalculateServiceTax() {
@@ -120,7 +126,8 @@ public class Order {
 		this.GST = tax;
 	}
 	
-	public double CalculateTotalPrice() {
+	public void CalculateTotalPrice() {
 		double price = this.GST+this.ServiceTax+this.TotalPriceWithoutTax;
+		this.TotalPriceWithTax = price;
 	}
 }

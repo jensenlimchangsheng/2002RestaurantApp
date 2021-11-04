@@ -1,57 +1,67 @@
 package project2002;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class MainUI extends UI {
-
-	public MainUI() {
-	}
-
+public class mainUI{
+	
 	public static void main(String[] args) {
-		int choice=0;
-		MenuUI menuUI; 
-		TableUI tableUI;
-		OrderUI orderUI;
-		Restaurant rest = new Restaurant();
-		menuUI= new MenuUI(rest);
-		tableUI= new TableUI(rest);
-		orderUI= new OrderUI(rest);
-		rest.addUI(tableUI,menuUI,orderUI);
-		
+		String temp="";
 		Scanner scan= new Scanner(System.in);
+		ArrayList<UI> uiList= new ArrayList<UI>();
+		int choice=0;
+		MenuUI menuUI=new MenuUI(scan);
+		uiList.add(menuUI);
+		OrderUI orderUI=new OrderUI(scan);
+		uiList.add(orderUI);
+		SalesReportUI srUI=new SalesReportUI(scan);
+		uiList.add(srUI);
+		CustomerUI customerUI=new CustomerUI(scan);
+		uiList.add(customerUI);
+		TableUI tableUI=new TableUI(scan);
+		uiList.add(tableUI);
+		Restaurant rest = new Restaurant();
+		rest.assignUI(uiList);
 		do {
-		System.out.printf("-----Welcome to Restaurant XXX-------\n"
-						+ "Please select one of this 4 options: \n"
-						+ "1.	Menu\n"
-						+ "2.	Order\n"
-						+ "3.	Table and Reservation\n"
-						+ "4.	Quit");
+			System.out.printf("-----Welcome to Restaurant XXX-------\n"
+					+ "Please select one of this 4 options: \n"
+					+ "1.	Menu\n"
+					+ "2.	Order\n"
+					+ "3.	SalesReport\n"
+					+ "4.	New Customer\n"
+					+ "5.	Table and Reservation\n"
+					+ "6.	Quit\n"
+					+ "Please enter your choice: ");
 		try {
 			choice =scan.nextInt();
 			}
 		catch(InputMismatchException e) {
+			temp=scan.nextLine();
 			System.out.println("Invalid Input.");
 			}
 		switch(choice) {
 		case 1:
-			menuUI.printMenuOptions();
+			menuUI.printOptions();
 			break;
 		case 2:
-			orderUI.printOrderOptions();
+			orderUI.printOptions();
 			break;
 		case 3:
-			tableUI.printTableOptions();
+			srUI.printOptions();
 			break;
 		case 4:
+			customerUI.printOptions();
+			break;
+		case 5:
+			tableUI.printOptions();
 			break;
 		default:
-			System.out.println("Invalid Input.");
+			System.out.println("");
 		}
-		} while(choice!=4);
+		} while(choice!=6);
 		System.out.println("THANK YOU.");
 		scan.close();
-
 	}
 
 }

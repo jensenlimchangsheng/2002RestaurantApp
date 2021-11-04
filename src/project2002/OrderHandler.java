@@ -1,10 +1,15 @@
 package project2002;
 import java.util.*;
 
+import project2002.Restaurant.handlerType;
 
-public class OrderHandler {
+public class OrderHandler extends Handler {
 	private ArrayList<Order> Orders;
 	private int OrderCounter = 0;
+	
+	public OrderHandler(){
+		type=handlerType.ORDER;
+	}
 	
 	public int createOrder(String TableID, Staff staff) {
 		Order temp = new Order(staff,TableID,OrderCounter);
@@ -41,7 +46,7 @@ public class OrderHandler {
 			return false;
 		}
 		else {
-			Orders.get(temp).AddItems(item);
+			Orders.get(temp).AddItems(item,Qty);
 			return true;
 		}
 	}
@@ -62,7 +67,7 @@ public class OrderHandler {
 		}
 	}
 	
-	public void printInvoice(int OrderID) {
+	public Order printInvoice(int OrderID, double discount) {
 		int temp = -1;
 		for(int j = 0; j<Orders.size();j++) {
 			if(Orders.get(j).getOrderID() == OrderID) {
@@ -72,10 +77,10 @@ public class OrderHandler {
 		}
 		if(temp == -1) {
 			System.out.println("This is invalid OrderID");
-			return;
+			return null;
 		}
 		
-		Orders.get(temp).CalculateTotalPriceWithoutTax();
+		Orders.get(temp).CalculateTotalPriceWithoutTax(discount);
 		Orders.get(temp).CalculateServiceTax();
 		Orders.get(temp).CalculateGST();
 		Orders.get(temp).CalculateTotalPrice();
@@ -84,11 +89,13 @@ public class OrderHandler {
 		System.out.println("Orders: ");
 		HashMap<MenuItem,Integer> Items = Orders.get(temp).getItems();
 		for(MenuItem i : Items.keySet()) {
-			String line = String.format("%2d %-30s $%.2f", i.get(i), i.getName(), i.getPrice()*temp.get(i));
+			String line = String.format("%2d %-30s $%.2f", i.getID(), i.getName(), i.getPrice());
 			System.out.println(line);
 		}
 		System.out.println("======================================");
 		String line = String.format("   %30s $%.2f","SubTotal:", Orders.get(temp).getTotalPriceWithoutTax());
+		System.out.println(line);
+		line = String.format("   %30s-$%.2f", "Discount: ", Orders.get(temp).getDiscount());
 		System.out.println(line);
 		line = String.format("   %30s $%.2f","GST:", Orders.get(temp).getGST());
 		System.out.println(line);
@@ -99,8 +106,11 @@ public class OrderHandler {
 		System.out.println("======================================");
 		System.out.println("Thank you for dining with us!");
 		
-		
-		
+		Order j = Orders.get(temp);
+		Orders.remove(temp);
+		return j;
 	}
+
 }
+
 

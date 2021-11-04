@@ -3,26 +3,28 @@ package project2002;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import project2002.Restaurant.UIType;
+
 public class OrderUI extends UI {
-	Restaurant rest;
+	
+	private OrderManager orderManager;
 
-	public OrderUI(Restaurant rest) {
-		this.rest=rest;
+	public OrderUI(Scanner scanner){
+		super(scanner);
+		this.type=UIType.ORDER;
 	}
-
-	public void printOrderOptions() {
+	
+	public void printOptions() {
 		int choice =0;
 		Scanner scan= new Scanner(System.in);
 		do {
 			System.out.printf("-------------Order Options-----------\n"
-					+ "Please select one of this 7 options: \n"
-					+ "1.	Create Order For New Customer\n"
-					+ "2.	Create Order For Reserved Customer\n"
-					+ "3.	Add Order Item\n"
-					+ "4.	Remove Order Item\n"
-					+ "5.	Print Order Invoice\n"
-					+ "6.	Print Sales Report\n"
-					+ "7.	Quit");	
+					+ "Please select one of this 4 options: \n"
+					+ "1.	Add Order Item\n"
+					+ "2.	Remove Order Item\n"
+					+ "3.	Print Order Invoice\n"
+					+ "4.	Print Sales Report\n"
+					+ "5.	Quit");	
 			try {
 				choice =scan.nextInt();
 				}
@@ -31,49 +33,25 @@ public class OrderUI extends UI {
 				}
 			switch(choice) {
 			case 1:
-				
-				System.out.println("Please enter number of pax: ");
-				int pax=this.getInt();
-				System.out.println("Please enter staff name: ");
-				String name=this.getString();
-				System.out.println("Please enter staff ID: ");
-				int id=this.getInt();
-				System.out.println("Please enter staff title: ");
-				String title=this.getString();
-				System.out.printf("The orderID is : %d.\n",rest.newCustomerOrder(pax,name,id,title));
+				System.out.println("Please enter orderID: ");
+				int id=scan.nextInt();
+				if(orderManager.addOrderItem(id)==-1) {
+					System.out.println("Menu Item does not exist");
+				}
+				else if(orderManager.addOrderItem(id)==0) System.out.printf("Menu Item could not be added to the order %d.\n",id);
+				else if(orderManager.addOrderItem(id)==1) System.out.printf("Menu Item was added to the order %d.\n",id);
 				break;
 			case 2:
-				System.out.println("Please enter number of pax: ");
-				pax=this.getInt();
-				System.out.println("Please enter staff name: ");
-				name=this.getString();
-				System.out.println("Please enter staff ID: ");
-				id=this.getInt();
-				System.out.println("Please enter staff title: ");
-				title=this.getString();
-				System.out.println("Please enter customer name: ");
-				String customername=this.getString();
-				System.out.println("Please enter customer phone number: ");
-				int number=this.getInt();
-				System.out.printf("The orderID is : %d.\n",rest.reservedCustomerOrder(pax,name,id,title,customername,number));
+				System.out.println("Please enter orderID: ");
+				id=scan.nextInt();
+				orderManager.removeOrderItem(id);
 				break;
 			case 3:
 				System.out.println("Please enter orderID: ");
 				id=scan.nextInt();
-				if(rest.addOrderItem(id)==-1) {
-					System.out.println("Menu Item does not exist");
-				}
-				else if(rest.addOrderItem(id)==0) System.out.printf("Menu Item could not be added to the order %d.\n",id);
-				else if(rest.addOrderItem(id)==1) System.out.printf("Menu Item was added to the order %d.\n",id);
+				orderManager.printOrderInvoice(id);
 				break;
 			case 4:
-				System.out.println(rest.removeOrderItem());
-			case 5:
-				System.out.println(rest.printOrderInvoice());
-			case 6:
-				
-				System.out.println(rest.printSalesRevenue());
-			case 7:
 				break;
 			default:
 				System.out.println("Invalid Input.");
@@ -86,6 +64,7 @@ public class OrderUI extends UI {
 		int itemID;
 		System.out.printf("Please enter the item ID: \n");
 		itemID=scan.nextInt();
+		scan.close();
 		return itemID;
 	}
 
@@ -96,7 +75,15 @@ public class OrderUI extends UI {
 		qty=scan.nextInt();
 		return qty;
 	}
-	
-	
+
+	@Override
+	protected void assignUIManager(Manager m) {
+		orderManager=(OrderManager) m;
+	}
+
+	public Double getDiscount() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
