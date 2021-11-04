@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class mainUI {
+public class MainUI {
 
 	public static void main(String[] args) {
 		String temp = "";

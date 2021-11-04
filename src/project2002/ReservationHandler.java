@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import project2002.Restaurant.handlerType;
 
 public class ReservationHandler extends Handler {
-	
-	public ReservationHandler(){
-		type=handlerType.RESERVATION;
+
+	public ReservationHandler() {
+		type = handlerType.RESERVATION;
 	}
 
 	public boolean checkReservation(Customer cust, int pax, LocalDateTime time) {
@@ -19,7 +19,7 @@ public class ReservationHandler extends Handler {
 
 	public void removeReservation(Customer cust, int pax, LocalDateTime time) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public boolean addReservation(Customer cust, int pax, LocalDateTime date, LocalDateTime time) {
@@ -39,26 +39,26 @@ public class ReservationHandler extends Handler {
 
 	public void addNewTable(int pax) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void removeTable(int pax) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public boolean updateTable(int pax, int pax2) {
 		return false;
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	public ArrayList<Reservations> retrieveNextReservationList(LocalDateTime time) {
+	public ArrayList<Reservation> retrieveNextReservationList(LocalDateTime time) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ArrayList<Reservations> retrieveBeforeReservationList(LocalDateTime time) {
+	public ArrayList<Reservation> retrieveBeforeReservationList(LocalDateTime time) {
 		// TODO Auto-generated method stub
 		return null;
 	}

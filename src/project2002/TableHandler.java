@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import project2002.Restaurant.handlerType;
 
 public class TableHandler extends Handler {
-	
-	public TableHandler(){
-		type=handlerType.TABLE;
+
+	public TableHandler() {
+		type = handlerType.TABLE;
 	}
 
 	public String assignTable(int pax) {
@@ -35,19 +35,19 @@ public class TableHandler extends Handler {
 		return 0;
 	}
 
-	public boolean reserveTables(ArrayList<Reservations> reservationList) {
+	public boolean reserveTables(ArrayList<Reservation> reservationList) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean removeReservations(ArrayList<Reservations> reservationList) {
+	public boolean removeReservations(ArrayList<Reservation> reservationList) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public void printAvailableTablesNow() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
