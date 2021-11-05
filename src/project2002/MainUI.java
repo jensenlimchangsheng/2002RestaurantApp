@@ -5,7 +5,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MainUI {
-
+	/**
+	 * Main entry point to the program
+	 */
 	public static void main(String[] args) {
 		String temp = "";
 		Scanner scan = new Scanner(System.in);
