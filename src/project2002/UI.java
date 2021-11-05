@@ -8,36 +8,44 @@ import project2002.Restaurant.UIType;
 public abstract class UI {
 	protected Scanner scan;
 	protected UIType type;
+
 	abstract protected void printOptions();
-	public UI(Scanner scanner){
-		this.scan=scanner;
+
+	/**
+	 * Constructor for UI
+	 */
+	public UI(Scanner scanner) {
+		this.scan = scanner;
 	}
-	UI(){};
+
+	UI() {
+	};
+
 	protected UIType getType() {
 		return this.type;
 	}
+
 	protected int getInt() {
-		int choice=0;
+		int choice = 0;
 		try {
-			choice =scan.nextInt();
-			}
-		catch(InputMismatchException e) {
-			String temp=scan.nextLine();
+			choice = scan.nextInt();
+		} catch (InputMismatchException e) {
+			String temp = scan.nextLine();
 			System.out.println("Invalid Input.");
-			}
+		}
 		return choice;
 	}
-	
+
 	protected String getString() {
-		String choice="";
+		String choice = "";
 		try {
-			choice =scan.nextLine();
-			}
-		catch(InputMismatchException e) {
-			String temp=scan.nextLine();
+			choice = scan.nextLine();
+		} catch (InputMismatchException e) {
+			String temp = scan.nextLine();
 			System.out.println("Invalid Input.");
-			}
+		}
 		return choice;
 	}
+
 	abstract protected void assignUIManager(Manager m);
 }
