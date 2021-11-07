@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class SalesReport {
-	private HashMap<Integer, ArrayList<Order>> Year;
-	private HashMap<String, ArrayList<Order>> Month;
-	private HashMap<LocalDate, ArrayList<Order>> Day;
+	private HashMap<Integer, ArrayList<Order>> Year = new HashMap<Integer, ArrayList<Order>>();
+	private HashMap<String, ArrayList<Order>> Month = new HashMap<String, ArrayList<Order>>();
+	private HashMap<LocalDate, ArrayList<Order>> Day = new HashMap<LocalDate, ArrayList<Order>>();
 	
 	public void InsertOrder(Order order){
 		LocalDateTime temp = order.getDate();
