@@ -91,7 +91,7 @@ public class OrderHandler extends Handler {
 		System.out.println("Orders: ");
 		HashMap<MenuItem,Integer> Items = Orders.get(temp).getItems();
 		for(MenuItem i : Items.keySet()) {
-			String line = String.format("%2d %-30s $%.2f", Items.get(i), i.getName(), i.getPrice());
+			String line = String.format("%2d %-30s $%.2f", Items.get(i), i.getName(), i.getPrice()* Items.get(i));
 			System.out.println(line);
 		}
 		System.out.println("=========================================");

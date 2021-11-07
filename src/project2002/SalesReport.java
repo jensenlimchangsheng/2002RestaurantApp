@@ -110,7 +110,7 @@ public class SalesReport {
 		System.out.println(line);
 		line = String.format("%24s $%.2f", "Total GST Collected:", totalGST);
 		System.out.println(line);
-		line = String.format("%24s $%.2f", totalServiceCharge);
+		line = String.format("%24s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
 	}
 	public void printMonthlyReport(int Y, int M) {
 		String MonthFormat = M + "-" + Y;
@@ -151,7 +151,7 @@ public class SalesReport {
 		System.out.println(line);
 		line = String.format("%24s $%.2f", "Total GST Collected:", totalGST);
 		System.out.println(line);
-		line = String.format("%24s $%.2f", totalServiceCharge);
+		line = String.format("%24s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
 	}
 	public void printDailyReport(int Y, int M, int D) {
 		LocalDate Date = LocalDate.of(Y, M, D);
@@ -192,7 +192,7 @@ public class SalesReport {
 		System.out.println(line);
 		line = String.format("%24s $%.2f", "Total GST Collected:", totalGST);
 		System.out.println(line);
-		line = String.format("%24s $%.2f", totalServiceCharge);
+		line = String.format("%24s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
 	}
 	
 }

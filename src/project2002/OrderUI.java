@@ -49,12 +49,12 @@ public class OrderUI extends UI {
 	}
 
 	public int getItemID() {
-		int itemID = this.getInt("Please enter the item ID: \n");
+		int itemID = this.getInt("Please enter the item ID: ");
 		return itemID;
 	}
 
 	public int getQty() {
-		int qty = this.getInt("Please enter the quantity: \n");
+		int qty = this.getInt("Please enter the quantity: ");
 		return qty;
 	}
 
