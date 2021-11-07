@@ -94,9 +94,9 @@ public class Order {
 		System.out.println(this.getOrderID());
 		System.out.print("Table ID: ");
 		System.out.println(this.getTableID());
-		System.out.println("Qty MenuItem");
+		System.out.println("Qty || MenuItem");
 		for (MenuItem i : Items.keySet()) {
-			System.out.println("Name: " + i.getName() + "Quantity: " + Items.get(i) + "ID: " + i.getID());
+			System.out.println("Quantity: " + Items.get(i) + "Name: " + i.getName());
 		}
 	}
 

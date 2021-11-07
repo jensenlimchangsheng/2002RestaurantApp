@@ -50,6 +50,10 @@ public class OrderManager extends Manager {
 		SalesReportManager.addOrder(order);
 	}
 
+	void viewOrder(int orderID){
+		orderHandler.printOrder(orderID);
+	}
+
 	@Override
 	public void assignHandler(Handler h) {
 		if (h.getType() == handlerType.ORDER)
