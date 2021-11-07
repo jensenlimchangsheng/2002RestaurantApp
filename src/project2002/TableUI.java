@@ -1,6 +1,5 @@
 package project2002;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -20,11 +19,16 @@ public class TableUI extends UI {
 
 	@Override
 	protected void printOptions() {
-		int choice=0;
+		int choice = 0;
+		int pax;
+		LocalDateTime dateTime;
+		String name;
+		int number;
+
 		Scanner scan= new Scanner(System.in);
 		do {
 			System.out.printf("----Table and Reservation Options----\n"
-					+ "Please select one of this 10 options: \n"
+					+ "Please select one of this 9 options: \n"
 					+ "1.	Print Available Tables Now\n"
 					+ "2.	Add New Tables\n"
 					+ "3.	Remove Table\n"
@@ -38,98 +42,159 @@ public class TableUI extends UI {
 					+ "11.	Quit");
 			try {
 				choice =scan.nextInt();
-				}
+			}
 			catch(InputMismatchException e) {
 				System.out.println("Invalid Input.");
-				}
-			switch(choice) {
-			case 1:
-				tableManager.printAvailableTablesNow();
-				break;
-			case 2:
-				int pax = 0;
-				tableManager.addNewTable(pax);
-				break;
-			case 3:
-				pax=0;
-				tableManager.removeTable(pax);
-				break;
-			case 4:
-				int tableID=0;
-				pax=0;
-				tableManager.updateTable(tableID,pax);
-				break;
-			case 5:
-				String name="";
-				int number=0;
-				pax=0;
-				LocalDateTime date=null;
-				LocalDateTime time=null;
-				tableManager.addReservation(pax,name,number,date,time);
-				break;
-			case 6:
-				pax=0;
-				name="";
-				number=0;
-				date=null;
-				time=null;
-				tableManager.removeReservation(pax,name,number,date,time);
-				break;
-			case 7:
-				pax=0;
-				name="";
-				number=0;
-				date=null;
-				time=null;
-				tableManager.updateReservation(pax,name,number,date,time);
-				break;
-			case 8:
-				pax=0;
-				name="";
-				number=0;
-				date=null;
-				time=null;
-				tableManager.checkReservation(pax,name,number,date,time);
-				break;
-			case 9:
-				tableManager.reserveTables();
-				break;
-			case 10:
-				tableManager.removeReservedTables();
-				break;
-			case 11:
-				tableManager.reserveTables();
-				break;
-			default:
-				System.out.println("Invalid Input.");
 			}
-			} while(choice!=11);
-		
+
+			switch(choice) {
+				case 1:
+					tableManager.printAvailableTablesNow(); // print current table status 
+					break;
+				case 2:
+					pax = getPax(scan);
+					name = getTableID(scan);
+					System.out.println(tableManager.addNewTable(name,  pax));
+					break;
+				case 3:
+					name = getTableID(scan);
+					switch(tableManager.removeTable(name)) {
+					case 1:
+						System.out.println("Table "+name+" removed successfully!");
+						break;
+					case 0:
+						System.out.println("Table "+name+" cannot be found!");
+						break;
+					case -1:
+						System.out.println("Table "+name+" is currently booked or occupied, try again later!");
+						break;
+					}
+					break;
+				case 4:
+					pax = getPax(scan);
+					name = getTableID(scan);
+					switch(tableManager.updateTable(name,  pax)) {
+					case 1:
+						System.out.println("Table "+name+" updated successfully!");
+						break;
+					case 0:
+						System.out.println("Table "+name+" cannot be found!");
+						break;
+					case -1:
+						System.out.println("Table "+name+" is currently booked or occupied, try again later!");
+						break;
+					case -2:
+						System.out.println("Bug in the update table code!");
+						break;
+					}
+					break;
+				case 5:
+					name = getName(scan);
+					number = getNumber(scan);
+					pax = getPax(scan);
+					dateTime = getDateTime(scan);
+					if (tableManager.addReservation(pax, name, number, dateTime)) {
+						System.out.println("Reservation for " + name + " at " + dateTime + " for " + pax + " people has been successfully added.");
+					} else {
+						System.out.println("Reservations for " + dateTime + " is full.");
+					}
+					break;
+				case 6:
+					name = getName(scan);
+					number = getNumber(scan);
+					dateTime = getDateTime(scan);
+					if (tableManager.removeReservation(name, number, dateTime)) {
+						System.out.println("Reservation for " + name + " at " + dateTime + " for " + pax + " people has been successfully cancelled.");
+					} else {						
+						System.out.println("Reservation for " + name + " at " + dateTime + " for " + pax + " people does not exist.");
+					}
+					break;
+				case 7:
+					name = getName(scan);
+					number = getNumber(scan);
+					dateTime = getDateTime(scan);
+					int newPax=getPax(scan);
+					LocalDateTime newDateTime = getDateTime(scan);
+					switch (tableManager.updateReservation(name, number, dateTime, newPax, newDateTime)) {
+						case 1:
+							System.out.println("Reservation for " + name + " for " + newPax + " people has been successfully updated.");
+							break;
+						case -1:
+							System.out.println("Removing old reservation failed.");
+							break;
+						case -2:
+							
+							System.out.println("Adding new reservation failed.");
+							break;
+					}
+					break;
+				case 8:
+					name = getName(scan);
+					number = getNumber(scan);
+					dateTime = getDateTime(scan);
+					if ( tableManager.checkReservation(name, number, dateTime)){ 
+						System.out.println("Reservation for " + name + " at " + dateTime + " found.");
+					} else {
+						System.out.println("Reservation for " + name + " at " + dateTime + " not found.");
+					}
+					break;
+				case 9:
+					if(tableManager.reserveTables())
+						System.out.println("Tables are all reserved!");
+					System.out.println("Issues reserving tables!");
+					break;
+				case 10:
+					if(tableManager.removeReservedTables())
+						System.out.println("All specified reserved tables are unreserved");
+					System.out.println("Issues unreserving tables!");
+					break;
+				default:
+					System.out.println("Invalid Input.");
+				}
+			} while(choice!=4);
 	}
 
-	@Override
-	protected void assignUIManager(Manager m) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public int getPax() {
+	int getPax(Scanner sc) {
 		System.out.println("Please enter number of pax: ");
-		int pax=this.getInt();
+		int pax=sc.nextInt();
 		return pax;
 	}
 
-	public LocalDate getDate() {
-		LocalDate date=null;
-		System.out.println("Please enter a date d MMMM, yyyy: ");
-		String datestring=this.getString();
+	String getName(Scanner sc) {
+		System.out.println("Please enter customer name: ");
+		String name=sc.next();
+		return name;
+	}
+	
+	/**
+	 * Gets table ID from user
+	 * @return tableID value
+	 */
+	String getTableID(Scanner sc) {
+		System.out.println("Please enter table ID: ");
+		String name=sc.next();
+		return name;
+	}
+
+	int getNumber(Scanner sc) {
+		System.out.println("Please enter customer phone number: ");
+		int number = sc.nextInt();
+		return number;
+	}
+
+	LocalDateTime getDateTime(Scanner sc) {
+		LocalDateTime dateTime = null;
+		System.out.println("Please enter a date dd/MM/yyyy");
+		String datestring=sc.next();
+		System.out.println("Please enter a time HH:mm");
+		String timeString=sc.next();
         DateTimeFormatter format
-        = DateTimeFormatter.ofPattern("d MMMM, yyyy");
+        = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 	    // Try block tp check for exceptions
 	    try {
 	
 	        // Getting the Date from String
-	    	date = LocalDate.parse(datestring, format);
+	    	dateTime = LocalDateTime.parse(datestring + " " + timeString,  format);
 	    }
 	
 	    // Block 1
@@ -148,12 +213,14 @@ public class TableUI extends UI {
 	        // Display the exception
 	        System.out.println("Exception: " + e);
 	    }
-	    return date;
+		
+	    return dateTime;
 	}
 
-	public LocalDateTime getTime() {
+	@Override
+	protected void assignUIManager(Manager m) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 }
