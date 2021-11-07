@@ -33,14 +33,4 @@ public class SalesReportManager extends Manager {
 	public void printDailyReport(int y , int m, int d){
 		report.printDailyReport(y, m, d);
 	}
-
-	public void printDailyReport(int y, int m, int d) {
-	}
-
-	public void printMonthlyReport(int y, int m) {
-	}
-
-	public void printYearlyReport(int y) {
-	}
-
 }
