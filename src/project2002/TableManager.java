@@ -144,7 +144,6 @@ public class TableManager extends Manager {
 	public void assignHandler(Handler h) {
 		if (h.getType() == handlerType.TABLE) {
 			tableHandler = (TableHandler) h;
-			if (tableHandler != null)
 		} else if (h.getType() == handlerType.RESERVATION)
 			reservationHandler = (ReservationHandler) h;
 		if (tableHandler != null && reservationHandler != null) {
