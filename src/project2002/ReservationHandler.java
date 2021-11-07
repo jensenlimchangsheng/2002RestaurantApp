@@ -93,6 +93,7 @@ public class ReservationHandler extends Handler{
 		reservationList = reservations.get(dateTime);
 		for (Iterator<Reservation> it = reservationList.iterator(); it.hasNext();) {
 			if (it.next().getCustomer() == cust) {
+				// this will need to be updated for customer class
 				it.remove();
 				return true;
 			}

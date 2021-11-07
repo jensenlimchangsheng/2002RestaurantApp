@@ -9,8 +9,8 @@ import project2002.Restaurant.handlerType;
  * TableHandler class for managing tables at the current point in time.
  * 
  * @author Shun Yao
- * @version 1.0
- * @since 2021-11-02
+ * @version 1.1
+ * @since 2021-11-07
  */
 
 public class TableHandler extends Handler {
@@ -61,8 +61,11 @@ public class TableHandler extends Handler {
 	 */
 
 	public int[] getTableSizes() {
-		int intArray[] = new int[this.curTableList.size()];
-		return intArray;
+		int tableStats[] = new int[] { 0, 0, 0, 0, 0 };
+		for (Table table : curTableList.values()) {
+			tableStats[table.getTableSize() % 2 - 1]++;
+		}
+		return tableStats;
 	}
 
 	/**
