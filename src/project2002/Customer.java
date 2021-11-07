@@ -6,4 +6,10 @@ public class Customer {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		// TODO create equals method for ReservationHandlers
+		return false;
+	}
+
 }
