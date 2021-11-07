@@ -55,9 +55,9 @@ public class TableHandler extends Handler {
 	}
 
 	/**
-	 * Returns an array of size 5 with index[i] = number of tables of capacity i
+	 * Passes back to TableManager the current table list
 	 * 
-	 * @return
+	 * @return an int array of size 5 with index[i] = number of tables of capacity i
 	 */
 
 	public int[] getTableSizes() {

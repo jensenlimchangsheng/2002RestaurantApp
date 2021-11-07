@@ -82,7 +82,7 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Add reservation
+	 * Remove reservation
 	 * 
 	 * @param name
 	 * @param number
