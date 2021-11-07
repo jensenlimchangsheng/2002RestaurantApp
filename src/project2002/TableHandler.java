@@ -55,7 +55,7 @@ public class TableHandler extends Handler {
 	}
 
 	/**
-	 * Returns an empty array of the current TreeMap size
+	 * Returns an array of size 5 with index[i] = number of tables of capacity i
 	 * 
 	 * @return
 	 */
