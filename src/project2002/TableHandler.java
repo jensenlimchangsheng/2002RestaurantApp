@@ -55,9 +55,9 @@ public class TableHandler extends Handler {
 	}
 
 	/**
-	 * Returns an empty array of the current TreeMap size
+	 * Passes back to TableManager the current table list
 	 * 
-	 * @return
+	 * @return an int array of size 5 with index[i] = number of tables of capacity i
 	 */
 
 	public int[] getTableSizes() {
@@ -202,6 +202,10 @@ public class TableHandler extends Handler {
 				return false;
 		}
 		return true;
+	}
+
+	public String assignTable(int pax) {
+		return null;
 	}
 
 }

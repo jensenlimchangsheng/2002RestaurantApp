@@ -4,51 +4,62 @@ import java.util.Scanner;
 
 import project2002.Restaurant.UIType;
 
-public class MenuUI extends UI{
-	public enum ItemType { MAIN, DRINK, DESSERT, SIDE, PROMO }	
+public class MenuUI extends UI {
+	public enum ItemType {
+		MAIN, DRINK, DESSERT, SIDE, PROMO;
+
+		public String toString() {
+			switch (this) {
+			case MAIN:
+				return "MAIN";
+			case DRINK:
+				return "DRINK";
+			case DESSERT:
+				return "DESSERT";
+			case SIDE:
+				return "SIDE";
+			case PROMO:
+				return "PROMO";
+			}
+			return null;
+		}
+	}
+
 	private MenuManager menuManager;
 
-	public MenuUI(Scanner scanner){
+	public MenuUI(Scanner scanner) {
 		super(scanner);
-		this.type=UIType.MENU;
+		this.type = UIType.MENU;
 	}
+
 	public void printOptions() {
-		int choice=0;
+		int choice = 0;
 		do {
-			System.out.printf("-------------Menu Options------------\n"
-					+ "Please select one of this 8 options: \n"
-					+ "1.	Print Menu\n"
-					+ "2.	Add Menu Item\n"
-					+ "3.	Remove Menu Item\n"
-					+ "4.	Update Menu Item\n"
-					+ "5.	Add Promo Set\n"
-					+ "6.	Remove Promo Set\n"
-					+ "7.	Update Promo Set\n"
-					+ "8.	Quit\n"
-					+ "Please enter your choice: ");
-			choice=this.getInt();
-			switch(choice) {
+			System.out.printf("-------------Menu Options------------\n" + "Please select one of this 8 options: \n"
+					+ "1.	Print Menu\n" + "2.	Add Menu Item\n" + "3.	Remove Menu Item\n" + "4.	Update Menu Item\n"
+					+ "5.	Add Promo Set\n" + "6.	Remove Promo Set\n" + "7.	Update Promo Set\n" + "8.	Quit\n");
+			choice = this.getInt("Please enter your choice: ");
+			switch (choice) {
 			case 1:
 				menuManager.printMenu();
 				break;
 			case 2:
-				String name=this.getString();
-				int price= this.getInt();
-				String description=this.getString();
-				ItemType i=this.getItemType();
-				if(menuManager.addMenuItem(name,price,description,i)==1) {
+				String name = this.getString("Please enter name of item: ");
+				int price = this.getInt("Please enter price of item: ");
+				String description = this.getString("Please enter description of item: ");
+				ItemType i = this.getItemType();
+				if (menuManager.addMenuItem(name, price, description, i) == 1) {
 					System.out.println("Item is successfully added.");
-				}
-				else {
+				} else {
 					System.out.println("Item could not be added/ duplicate item exist...");
 				}
 				break;
 			case 3:
-				int x=menuManager.removeMenuItem();
-				if(x ==0) {
+				int x = menuManager.removeMenuItem();
+				if (x == 0) {
 					System.out.println("Item does not exist in the menu");
-				}
-				else System.out.println("Item successfully removed");
+				} else
+					System.out.println("Item successfully removed");
 				break;
 			case 4:
 				menuManager.updateMenuItem();
@@ -67,52 +78,61 @@ public class MenuUI extends UI{
 			default:
 				System.out.println("");
 			}
-			} while(choice!=8);
-		
+		} while (choice != 8);
+
 	}
+
 	public ItemType getItemType() {
-		System.out.println("Please enter menu item type: ");
-		String type=this.getString();
-		for (ItemType i : ItemType.values())  {
-			if(type.toUpperCase()==i.toString()) return i;  
-		} 
+		int index = 1;
+		String choice = "";
+		System.out.println("Available item types:");
+		for (ItemType i : ItemType.values()) {
+			System.out.printf("%d. %s\n", index, i.toString());
+			index++;
+		}
+		choice = this.getString("Please enter menu item type: ");
+		for (ItemType i : ItemType.values()) {
+			if (choice.equalsIgnoreCase(i.toString())) {
+				return i;
+			}
+		}
 		return null;
 	}
-	
+
 	public int getItemID() {
 		int itemID;
 		System.out.printf("Please enter the item ID: \n");
-		itemID=scan.nextInt();
+		itemID = scan.nextInt();
 		return itemID;
 	}
 
 	@Override
 	protected void assignUIManager(Manager m) {
-		menuManager=(MenuManager) m;
+		menuManager = (MenuManager) m;
 	}
-	
-	public void updateItem(String name,int ID) {
+
+	public void updateItem(String name, int ID) {
 		System.out.println("You have selected " + name + ".");
 		System.out.println("Select:\n1. Update Name\n2. Update Price\n3. Update Description\nInsert -1 when done.");
 		int choice = scan.nextInt();
-		while(choice != -1) {
-			switch(choice) {
+		while (choice != -1) {
+			switch (choice) {
 			case 1:
 				System.out.println("New Name?");
 				String newname = scan.next();
-				menuManager.updateName(ID,newname);
+				menuManager.updateName(ID, newname);
 				System.out.println("Name updated.");
 				break;
 			case 2:
 				System.out.println("New Price?");
 				double price = scan.nextDouble();
-				menuManager.updatePrice(ID,price);
+				menuManager.updatePrice(ID, price);
 				System.out.println("Price updated.");
 				break;
-			case 3: 
+			case 3:
 				System.out.println("New Description?");
 				String description = scan.next();
-				menuManager.updateDescription(ID,description);
+				menuManager.updateDescription(ID, description);
 				System.out.println("Description updated.");
 				break;
 			default:
@@ -122,5 +142,5 @@ public class MenuUI extends UI{
 			choice = scan.nextInt();
 		}
 		System.out.println("Update Complete.");
-		}
+	}
 }

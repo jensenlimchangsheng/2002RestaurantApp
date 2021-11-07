@@ -1,8 +1,6 @@
 package project2002;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.*;
 
 public class Order {

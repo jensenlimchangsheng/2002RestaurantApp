@@ -6,8 +6,8 @@ import project2002.Restaurant.UIType;
 import project2002.Restaurant.handlerType;
 
 public class OrderManager extends Manager {
-	OrderHandler orderHandler = new OrderHandler();
-	MenuHandler menu = new MenuHandler();
+	OrderHandler orderHandler;
+	MenuHandler menu;
 
 	OrderUI orderUI;
 
@@ -15,8 +15,8 @@ public class OrderManager extends Manager {
 	 * This function does blah blah
 	 */
 	public OrderManager() {
-		handlerList.add(menu);
-		handlerList.add(orderHandler);
+		handlerList.add(handlerType.MENU);
+		handlerList.add(handlerType.ORDER);
 		type = UIType.ORDER;
 	}
 

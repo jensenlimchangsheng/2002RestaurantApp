@@ -1,20 +1,20 @@
 package project2002;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.TreeMap;
 import java.util.ArrayList;
 import java.util.Iterator;
+import project2002.Restaurant.handlerType;
 
 /**
  * ReservationHandler class for managing reservations of the restaurant
- * @author 	Jermyn
+ * 
+ * @author Jermyn
  * @version 1.0
- * @since	2021-11-02 
+ * @since 2021-11-02
  */
 
-
-public class ReservationHandler extends Handler{
+public class ReservationHandler extends Handler {
 
 	/**
 	 * Mapping reservation time to a list of reservations booked for that timing.
@@ -22,40 +22,44 @@ public class ReservationHandler extends Handler{
 	private TreeMap<LocalDateTime, ArrayList<Reservation>> reservations;
 
 	/**
-	 * Mapping available table sizes to its quantity every datetime. 
+	 * Mapping available table sizes to its quantity every datetime.
 	 */
 	private TreeMap<LocalDateTime, int[]> availTableSizes;
 
 	/**
 	 * Mapping available table sizes to its quantity
 	 */
-	private int[] tableSizes;  // [qty for pax size: 2, qty for pax size: 4, qty for pax size: 6, qty for pax size: 8, qty for pax size: 10]. 
+	private int[] tableSizes; // [qty for pax size: 2, qty for pax size: 4, qty for pax size: 6, qty for pax
+								// size: 8, qty for pax size: 10].
 
 	/**
-	 * Initializes variables 
+	 * Initializes variables
 	 */
-	public ReservationHandler(int[] tableSizes) {
+	public ReservationHandler() {
 		this.reservations = new TreeMap<LocalDateTime, ArrayList<Reservation>>();
 		this.availTableSizes = new TreeMap<LocalDateTime, int[]>();
-		this.tableSizes = tableSizes;
+		type = handlerType.RESERVATION;
 	}
 
 	/**
 	 * Adds a new reservation to the restaurant
-	 * @param cust 
+	 * 
+	 * @param cust
 	 * @param pax
 	 * @param dateTime
-	 * @return whether adding a reservation is successful - False if reservations are maxed, True otherwise.
+	 * @return whether adding a reservation is successful - False if reservations
+	 *         are maxed, True otherwise.
 	 */
 	public boolean addReservation(Customer cust, int pax, LocalDateTime dateTime) {
 		ArrayList<Reservation> reservationList;
 		if (!reservations.containsKey(dateTime)) {
-			reservations.put(dateTime, new ArrayList<Reservation>()); 
-			availTableSizes.put(dateTime, this.tableSizes); 
-		} 
+			reservations.put(dateTime, new ArrayList<Reservation>());
+			availTableSizes.put(dateTime, this.tableSizes);
+		}
 
-		// checking for maxed reservation. 		
-		if (availTableSizes.get(dateTime)[Math.floorDiv(pax, 2) - 1] == 0){  // if there is not more available table for the pax,
+		// checking for maxed reservation.
+		if (availTableSizes.get(dateTime)[Math.floorDiv(pax, 2) - 1] == 0) { // if there is not more available table for
+																				// the pax,
 			return false;
 		}
 
@@ -66,25 +70,28 @@ public class ReservationHandler extends Handler{
 	}
 
 	/**
-	 * Checks if a customer has made a reservation at the given time 
-	 * @param cust 
+	 * Checks if a customer has made a reservation at the given time
+	 * 
+	 * @param cust
 	 * @param dateTime
-	 * @return whether there is a reservation - True of reservation exists, False otherwise.
+	 * @return whether there is a reservation - True of reservation exists, False
+	 *         otherwise.
 	 */
 	public boolean checkReservation(Customer cust, LocalDateTime dateTime) {
 		ArrayList<Reservation> reservationList;
 		reservationList = reservations.get(dateTime);
-		for (Reservation r: reservationList){ 
+		for (Reservation r : reservationList) {
 			if (r.getCustomer() == cust) {
-				return true; 
+				return true;
 			}
 		}
 		return false;
 	}
 
 	/**
-	 * Remove a customer's reservation at the given time 
-	 * @param cust 
+	 * Remove a customer's reservation at the given time
+	 * 
+	 * @param cust
 	 * @param dateTime
 	 * @return whether removal of reservation is succsesful
 	 */
@@ -103,6 +110,7 @@ public class ReservationHandler extends Handler{
 
 	/**
 	 * Retrieve list of reservation
+	 * 
 	 * @param dateTime
 	 * @return ArrayList<Reservation> of all reservations at the current dateTime
 	 */
@@ -111,11 +119,12 @@ public class ReservationHandler extends Handler{
 		return reservations.get(dateTime);
 	}
 
-
 	/**
 	 * Retrieve list of reservation
+	 * 
 	 * @param dateTime
-	 * @return ArrayList<Reservation> of all reservations 1 hour before current dateTime
+	 * @return ArrayList<Reservation> of all reservations 1 hour before current
+	 *         dateTime
 	 */
 	public ArrayList<Reservation> retrieveNextReservationList(LocalDateTime dateTime) {
 		// TODO Auto-generated method stub
@@ -123,16 +132,21 @@ public class ReservationHandler extends Handler{
 		return reservations.get(dateTime);
 	}
 
-
 	/**
 	 * Retrieve list of reservation
+	 * 
 	 * @param dateTime
-	 * @return ArrayList<Reservation> of all reservations 1 hour after current dateTime
+	 * @return ArrayList<Reservation> of all reservations 1 hour after current
+	 *         dateTime
 	 */
 	public ArrayList<Reservation> retrieveBeforeReservationList(LocalDateTime dateTime) {
 		// TODO Auto-generated method stub
 		dateTime = dateTime.plusMinutes(60);
 		return reservations.get(dateTime);
+	}
+
+	public void setTableSize(int[] tableSizes) {
+		this.tableSizes = tableSizes;
 	}
 
 }

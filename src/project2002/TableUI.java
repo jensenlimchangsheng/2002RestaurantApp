@@ -39,10 +39,10 @@ public class TableUI extends UI {
 			}
 
 			switch (choice) {
-			case 1:
+			case 1: // Print Available Tables Now
 				tableManager.printAvailableTablesNow(); // print current table status
 				break;
-			case 2:
+			case 2: // Add New Tables
 				pax = getPax(scan);
 				name = getTableID(scan);
 				switch (pax) {
@@ -62,7 +62,7 @@ public class TableUI extends UI {
 					System.out.println("Invalid pax size. Only 2, 4, 6, 8, 10 allowed.");
 				}
 				break;
-			case 3:
+			case 3: // Remove Table
 				name = getTableID(scan);
 				switch (tableManager.removeTable(name)) {
 				case 1:
@@ -76,7 +76,7 @@ public class TableUI extends UI {
 					break;
 				}
 				break;
-			case 4:
+			case 4: // Update Table
 				pax = getPax(scan);
 				name = getTableID(scan);
 				switch (tableManager.updateTable(name, pax)) {
@@ -94,7 +94,7 @@ public class TableUI extends UI {
 					break;
 				}
 				break;
-			case 5:
+			case 5: // Book Table
 				name = getName(scan);
 				number = getNumber(scan);
 				pax = getPax(scan);
@@ -106,7 +106,7 @@ public class TableUI extends UI {
 					System.out.println("Reservations for " + dateTime + " is full.");
 				}
 				break;
-			case 6:
+			case 6: // Remove Reservation
 				name = getName(scan);
 				number = getNumber(scan);
 				dateTime = getDateTime(scan);
@@ -117,7 +117,7 @@ public class TableUI extends UI {
 					System.out.println("Reservation for " + name + " at " + dateTime + " does not exist.");
 				}
 				break;
-			case 7:
+			case 7: // Update Reservation
 				name = getName(scan);
 				number = getNumber(scan);
 				dateTime = getDateTime(scan);
@@ -137,7 +137,7 @@ public class TableUI extends UI {
 					break;
 				}
 				break;
-			case 8:
+			case 8: // Check Reservation
 				name = getName(scan);
 				number = getNumber(scan);
 				dateTime = getDateTime(scan);
@@ -147,12 +147,13 @@ public class TableUI extends UI {
 					System.out.println("Reservation for " + name + " at " + dateTime + " not found.");
 				}
 				break;
-			case 9:
+			case 9: // Reserve Tables For The Day
 				if (tableManager.reserveTables())
-					System.out.println("Tables are all reserved!");
-				System.out.println("Issues reserving tables!");
+					System.out.println("Table reservation complete!");
+				else
+					System.out.println("Issues reserving tables!");
 				break;
-			case 10:
+			case 10: // Remove Reserved Tables
 				if (tableManager.removeReservedTables())
 					System.out.println("All specified reserved tables are unreserved");
 				System.out.println("Issues unreserving tables!");
@@ -160,15 +161,25 @@ public class TableUI extends UI {
 			default:
 				System.out.println("Invalid Input.");
 			}
-		} while (choice != 4);
+		} while (choice != 11);
 	}
 
+	/**
+	 * Get number of diners from user
+	 * 
+	 * @return number of pax input by user
+	 */
 	int getPax(Scanner sc) {
 		System.out.println("Please enter number of pax: ");
 		int pax = sc.nextInt();
 		return pax;
 	}
 
+	/**
+	 * Get customer name from user
+	 * 
+	 * @return name of customer input by user
+	 */
 	String getName(Scanner sc) {
 		System.out.println("Please enter customer name: ");
 		String name = sc.next();
@@ -176,9 +187,9 @@ public class TableUI extends UI {
 	}
 
 	/**
-	 * Gets table ID from user
+	 * Get table ID from user
 	 * 
-	 * @return tableID value
+	 * @return tableID input by user
 	 */
 	String getTableID(Scanner sc) {
 		System.out.println("Please enter table ID: ");

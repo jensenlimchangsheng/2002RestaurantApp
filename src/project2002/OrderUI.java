@@ -16,7 +16,6 @@ public class OrderUI extends UI {
 
 	public void printOptions() {
 		int choice = 0;
-		Scanner scan = new Scanner(System.in);
 		do {
 			System.out.printf("-------------Order Options-----------\n" + "Please select one of this 4 options: \n"
 					+ "1.	Add Order Item\n" + "2.	Remove Order Item\n" + "3.	Print Order Invoice\n" + "4.	Quit");
@@ -51,7 +50,7 @@ public class OrderUI extends UI {
 			default:
 				System.out.println("Invalid Input.");
 			}
-		} while (choice != 7);
+		} while (choice != 4);
 	}
 
 	public int getItemID() {
