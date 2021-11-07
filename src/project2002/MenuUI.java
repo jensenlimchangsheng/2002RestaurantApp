@@ -55,23 +55,39 @@ public class MenuUI extends UI {
 				}
 				break;
 			case 3:
-				int x = menuManager.removeMenuItem();
-				if (x == 0) {
+				if (menuManager.removeMenuItem() == 0) {
 					System.out.println("Item does not exist in the menu");
 				} else
 					System.out.println("Item successfully removed");
 				break;
 			case 4:
-				menuManager.updateMenuItem();
+				if (menuManager.updateMenuItem() == 0) {
+					System.out.println("Item does not exist in the menu");
+				} else
+					System.out.println("Item successfully updated");
 				break;
 			case 5:
-				System.out.println(menuManager.addPromoSet());
+				String name1 = this.getString("Please enter name of promoset: ");
+				int price1 = this.getInt("Please enter price of promoset: ");
+				String description1 = this.getString("Please enter description of promoset: ");
+				ItemType i1 = ItemType.PROMO;
+				if (menuManager.addPromoSet(name1, price1, description1, i1) == 1) {
+					System.out.println("Promo is successfully added.");
+				} else {
+					System.out.println("Promo could not be added/ duplicate item exist...");
+				}
 				break;
 			case 6:
-				System.out.println(menuManager.removePromoSet());
+				if (menuManager.removePromoSet() == 0) {
+					System.out.println("Promo does not exist in the menu");
+				} else
+					System.out.println("Promo successfully removed");
 				break;
 			case 7:
-				System.out.println(menuManager.updatePromoSet());
+				if (menuManager.updatePromoSet() == 0) {
+					System.out.println("Promo does not exist in the menu");
+				} else
+					System.out.println("Promo successfully updated");
 				break;
 			case 8:
 				break;
@@ -114,24 +130,21 @@ public class MenuUI extends UI {
 	public void updateItem(String name, int ID) {
 		System.out.println("You have selected " + name + ".");
 		System.out.println("Select:\n1. Update Name\n2. Update Price\n3. Update Description\nInsert -1 when done.");
-		int choice = scan.nextInt();
+		int choice = getInt("Please select an option: ");
 		while (choice != -1) {
 			switch (choice) {
 			case 1:
-				System.out.println("New Name?");
-				String newname = scan.next();
+				String newname = getString("Please enter the new name: ");
 				menuManager.updateName(ID, newname);
 				System.out.println("Name updated.");
 				break;
 			case 2:
-				System.out.println("New Price?");
-				double price = scan.nextDouble();
+				double price = getDouble("Please enter the new price: ");
 				menuManager.updatePrice(ID, price);
 				System.out.println("Price updated.");
 				break;
 			case 3:
-				System.out.println("New Description?");
-				String description = scan.next();
+				String description = getString("Please enter the new description: ");
 				menuManager.updateDescription(ID, description);
 				System.out.println("Description updated.");
 				break;
@@ -139,7 +152,7 @@ public class MenuUI extends UI {
 				System.out.println("Please select again.");
 				break;
 			}
-			choice = scan.nextInt();
+			choice = getInt("Please select an option: ");
 		}
 		System.out.println("Update Complete.");
 	}

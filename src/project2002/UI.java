@@ -43,6 +43,24 @@ public abstract class UI {
 		return integer;
 	}
 
+	protected double getDouble(String prompt) {
+		boolean validInput = false;
+		String input;
+		double number = 0;
+		while (!validInput) {
+			System.out.println(prompt);
+			input = scan.nextLine();
+			try {
+				number = Double.parseDouble(input.trim());
+				validInput = true;
+			} catch (NumberFormatException nfe) {
+				validInput = false;
+				System.out.println("Sorry, this input is incorrect! Please try again.");
+			}
+		}
+		return number;
+	}
+
 	protected String getString(String prompt) {
 		String choice = "";
 		System.out.println(prompt);

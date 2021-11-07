@@ -29,42 +29,45 @@ public class MenuManager extends Manager {
 	}
 
 	public int addMenuItem(String name, double price, String description, MenuUI.ItemType i) {
-		return 0;
-		// TODO Auto-generated method stub
-
+		return menu.addMenuItem(name, price, i, description);
 	}
 
 	public int removeMenuItem() {
 		menu.printMenu();
 		int id = menuUI.getItemID();
 		return menu.removeItem(id);
-		// TODO Auto-generated method stub
-
 	}
 
-	public void updateMenuItem() {
+	public int updateMenuItem() {
 		menu.printMenu();
 		int id = menuUI.getItemID();
+		if (menu.checkExist(id) == 0) {
+			return 0;
+		}
 		String name = menu.getName(id);
 		menuUI.updateItem(name, id);
+		return 1;
 	}
 
-	public int addPromoSet() {
-
-		return 0;
-		// TODO Auto-generated method stub
-
+	public int addPromoSet(String name, double price, String description, MenuUI.ItemType i) {
+		return menu.addMenuItem(name, price, i, description);
 	}
 
 	public int removePromoSet() {
-		return 0;
-		// TODO Auto-generated method stub
-
+		menu.printMenu();
+		int id = menuUI.getItemID();
+		return menu.removeItem(id);
 	}
 
 	public int updatePromoSet() {
-		// TODO Auto-generated method stub
-		return 0;
+		menu.printMenu();
+		int id = menuUI.getItemID();
+		if (menu.checkExist(id) == 0) {
+			return 0;
+		}
+		String name = menu.getName(id);
+		menuUI.updateItem(name, id);
+		return 1;
 	}
 
 	public void updateName(int ID, String newname) {
