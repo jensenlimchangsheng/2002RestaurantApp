@@ -19,7 +19,7 @@ public class CustomerUI extends UI {
 		int choice = 0;
 		do {
 			System.out.printf("-------------Customer Options-----------\n" + "Please select one of this 2 options: \n"
-					+ "1.	Create Order For New Customer\n" + "2.	Create Order For Reserved Customer\n" + "3.	Quit");
+					+ "1.	Create Order For New Customer\n" + "2.	Create Order For Reserved Customer\n" + "3.	Quit\n");
 			choice = this.getInt("Please enter your choice: ");
 			switch (choice) {
 			case 1:

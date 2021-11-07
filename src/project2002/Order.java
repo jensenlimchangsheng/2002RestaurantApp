@@ -7,7 +7,7 @@ public class Order {
 	private Staff staff;
 	private String TableID;
 	private LocalDateTime Time;
-	private HashMap<MenuItem, Integer> Items;
+	private HashMap<MenuItem, Integer> Items = new HashMap<MenuItem, Integer>();
 	private double TotalPriceWithoutTax = 0;
 	private double TotalPriceWithTax = 0;
 	private int OrderID;

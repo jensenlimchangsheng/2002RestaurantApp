@@ -26,10 +26,12 @@ public class OrderManager extends Manager {
 		itemID = orderUI.getItemID();
 		int quantity = orderUI.getQty();
 		MenuItem MenuItem = menu.getItem(itemID); // Takes in the itemID and returns the menuitem
-		if (MenuItem == null)
+		if (MenuItem == null){
 			return -1; // item does not exist
+		}
 		if (orderHandler.AddItem(orderID, MenuItem, quantity))
 			return 1; // successful
+		System.out.println("OrderID doesnt Exist");
 		return 0; // unsuccessful
 	}
 
