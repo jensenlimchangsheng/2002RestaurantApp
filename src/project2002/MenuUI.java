@@ -117,8 +117,7 @@ public class MenuUI extends UI {
 
 	public int getItemID() {
 		int itemID;
-		System.out.printf("Please enter the item ID: \n");
-		itemID = scan.nextInt();
+		itemID = getInt("Please enter the item ID: \n");
 		return itemID;
 	}
 

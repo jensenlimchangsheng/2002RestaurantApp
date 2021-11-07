@@ -142,11 +142,9 @@ public class TableManager extends Manager {
 
 	@Override
 	public void assignHandler(Handler h) {
-		System.out.println("Test1234");
 		if (h.getType() == handlerType.TABLE) {
 			tableHandler = (TableHandler) h;
 			if (tableHandler != null)
-				System.out.println("Test123");
 		} else if (h.getType() == handlerType.RESERVATION)
 			reservationHandler = (ReservationHandler) h;
 		if (tableHandler != null && reservationHandler != null) {
