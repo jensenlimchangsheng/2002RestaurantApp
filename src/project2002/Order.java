@@ -90,14 +90,16 @@ public class Order {
 
 	// printing order
 	public void PrintOrder() {
+		System.out.println("==============================");
 		System.out.print("Order ID: ");
 		System.out.println(this.getOrderID());
 		System.out.print("Table ID: ");
 		System.out.println(this.getTableID());
-		System.out.println("Qty MenuItem");
+		System.out.println("Qty || MenuItem || Item ID");
 		for (MenuItem i : Items.keySet()) {
-			System.out.println("Name: " + i.getName() + "Quantity: " + Items.get(i) + "ID: " + i.getID());
+			System.out.println(Items.get(i) + " " + i.getName() + " " + i.getID());
 		}
+		System.out.println("==============================");
 	}
 
 	// calculating the total price
