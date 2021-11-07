@@ -142,9 +142,12 @@ public class TableManager extends Manager {
 
 	@Override
 	public void assignHandler(Handler h) {
-		if (h.getType() == handlerType.TABLE)
+		System.out.println("Test1234");
+		if (h.getType() == handlerType.TABLE) {
 			tableHandler = (TableHandler) h;
-		else if (h.getType() == handlerType.RESERVATION)
+			if (tableHandler != null)
+				System.out.println("Test123");
+		} else if (h.getType() == handlerType.RESERVATION)
 			reservationHandler = (ReservationHandler) h;
 		if (tableHandler != null && reservationHandler != null) {
 			// @ shun yao return the tableSizes here. Type: int[] = new int[5]. index 0 >

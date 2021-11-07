@@ -18,13 +18,9 @@ public class CustomerUI extends UI {
 	protected void printOptions() {
 		int choice = 0;
 		do {
-			System.out.printf("-------------Order Options-----------\n" + "Please select one of this 2 options: \n"
+			System.out.printf("-------------Customer Options-----------\n" + "Please select one of this 2 options: \n"
 					+ "1.	Create Order For New Customer\n" + "2.	Create Order For Reserved Customer\n" + "3.	Quit");
-			try {
-				choice = scan.nextInt();
-			} catch (InputMismatchException e) {
-				System.out.println("Invalid Input.");
-			}
+			choice = this.getInt("Please enter your choice: ");
 			switch (choice) {
 			case 1:
 				int pax = this.getInt("Please enter number of pax: ");
