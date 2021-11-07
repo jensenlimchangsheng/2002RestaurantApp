@@ -18,7 +18,7 @@ public class OrderUI extends UI {
 		int choice = 0;
 		do {
 			System.out.printf("-------------Order Options-----------\n" + "Please select one of this 4 options: \n"
-					+ "1.	Add Order Item\n" + "2.	Remove Order Item\n" + "3.View Order" + "4.	Print Order Invoice\n"
+					+ "1.	Add Order Item\n" + "2.	Remove Order Item\n" + "3.	View Order\n" + "4.	Print Order Invoice\n"
 					+ "5.	Quit\n");
 			choice = this.getInt("Please enter your choice:");
 			switch (choice) {
@@ -50,17 +50,46 @@ public class OrderUI extends UI {
 							default:
 								System.out.println("invalid input. Please try again");
 								System.out.println("Is there more items you would like to add? Y/N");
+								in = scan.nextLine();
 						}
 					}
 				}
 				break;
 			case 2:
 				id = this.getInt("Please enter orderID: ");
-				orderManager.removeOrderItem(id);
+				temp = true;
+				while(temp){
+					boolean check = orderManager.removeOrderItem(id);
+					if(check == false){
+						System.out.println("The quantity you wish to delete is more than what was ordered");
+					}
+					System.out.println("Is there more items you wish to delete Y/N");
+					String in = scan.nextLine();
+					int option = -1;
+					while(option == -1){
+						switch (in) {
+							case "Y":
+							case "y":
+								option =1;
+								break;
+							case "N":
+							case "n":
+								option =1;
+								temp = false;
+								break;
+							default:
+								System.out.println("invalid input. Please try again");
+								System.out.println("Is there more items you would like to add? Y/N");
+								in = scan.nextLine();
+						}
+					}
+
+				}
 				break;
 			case 3:
 				id = this.getInt("Please enter orderID: ");
 				orderManager.viewOrder(id);
+				break;
 			case 4:
 				id = this.getInt("Please enter orderID: ");
 				orderManager.printOrderInvoice(id);

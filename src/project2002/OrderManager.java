@@ -41,6 +41,9 @@ public class OrderManager extends Manager {
 		itemID = orderUI.getItemID();
 		int quantity = orderUI.getQty();
 		MenuItem MenuItem = menu.getItem(itemID); // Takes in the itemID and returns the menuitem
+		if(MenuItem == null){
+			System.out.println("There is no such Menu Item");
+		}
 		return orderHandler.RemoveItem(orderID, MenuItem, quantity); // Add menuitem to the particular orderID
 	}
 
