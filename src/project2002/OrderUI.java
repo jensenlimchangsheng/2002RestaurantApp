@@ -96,6 +96,7 @@ public class OrderUI extends UI {
 			int percent = this.getInt("How many percent is the additional discount");
 			totaldiscount += percent * 0.01;
 		}
+		return totaldiscount;
 	}
 
 }
