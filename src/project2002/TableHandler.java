@@ -29,8 +29,9 @@ public class TableHandler extends Handler {
 	}
 
 	/**
-	 * Checks for an available table for a certain number of pax at the current timing.
-	 * Assumes that for pax of size n, they can only be seated at tables of size (n+ n%2).
+	 * Checks for an available table for a certain number of pax at the current
+	 * timing. Assumes that for pax of size n, they can only be seated at tables of
+	 * size (n+ n%2).
 	 * 
 	 * @param pax
 	 * @return True or False depending on table availability
@@ -70,8 +71,9 @@ public class TableHandler extends Handler {
 
 	/**
 	 * Generic method for setting a table's status, to be called by other methods
-	 * seatNewCustomer, seatBookedCustomer and reserveTables
-	 * Assumes that for pax of size n, they can only be seated at tables of size (n+ n%2).
+	 * seatNewCustomer, seatBookedCustomer and reserveTables Assumes that for pax of
+	 * size n, they can only be seated at tables of size (n+ n%2).
+	 * 
 	 * @param pax
 	 * @param required status to match
 	 * @param desired  status to set to
@@ -88,8 +90,9 @@ public class TableHandler extends Handler {
 	}
 
 	/**
-	 * Seats a walk-in customer with no booking.
-	 * Assumes that for pax of size n, they can only be seated at tables of size (n+ n%2).
+	 * Seats a walk-in customer with no booking. Assumes that for pax of size n,
+	 * they can only be seated at tables of size (n+ n%2).
+	 * 
 	 * @param pax
 	 * @return TableID if the table is assigned, else "NoTablesAvailable"
 	 */
@@ -101,8 +104,9 @@ public class TableHandler extends Handler {
 	}
 
 	/**
-	 * Seats a customer with booking.
-	 * Assumes that for pax of size n, they can only be seated at tables of size (n+ n%2).
+	 * Seats a customer with booking. Assumes that for pax of size n, they can only
+	 * be seated at tables of size (n+ n%2).
+	 * 
 	 * @param pax
 	 * @return TableID if the table is assigned, else "NoTablesAvailable"
 	 */
@@ -174,7 +178,7 @@ public class TableHandler extends Handler {
 	public boolean reserveTables(ArrayList<Reservation> reservationList) {
 		for (Reservation reservation : reservationList) {
 			if (this.setTableStatus(reservation.getPax(), TableStatus.VACANT, TableStatus.RESERVED)
-					.equals("NoTablesAvailable"))
+					.equals("TableNotFound"))
 				return false;
 		}
 		return true;
