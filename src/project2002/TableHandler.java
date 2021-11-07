@@ -63,7 +63,7 @@ public class TableHandler extends Handler {
 	public int[] getTableSizes() {
 		int tableStats[] = new int[] { 0, 0, 0, 0, 0 };
 		for (Table table : curTableList.values()) {
-			tableStats[table.getTableSize() % 2 - 1]++;
+			tableStats[table.getTableSize() / 2 - 1]++;
 		}
 		return tableStats;
 	}
