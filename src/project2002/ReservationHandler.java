@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.TreeMap;
 import java.util.ArrayList;
 import java.util.Iterator;
+import project2002.Restaurant.handlerType;
 
 /**
  * ReservationHandler class for managing reservations of the restaurant
@@ -34,10 +35,10 @@ public class ReservationHandler extends Handler {
 	/**
 	 * Initializes variables
 	 */
-	public ReservationHandler(int[] tableSizes) {
+	public ReservationHandler() {
 		this.reservations = new TreeMap<LocalDateTime, ArrayList<Reservation>>();
 		this.availTableSizes = new TreeMap<LocalDateTime, int[]>();
-		this.tableSizes = tableSizes;
+		type = handlerType.RESERVATION;
 	}
 
 	/**
@@ -142,6 +143,10 @@ public class ReservationHandler extends Handler {
 		// TODO Auto-generated method stub
 		dateTime = dateTime.plusMinutes(60);
 		return reservations.get(dateTime);
+	}
+
+	public void setTableSize(int[] tableSizes) {
+		this.tableSizes = tableSizes;
 	}
 
 }

@@ -6,69 +6,55 @@ import java.util.Scanner;
 import project2002.Restaurant.UIType;
 
 public class CustomerUI extends UI {
-	
+
 	private CustomerManager customerManager;
 
-	public CustomerUI(Scanner scanner){
+	public CustomerUI(Scanner scanner) {
 		super(scanner);
-		this.type=UIType.CUSTOMER;
+		this.type = UIType.CUSTOMER;
 	}
 
 	@Override
 	protected void printOptions() {
-		int choice=0;
+		int choice = 0;
 		do {
-			System.out.printf("-------------Order Options-----------\n"
-					+ "Please select one of this 2 options: \n"
-					+ "1.	Create Order For New Customer\n"
-					+ "2.	Create Order For Reserved Customer\n"
-					+ "3.	Quit");	
+			System.out.printf("-------------Order Options-----------\n" + "Please select one of this 2 options: \n"
+					+ "1.	Create Order For New Customer\n" + "2.	Create Order For Reserved Customer\n" + "3.	Quit");
 			try {
-				choice =scan.nextInt();
-				}
-			catch(InputMismatchException e) {
+				choice = scan.nextInt();
+			} catch (InputMismatchException e) {
 				System.out.println("Invalid Input.");
-				}
-			switch(choice) {
+			}
+			switch (choice) {
 			case 1:
-				System.out.println("Please enter number of pax: ");
-				int pax=this.getInt();
-				System.out.println("Please enter staff name: ");
-				String name=this.getString();
-				System.out.println("Please enter staff ID: ");
-				int id=this.getInt();
-				System.out.println("Please enter staff title: ");
-				String title=this.getString();
-				System.out.printf("The orderID is : %d.\n",customerManager.newCustomerOrder(pax,name,id,title));
+				int pax = this.getInt("Please enter number of pax: ");
+				String name = this.getString("Please enter staff name: ");
+				int id = this.getInt("Please enter staff ID: ");
+				String title = this.getString("Please enter staff title: ");
+				System.out.printf("The orderID is : %d.\n", customerManager.newCustomerOrder(pax, name, id, title));
 				break;
 			case 2:
-				System.out.println("Please enter number of pax: ");
-				pax=this.getInt();
-				System.out.println("Please enter staff name: ");
-				name=this.getString();
-				System.out.println("Please enter staff ID: ");
-				id=this.getInt();
-				System.out.println("Please enter staff title: ");
-				title=this.getString();
-				System.out.println("Please enter customer name: ");
-				String customername=this.getString();
-				System.out.println("Please enter customer phone number: ");
-				int number=this.getInt();
-				System.out.printf("The orderID is : %d.\n",customerManager.reservedCustomerOrder(pax,name,id,title,customername,number));
+				pax = this.getInt("Please enter number of pax: ");
+				name = this.getString("Please enter staff name: ");
+				id = this.getInt("Please enter staff ID: ");
+				title = this.getString("Please enter staff title: ");
+				String customername = this.getString("Please enter customer name: ");
+				int number = this.getInt("Please enter customer phone number: ");
+				System.out.printf("The orderID is : %d.\n",
+						customerManager.reservedCustomerOrder(pax, name, id, title, customername, number));
 				break;
 			case 3:
 				break;
 			default:
 				System.out.println("Invalid Input.");
 			}
-			} while(choice!=7);
-		
+		} while (choice != 3);
+
 	}
 
 	@Override
 	protected void assignUIManager(Manager m) {
-		// TODO Auto-generated method stub
-		
+		customerManager = (CustomerManager) m;
 	}
 
 }

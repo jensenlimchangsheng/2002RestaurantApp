@@ -25,25 +25,28 @@ public abstract class UI {
 		return this.type;
 	}
 
-	protected int getInt() {
-		int choice = 0;
-		try {
-			choice = scan.nextInt();
-		} catch (InputMismatchException e) {
-			String temp = scan.nextLine();
-			System.out.println("Invalid Input.");
+	protected int getInt(String prompt) {
+		boolean validInput = false;
+		String input;
+		int integer = 0;
+		while (!validInput) {
+			System.out.println(prompt);
+			input = scan.nextLine();
+			try {
+				integer = Integer.parseInt(input.trim());
+				validInput = true;
+			} catch (NumberFormatException nfe) {
+				validInput = false;
+				System.out.println("Sorry, this input is incorrect! Please try again.");
+			}
 		}
-		return choice;
+		return integer;
 	}
 
-	protected String getString() {
+	protected String getString(String prompt) {
 		String choice = "";
-		try {
-			choice = scan.nextLine();
-		} catch (InputMismatchException e) {
-			String temp = scan.nextLine();
-			System.out.println("Invalid Input.");
-		}
+		System.out.println(prompt);
+		choice = scan.nextLine();
 		return choice;
 	}
 

@@ -1,7 +1,6 @@
 package project2002;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MainUI {
@@ -10,6 +9,8 @@ public class MainUI {
 	 */
 	public static void main(String[] args) {
 		String temp = "";
+		boolean validInput = false;
+		String input;
 		Scanner scan = new Scanner(System.in);
 		ArrayList<UI> uiList = new ArrayList<UI>();
 		int choice = 0;
@@ -29,11 +30,17 @@ public class MainUI {
 			System.out.printf("-----Welcome to Restaurant XXX-------\n" + "Please select one of this 5 options: \n"
 					+ "1.	Menu\n" + "2.	Order\n" + "3.	SalesReport\n" + "4.	New Customer\n"
 					+ "5.	Table and Reservation\n" + "6.	Quit\n" + "Please enter your choice: ");
-			try {
-				choice = scan.nextInt();
-			} catch (InputMismatchException e) {
-				temp = scan.nextLine();
-				System.out.println("Invalid Input.");
+			validInput = false;
+			while (!validInput) {
+				System.out.println("Please enter your choice: ");
+				input = scan.nextLine();
+				try {
+					choice = Integer.parseInt(input.trim());
+					validInput = true;
+				} catch (NumberFormatException nfe) {
+					validInput = false;
+					System.out.println("Sorry, this input is incorrect! Please try again.");
+				}
 			}
 			switch (choice) {
 			case 1:
@@ -58,5 +65,4 @@ public class MainUI {
 		System.out.println("THANK YOU.");
 		scan.close();
 	}
-
 }
