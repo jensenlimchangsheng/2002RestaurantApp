@@ -18,12 +18,8 @@ public class OrderUI extends UI {
 		int choice = 0;
 		do {
 			System.out.printf("-------------Order Options-----------\n" + "Please select one of this 4 options: \n"
-					+ "1.	Add Order Item\n" + "2.	Remove Order Item\n" + "3.	Print Order Invoice\n" + "4.	Quit");
-			try {
-				choice = scan.nextInt();
-			} catch (InputMismatchException e) {
-				System.out.println("Invalid Input.");
-			}
+					+ "1.	Add Order Item\n" + "2.	Remove Order Item\n" + "3.	Print Order Invoice\n" + "4.	Quit\n");
+			choice = this.getInt("Please enter your choice: \n");
 			switch (choice) {
 			case 1:
 				System.out.println("Please enter orderID: ");
@@ -73,8 +69,33 @@ public class OrderUI extends UI {
 	}
 
 	public Double getDiscount() {
-		// TODO Auto-generated method stub
-		return null;
+		double totaldiscount = 0;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Is the customer a member? Y/N");
+		String in = sc.nextLine();
+		char member = in.charAt(0);
+		while(in.charAt(1) != '\0' || member !='Y' || member != 'N' || member != 'y' ||member != 'n'){
+			System.out.println("invalid input. Please try again");
+			System.out.println("Is the customer a member? Y/N");
+			in = sc.nextLine();
+			member = in.charAt(0);
+		}
+		if(member == 'Y' || member == 'y'){
+			totaldiscount += 0.1;
+		}
+		System.out.println("Is there any more additional discounts? Y/N");
+		in = sc.nextLine();
+		char additional = in.charAt(0);
+		while(in.charAt(1) != '\0'|| additional !='Y' || additional != 'N' || additional != 'y' ||additional != 'n'){
+			System.out.println("invalid input. Please try again");
+			System.out.println("Is there any more additional discounts? Y/N");
+			in = sc.nextLine();
+			additional = in.charAt(0);
+		}
+		if(additional == 'Y' || additional == 'y'){
+			int percent = this.getInt("How many percent is the additional discount");
+			totaldiscount += percent * 0.01;
+		}
 	}
 
 }

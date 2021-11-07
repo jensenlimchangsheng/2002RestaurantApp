@@ -4,7 +4,7 @@ import java.util.*;
 import project2002.Restaurant.handlerType;
 
 public class OrderHandler extends Handler {
-	private ArrayList<Order> Orders;
+	private ArrayList<Order> Orders = new ArrayList<Order>();
 	private int OrderCounter = 0;
 	
 	public OrderHandler(){
