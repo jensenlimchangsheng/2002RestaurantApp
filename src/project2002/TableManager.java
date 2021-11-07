@@ -20,11 +20,7 @@ public class TableManager extends Manager {
 	TableUI tableUI;
 
 	public TableManager() {
-		this.tableHandler = new TableHandler();
 
-		// @ shun yao return the tableSizes here. Type: int[] = new int[5]. index 0 >
-		// capacity for pax size 2; index 1 > capacity for pax size 4 and so on.
-		int[] tableSizes = tableHandler.getTableSizes();
 		handlerList.add(handlerType.TABLE);
 		handlerList.add(handlerType.RESERVATION);
 		type = UIType.TABLE;
@@ -151,6 +147,8 @@ public class TableManager extends Manager {
 		else if (h.getType() == handlerType.RESERVATION)
 			reservationHandler = (ReservationHandler) h;
 		if (tableHandler != null && reservationHandler != null) {
+			// @ shun yao return the tableSizes here. Type: int[] = new int[5]. index 0 >
+			// capacity for pax size 2; index 1 > capacity for pax size 4 and so on.
 			int[] tableSizes = tableHandler.getTableSizes();
 			reservationHandler.setTableSize(tableSizes);
 		}
