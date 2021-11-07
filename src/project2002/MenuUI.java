@@ -129,7 +129,7 @@ public class MenuUI extends UI {
 
 	public void updateItem(String name, int ID) {
 		System.out.println("You have selected " + name + ".");
-		System.out.println("Select:\n1. Update Name\n2. Update Price\n3. Update Description\nInsert -1 when done.");
+		System.out.println("Select:\n1. Update Name\n2. Update Price\n3. Update Description\nInsert -1 when done.\n");
 		int choice = getInt("Please select an option: ");
 		while (choice != -1) {
 			switch (choice) {
