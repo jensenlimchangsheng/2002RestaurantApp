@@ -25,8 +25,6 @@ public class TableUI extends UI {
 		String name;
 		String tableID;
 		int number;
-
-		Scanner scan = new Scanner(System.in);
 		do {
 			System.out.printf("----Table and Reservation Options----\n" + "Please select one of this 9 options: \n"
 					+ "1.	Print Available Tables Now\n" + "2.	Add New Tables\n" + "3.	Remove Table\n"
