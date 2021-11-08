@@ -1,13 +1,29 @@
+/**
+ * contains all the sales reports based on year, month and day for the restaurant
+ */
 package project2002;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class SalesReport {
+	/**
+	 * contains the orders for the retaurant for a certain year
+	 */
 	private HashMap<Integer, ArrayList<Order>> Year = new HashMap<Integer, ArrayList<Order>>();
+	/**
+	 * contains the orders for the restaurant for a certain month
+	 */
 	private HashMap<String, ArrayList<Order>> Month = new HashMap<String, ArrayList<Order>>();
+	/**
+	 * contains the orders for the restaurant for a certain day
+	 */
 	private HashMap<LocalDate, ArrayList<Order>> Day = new HashMap<LocalDate, ArrayList<Order>>();
 	
+	/**
+	 * To insert the order of a customer into the sales report when the customer asks for the bill
+	 * @param order the order of the customer who wants his bill
+	 */
 	public void InsertOrder(Order order){
 		LocalDateTime temp = order.getDate();
 		int y = temp.getYear();
@@ -72,7 +88,10 @@ public class SalesReport {
 			}
 		}
 	}
-	
+	/**
+	 * To print the sales report for a certain year
+	 * @param y the year that the user wants the report to be on
+	 */
 	public void printYearlyReport(int y) {
 		ArrayList<Order> temp = Year.get(y);
 		if(temp == null) {
@@ -114,6 +133,11 @@ public class SalesReport {
 		System.out.println(line);
 		System.out.println("=============================================");
 	}
+	/**
+	 * To print the sales report for a certain month
+	 * @param Y the year that the user wants the report to be on
+	 * @param M the month that the user wants the report to be on
+	 */
 	public void printMonthlyReport(int Y, int M) {
 		String MonthFormat = M + "-" + Y;
 		ArrayList<Order> temp = Month.get(MonthFormat);
@@ -157,6 +181,13 @@ public class SalesReport {
 		System.out.println(line);
 		System.out.println("=============================================");
 	}
+
+	/**
+	 * To print the sales report for a certain date
+	 * @param Y the year that the user wants the report to be on
+	 * @param M the month that the user wants the report to be on
+	 * @param D the date that the user wants the report to be on
+	 */
 	public void printDailyReport(int Y, int M, int D) {
 		LocalDate Date = LocalDate.of(Y, M, D);
 		ArrayList<Order> temp = Day.get(Date);
