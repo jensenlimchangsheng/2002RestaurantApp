@@ -97,7 +97,12 @@ public class OrderHandler extends Handler {
 			return Orders.get(temp).RemoveItems(item, Qty);
 		}
 	}
-	
+	/**
+	 * To print the invoice of a certain order
+	 * @param OrderID the Order identification of the order you would like to print the invoice
+	 * @param discount the amount of discount of the order 
+	 * @return the Order which invoice got printed
+	 */
 	public Order printInvoice(int OrderID, double discount) {
 		int temp = -1;
 		for(int j = 0; j<Orders.size();j++) {
