@@ -47,7 +47,7 @@ public class TableUI extends UI {
 				case 6:
 				case 8:
 				case 10:
-					String result = tableManager.addNewTable(name, pax);
+					String result = tableManager.addNewTable(tableID, pax);
 					if (result.equals("TableAlreadyExists"))
 						System.out.println("TableID already exists. Retry with new ID!");
 					else {
