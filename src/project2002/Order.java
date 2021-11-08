@@ -39,55 +39,83 @@ public class Order {
 	}
 
 	/**
-	 * Gets the order's total price without tax
-	 * @return the total price without tax
+	 * Gets the total price without tax of this order
+	 * @return this order's total price without tax
 	 */
 	public double getTotalPriceWithoutTax() {
 		return this.TotalPriceWithoutTax;
 	}
 	/**
-	 * Gets the order's total price with tax
-	 * @return the total price with tax
+	 * Gets the total price with tax of this order
+	 * @return this order's total price with tax
 	 */
 	public double getTotalPriceWithTax() {
 		return this.TotalPriceWithTax;
 	}
-
+	/**
+	 * Gets the total GST of this order
+	 * @return this order's GST
+	 */
 	public double getGST() {
 		return this.GST;
 	}
-
+	/**
+	 * gets the service tax of this order
+	 * @return this order's service tax
+	 */
 	public double getServiceTax() {
 		return this.ServiceTax;
 	}
-
+	/**
+	 * gets the time of this order
+	 * @return	the time the order was created
+	 */
 	public LocalDateTime getDate() {
 		return this.Time;
 	}
-
+	/**
+	 * gets the staff who attended this order
+	 * @return the order's staff
+	 */
 	public Staff getStaff() {
 		return this.staff;
 	}
-
+	/**
+	 * gets the table identification of this order
+	 * @return the order's table id
+	 */
 	public String getTableID() {
 		return this.TableID;
 	}
-
+	/**
+	 * gets the order identification of this order
+	 * @return the order's id
+	 */
 	public int getOrderID() {
 		return this.OrderID;
 	}
-
+	/**
+	 * get the menu Item and quantity of this order
+	 * @return the hashmap that contain the menutems and the respective quantity
+	 */
 	public HashMap<MenuItem, Integer> getItems() {
 		return this.Items;
 	}
-
+	/**
+	 * get the discount of this order
+	 * @return the order's discount
+	 */
 	public double getDiscount() {
 		return this.Discount;
 	}
 
-	// operations
+	
 
-	// adding items
+	/**
+	 * Too add menu item into the order
+	 * @param item the menu item that you want to add into this respective order
+	 * @param Qty the amount of this menu item you would like to add into the order
+	 */
 	public void AddItems(MenuItem item, int Qty) {
 		if (Items.get(item) == null) {
 			Items.put(item, Qty);
@@ -96,7 +124,12 @@ public class Order {
 		}
 	}
 
-	// removing items
+	/**
+	 * to remove a menu item from the order
+	 * @param item the menu item that you want to remove from this respective order
+	 * @param Qty the amount of this menu item you would like to remove from this order
+	 * @return a boolean which shows whether the item was successfully removed the item or not
+	 */
 	public boolean RemoveItems(MenuItem item, int Qty) {
 		if (Items.get(item) == null || Items.get(item) < Qty) {
 			return false;
@@ -109,7 +142,9 @@ public class Order {
 		}
 	}
 
-	// printing order
+	/**
+	 * To print this order to showing the Order ID table ID and the quantity of menu items and their respective item ID in this order
+	 */
 	public void PrintOrder() {
 		System.out.println("==============================");
 		System.out.print("Order ID: ");
@@ -123,7 +158,10 @@ public class Order {
 		System.out.println("==============================");
 	}
 
-	// calculating the total price
+	/**
+	 * To calculate the total price of this order including discounts without tax
+	 * @param discount the amount of discount that is included in this 
+	 */
 	public void CalculateTotalPriceWithoutTax(double discount) {
 		double price = 0;
 		for (MenuItem i : Items.keySet()) {
@@ -132,19 +170,25 @@ public class Order {
 		this.Discount = price * discount;
 		this.TotalPriceWithoutTax = price - this.Discount;
 	}
-
+	/**
+	 * Calculate the service tax for this order
+	 */
 	public void CalculateServiceTax() {
 		double tax = 0;
 		tax += this.TotalPriceWithoutTax * 0.07;
 		this.ServiceTax = tax;
 	}
-
+	/**
+	 * Calculate the GST for this order
+	 */
 	public void CalculateGST() {
 		double tax = 0;
 		tax += this.TotalPriceWithoutTax * 0.1;
 		this.GST = tax;
 	}
-
+	/**
+	 * calculate the total price of this order including tax and discounts
+	 */
 	public void CalculateTotalPrice() {
 		double price = this.GST + this.ServiceTax + this.TotalPriceWithoutTax;
 		this.TotalPriceWithTax = price;
