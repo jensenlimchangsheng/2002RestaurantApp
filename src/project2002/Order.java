@@ -1,3 +1,6 @@
+/**
+ * Represent a single order in the restaurant
+ */
 package project2002;
 
 import java.time.LocalDateTime;
