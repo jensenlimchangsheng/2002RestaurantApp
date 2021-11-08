@@ -11,6 +11,7 @@ public class MenuManager extends Manager {
 	public MenuManager() {
 		handlerList.add(handlerType.MENU);
 		type = UIType.MENU;
+
 	}
 
 	public void assignHandler(Handler h) {
@@ -23,52 +24,78 @@ public class MenuManager extends Manager {
 		menuUI = (MenuUI) ui;
 	}
 
+	// Prints out the whole menu
+	//SETTLED
 	public void printMenu() {
 		menu.printMenu();
-		return; // Prints out the whole menu
+		return; 
 	}
 
-	public int addMenuItem(String name, double price, String description, MenuUI.ItemType i) {
-		return menu.addMenuItem(name, price, i, description);
+
+	//SETTLED
+	public MenuItem addMenuItem(String name, double price, String description, MenuUI.ItemType i) {
+		return menu.addMenuItem(name, price, description, i);
 	}
 
-	public int removeMenuItem() {
-		menu.printMenu();
-		int id = menuUI.getItemID();
-		return menu.removeItem(id);
-	}
 
-	public int updateMenuItem() {
-		menu.printMenu();
-		int id = menuUI.getItemID();
-		if (menu.checkExist(id) == 0) {
-			return 0;
-		}
-		String name = menu.getName(id);
-		menuUI.updateItem(name, id);
-		return 1;
-	}
-
-	public int addPromoSet(String name, double price, String description, MenuUI.ItemType i) {
-		return menu.addMenuItem(name, price, i, description);
-	}
-
-	public int removePromoSet() {
-		menu.printMenu();
-		int id = menuUI.getItemID();
-		return menu.removeItem(id);
-	}
-
-	public int updatePromoSet() {
+	//SETTLED
+	public String removeMenuItem() {
 		menu.printMenu();
 		int id = menuUI.getItemID();
 		if (menu.checkExist(id) == 0) {
-			return 0;
+			return null;
+		}
+		return menu.removeItem(id);
+	}
+
+
+	//SETTLED
+	public String updateMenuItem() {
+		menu.printMenu();
+		int id = menuUI.getItemID();
+		if (menu.checkExist(id) == 0) {
+			return null;
 		}
 		String name = menu.getName(id);
 		menuUI.updateItem(name, id);
-		return 1;
+		return name;
 	}
+
+
+	//SETTLED
+	public MenuItem addPromoSet(String name, double price, String description, MenuUI.ItemType i) {
+		return menu.addMenuItem(name, price, description, i);
+	}
+
+
+	//SETTLED
+	public String removePromoSet() {
+		menu.printMenu();
+		int id = menuUI.getItemID();
+		if(id>600 || id<500){
+			return null;
+		}
+		return menu.removeItem(id);
+	}
+
+
+	//SETTLED
+	public String updatePromoSet() {
+		menu.printMenu();
+		int id = menuUI.getItemID();
+		if (menu.checkExist(id) == 0) {
+			return null;
+		}
+		if(id>600 || id<500){
+			return null;
+		}
+		String name = menu.getName(id);
+		menuUI.updateItem(name, id);
+		return name;
+	}
+
+
+
 
 	public void updateName(int ID, String newname) {
 		menu.updateName(ID, newname);

@@ -22,41 +22,50 @@ public class MenuItem {
 		return itemID;
 	}
 	
+
 	void setID(int itemID) {
 		this.itemID = itemID;
 	}
+
 
 	String getName() {
 		return name;
 	}
 	
+
 	void setName(String name) {
 		this.name = name;
 	}
 	
+
 	double getPrice() {
 		return price;
 	}
 	
+
 	void setPrice(double price) {
 		this.price = price;
 	}
+
 
 	String getDescription() {
 		return description;
 		
 	}
+
+
 	void setDescription(String description) {
 		this.description = description;
 	}
 
+
 	ItemType getItemType() {
 		return itemType;
-		
 	}
+
+	
 	void setItemType(ItemType itemType) {
 		this.itemType = itemType;
 	}
-
 
 }

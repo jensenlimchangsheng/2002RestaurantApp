@@ -8,6 +8,11 @@ import project2002.Restaurant.handlerType;
 public class MenuHandler extends Handler {
 	public MenuHandler() {
 		type = handlerType.MENU;
+		addMenuItem("The Feather Blade Steak", 21, "Signature", MenuUI.ItemType.MAIN);
+		addMenuItem("Potatoes", 7, "Hand Smashed, Deep Fried in Beef Fat", MenuUI.ItemType.SIDE);
+		addMenuItem("Madagascan Vallina Ice Cream", 8, "Sweet Devil", MenuUI.ItemType.DESSERT);
+		addMenuItem("Death on Weekends", 19, "Prosecco with a splash of green fairy", MenuUI.ItemType.DRINK);
+		addMenuItem("Lunch Special", 45, "The Feather Blade Steak, Potatoes, Madagascan Vallina Ice Cream, Death on Weekends", MenuUI.ItemType.PROMO);
 	}
 
 	ArrayList<MenuItem> MenuItems = new ArrayList<MenuItem>();
@@ -17,17 +22,16 @@ public class MenuHandler extends Handler {
 	private int maxDessertID = 400;
 	private int maxPromoID = 500;
 
-	// no need feed itemID -> auto generated base on what kind of item you want to
-	// add
-	// if got duplicate name return 0
-	public int addMenuItem(String name, double price, ItemType itemType, String description) {
+
+
+	// SETTLED
+	public MenuItem addMenuItem(String name, double price, String description, ItemType itemType) {
 		MenuItem newItem = null;
 		for (int i = 0; i < MenuItems.size(); i++) {
-			if (name == MenuItems.get(i).getName()) {
-				return 0;
+			if (name.equals(MenuItems.get(i).getName())) {
+				return null;
 			}
 		}
-
 		switch (itemType) {
 		case MAIN:
 			newItem = new MainDish(name, price, itemType, description);
@@ -50,10 +54,12 @@ public class MenuHandler extends Handler {
 		int newID = generateID(itemType);
 		newItem.setID(newID);
 		MenuItems.add(newItem);
-		return 1;
+		return newItem;
 	}
 
-	// generate new ID for different food type
+
+
+	// SETTLED
 	private int generateID(ItemType itemType) {
 		int newID = 0;
 		switch (itemType) {
@@ -81,21 +87,10 @@ public class MenuHandler extends Handler {
 		return newID;
 	}
 
-	// update fooditem by inputting its ID, if successful return 1 else 0
-	// public int updateItem(int itemID){
-	// MenuItem item = null;
-	// for(int i = 0; i < MenuItems.size(); i++) {
-	// item = MenuItems.get(i);
-	// if(item.getID() == itemID) {
-	// //go to menuUI to ask for changes
-	// return 1;
-	// }
-	// }
-	// return 0;
-	// }
 
-	// check if item exist
-	public int checkExist(int itemID) {
+
+	//check if item exist
+	public int checkExist(int itemID){
 		MenuItem item = null;
 		for (int i = 0; i < MenuItems.size(); i++) {
 			item = MenuItems.get(i);
@@ -109,7 +104,8 @@ public class MenuHandler extends Handler {
 		return 1;
 	}
 
-	public int removeItem(int itemID) {
+	//SETTLED
+	public String removeItem(int itemID) {
 		MenuItem item = null;
 		int index = 0;
 		for (int i = 0; i < MenuItems.size(); i++) {
@@ -120,24 +116,28 @@ public class MenuHandler extends Handler {
 			}
 			// if still havent found, means dont exist
 			if (i == MenuItems.size() - 1)
-				return 0;
+				return null;
 		}
 		MenuItems.remove(index);
-		return 1;
+		return item.getName();
 	}
 
-	// print entire menu
+	
+
+	// SETTLED
 	public void printMenu() {
-		System.out.println("============================== MENU ==============================");
+		System.out.println("============================================================  MENU ============================================================ ");
 		doSelectionSort(MenuItems);
 		for (int i = 0; i < MenuItems.size(); i++) {
 			MenuItem eachItem = MenuItems.get(i);
-			System.out.println(eachItem.getID() + " | " + eachItem.getItemType() + " | " + eachItem.getName() + " | $"
-					+ eachItem.getPrice() + " | " + eachItem.getDescription());
+			String format = "%1$-7s | %2$3s | %3$-30s | %4$4s | %5$-100s\n";
+			System.out.format(format, eachItem.getItemType(), eachItem.getID(), eachItem.getName(), eachItem.getPrice(), eachItem.getDescription());
 		}
-		System.out.println("==================================================================");
+		System.out.println("===============================================================================================================================");
 	}
 
+
+	// SETTLED
 	public static void doSelectionSort(ArrayList<MenuItem> arr) {
 		for (int i = 0; i < arr.size(); i++) {
 			// find position of smallest itemID between (i + 1)th element and last element
@@ -152,6 +152,9 @@ public class MenuHandler extends Handler {
 			arr.set(i, min);
 		}
 	}
+
+
+
 
 	public MenuItem getItem(int itemID) {
 		MenuItem item = null;
@@ -169,18 +172,24 @@ public class MenuHandler extends Handler {
 		return item.getName();
 	}
 
+
+	//SETTLED
 	public void updateName(int iD, String newname) {
 		MenuItem item = getItem(iD);
 		item.setName(newname);
 
 	}
 
+
+	//SETTLED
 	public void updatePrice(int iD, double price) {
 		MenuItem item = getItem(iD);
 		item.setPrice(price);
 
 	}
 
+
+	//SETTLED
 	public void updateDescription(int iD, String description) {
 		MenuItem item = getItem(iD);
 		item.setDescription(description);

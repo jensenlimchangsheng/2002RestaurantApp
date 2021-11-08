@@ -5,6 +5,9 @@ import java.util.Scanner;
 import project2002.Restaurant.UIType;
 
 public class MenuUI extends UI {
+	private MenuManager menuManager;
+
+
 	public enum ItemType {
 		MAIN, DRINK, DESSERT, SIDE, PROMO;
 
@@ -25,12 +28,12 @@ public class MenuUI extends UI {
 		}
 	}
 
-	private MenuManager menuManager;
-
+	
 	public MenuUI(Scanner scanner) {
 		super(scanner);
 		this.type = UIType.MENU;
 	}
+
 
 	public void printOptions() {
 		int choice = 0;
@@ -39,85 +42,114 @@ public class MenuUI extends UI {
 					+ "1.	Print Menu\n" + "2.	Add Menu Item\n" + "3.	Remove Menu Item\n" + "4.	Update Menu Item\n"
 					+ "5.	Add Promo Set\n" + "6.	Remove Promo Set\n" + "7.	Update Promo Set\n" + "8.	Quit\n");
 			choice = this.getInt("Please enter your choice: ");
+
 			switch (choice) {
-			case 1:
-				menuManager.printMenu();
-				break;
-			case 2:
-				String name = this.getString("Please enter name of item: ");
-				int price = this.getInt("Please enter price of item: ");
-				String description = this.getString("Please enter description of item: ");
-				ItemType i = this.getItemType();
-				if (menuManager.addMenuItem(name, price, description, i) == 1) {
-					System.out.println("Item is successfully added.");
-				} else {
-					System.out.println("Item could not be added/ duplicate item exist...");
-				}
-				break;
-			case 3:
-				if (menuManager.removeMenuItem() == 0) {
-					System.out.println("Item does not exist in the menu");
-				} else
-					System.out.println("Item successfully removed");
-				break;
-			case 4:
-				if (menuManager.updateMenuItem() == 0) {
-					System.out.println("Item does not exist in the menu");
-				} else
-					System.out.println("Item successfully updated");
-				break;
-			case 5:
-				String name1 = this.getString("Please enter name of promoset: ");
-				int price1 = this.getInt("Please enter price of promoset: ");
-				String description1 = this.getString("Please enter description of promoset: ");
-				ItemType i1 = ItemType.PROMO;
-				if (menuManager.addPromoSet(name1, price1, description1, i1) == 1) {
-					System.out.println("Promo is successfully added.");
-				} else {
-					System.out.println("Promo could not be added/ duplicate item exist...");
-				}
-				break;
-			case 6:
-				if (menuManager.removePromoSet() == 0) {
-					System.out.println("Promo does not exist in the menu");
-				} else
-					System.out.println("Promo successfully removed");
-				break;
-			case 7:
-				if (menuManager.updatePromoSet() == 0) {
-					System.out.println("Promo does not exist in the menu");
-				} else
-					System.out.println("Promo successfully updated");
-				break;
-			case 8:
-				break;
-			default:
-				System.out.println("");
+
+				case 1:
+					menuManager.printMenu();
+					break;
+
+				case 2:
+					String name2 = this.getString("Please enter name of item: ");
+					int price2 = this.getInt("Please enter price of item: ");
+					String description2 = this.getString("Please enter description of item: ");
+					ItemType itemtype2 = this.getItemType();
+					MenuItem item2 = menuManager.addMenuItem(name2, price2, description2, itemtype2);
+
+					if (item2 == null) {
+						System.out.println(name2 + " could not be added/ duplicate item exist...");
+					} else {
+						System.out.println(item2.getName() + " is successfully added.");
+					}
+					break;
+
+				case 3:
+					String name3 = menuManager.removeMenuItem();
+					if (name3 == null) {
+						System.out.println("Item does not exist in the menu");
+					} else {
+						System.out.println(name3 + " successfully removed");
+					}
+					break;
+
+				case 4:
+					String name4 = menuManager.updateMenuItem();
+					if (name4 == null) {
+						System.out.println("Item does not exist in the menu");
+					} else {
+						System.out.println(name4 + " successfully updated");
+					}
+					break;
+
+				case 5:
+					String name5 = this.getString("Please enter name of promoset: ");
+					int price5 = this.getInt("Please enter price of promoset: ");
+					String description5 = this.getString("Please enter description of promoset: ");
+					ItemType itemtype5 = ItemType.PROMO;
+					MenuItem item5 = menuManager.addPromoSet(name5, price5, description5, itemtype5); 
+					if (item5 == null) {
+						System.out.println("Promo could not be added/ duplicate item exist...");
+						
+					} else {
+						System.out.println(item5.getName() + " is successfully added.");
+					}
+					break;
+
+				case 6:
+					String name6 = menuManager.removePromoSet();
+					if (name6 == null) {
+						System.out.println("Promo does not exist in the menu");
+					} else {
+						System.out.println(name6 + " successfully removed");
+					}
+					break;
+
+				case 7:
+					String name7 = menuManager.updatePromoSet();
+					if (name7 == null) {
+						System.out.println("Promo does not exist in the menu");
+					} else {
+						System.out.println(name7 + " successfully updated");
+					}
+					break;
+
+				case 8:
+					break;
+
+				default:
+					System.out.println("");
+					
 			}
 		} while (choice != 8);
 
 	}
 
+
 	public ItemType getItemType() {
 		int index = 1;
-		String choice = "";
+		int choice = 0;
 		System.out.println("Available item types:");
 		for (ItemType i : ItemType.values()) {
-			System.out.printf("%d. %s\n", index, i.toString());
+			System.out.printf("%d.	%s\n", index, i.toString());
 			index++;
+			if(index == 5) break; //hide promo
 		}
-		choice = this.getString("Please enter menu item type: ");
-		for (ItemType i : ItemType.values()) {
-			if (choice.equalsIgnoreCase(i.toString())) {
-				return i;
-			}
+		choice = this.getInt("Please enter choice: ");
+		switch(choice){
+			case 1:
+				return ItemType.MAIN;
+			case 2:
+				return ItemType.DRINK;
+			case 3:
+				return ItemType.DESSERT;
+			case 4:
+				return ItemType.SIDE;
 		}
 		return null;
 	}
 
 	public int getItemID() {
-		int itemID;
-		itemID = getInt("Please enter the item ID: \n");
+		int itemID = this.getInt("Please enter the item ID:");
 		return itemID;
 	}
 
@@ -128,7 +160,7 @@ public class MenuUI extends UI {
 
 	public void updateItem(String name, int ID) {
 		System.out.println("You have selected " + name + ".");
-		System.out.println("Select:\n1. Update Name\n2. Update Price\n3. Update Description\nInsert -1 when done.\n");
+		System.out.println("Select:\n1. Update Name\n2. Update Price\n3. Update Description\nInsert -1 when done.");
 		int choice = getInt("Please select an option: ");
 		while (choice != -1) {
 			switch (choice) {
