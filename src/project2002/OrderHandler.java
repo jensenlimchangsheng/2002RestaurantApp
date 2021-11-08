@@ -1,23 +1,41 @@
+/**
+ * Represent the handler that handles all the orders in the restaurant
+ */
 package project2002;
 import java.util.*;
 
 import project2002.Restaurant.handlerType;
-
 public class OrderHandler extends Handler {
+	/** 
+	 * contains an arraylist of orders that are in the restaurant at the current moment
+	 */
 	private ArrayList<Order> Orders = new ArrayList<Order>();
+	/**
+	 * A order counter to count the amount of order and provide each order with a unique order identification
+	 */
 	private int OrderCounter = 1;
-	
+	/**
+	 * to construct this handler in the manager
+	 */
 	public OrderHandler(){
 		type=handlerType.ORDER;
 	}
-	
+	/**
+	 * To create an order in the restaurant
+	 * @param TableID the Table identification of the particular order
+	 * @param staff the staff of the particular order
+	 * @return the order identification of this order
+	 */
 	public int createOrder(String TableID, Staff staff) {
 		Order temp = new Order(staff,TableID,OrderCounter);
 		Orders.add(temp);
 		OrderCounter++;
 		return OrderCounter-1;
 	}
-	
+	/**
+	 * To print a particular order where it shows the quantity, MenuItem and the respective menu item id
+	 * @param OrderID the particular order, order identification
+	 */
 	public void printOrder(int OrderID) {
 		int temp = -1;
 		for(int j = 0; j<Orders.size();j++) {
@@ -34,7 +52,13 @@ public class OrderHandler extends Handler {
 			Orders.get(temp).PrintOrder();
 		}
 	}
-	
+	/**
+	 * To add an item to a specific order
+	 * @param OrderID the Order identification of the order you want to add
+	 * @param item the menu item you want to add to the order
+	 * @param Qty the quantity of the menuitem you want to add
+	 * @return a boolean value to show whether the addition was successful or not
+	 */
 	public boolean AddItem(int OrderID, MenuItem item, int Qty){
 		int temp = -1;
 		for(int j = 0; j<Orders.size();j++) {
@@ -51,7 +75,13 @@ public class OrderHandler extends Handler {
 			return true;
 		}
 	}
-	
+	/**
+	 * To remove an menu Item from an order
+	 * @param OrderID the Order identification of the order you want to remove from
+	 * @param item the menu item you want to remove from that order
+	 * @param Qty the quantity of the menu item you want to remove
+	 * @return
+	 */
 	public boolean RemoveItem(int OrderID,MenuItem item, int Qty){
 		int temp = -1;
 		for(int j = 0; j<Orders.size();j++) {
