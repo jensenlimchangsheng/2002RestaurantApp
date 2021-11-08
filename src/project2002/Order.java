@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class Order {
+	/** The unique OrderID for each order */
 	private int OrderID;
 	/** Represents the staff attending to the order */
 	private Staff staff;
@@ -15,12 +16,21 @@ public class Order {
 	private HashMap<MenuItem, Integer> Items = new HashMap<MenuItem, Integer>();
 	/**To store the total net price of the order */
 	private double TotalPriceWithoutTax = 0;
+	/**The calculated total price including GST and Service Tax */
 	private double TotalPriceWithTax = 0;
+	/**The GST collected for this order */
 	private double GST = 0;
+	/**The service tax for this order */
 	private double ServiceTax = 0;
+	/**Amount of dicsount in for this order */
 	private double Discount = 0;
 
-	// constructor
+	/**
+	 * Creates a new order with a given staff, table Id and order Id
+	 * @param staff The staff handling this respective Order
+	 * @param TableID The table identification of this respective order
+	 * @param OrderID the order identification of this respective order
+	 */
 	public Order(Staff staff, String TableID, int OrderID) {
 		this.staff = staff;
 		this.TableID = TableID;
@@ -28,11 +38,17 @@ public class Order {
 		this.Time = LocalDateTime.now();
 	}
 
-	// getter
+	/**
+	 * Gets the order's total price without tax
+	 * @return the total price without tax
+	 */
 	public double getTotalPriceWithoutTax() {
 		return this.TotalPriceWithoutTax;
 	}
-
+	/**
+	 * Gets the order's total price with tax
+	 * @return the total price with tax
+	 */
 	public double getTotalPriceWithTax() {
 		return this.TotalPriceWithTax;
 	}
