@@ -94,7 +94,7 @@ public class TableUI extends UI {
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
 				pax = getInt("Please enter number of pax: ");
-				dateTime = getDateTime(scan);
+				dateTime = getDateTime();
 				if (tableManager.addReservation(pax, name, number, dateTime)) {
 					System.out.println("Reservation for " + name + " at " + dateTime + " for " + pax
 							+ " people has been successfully added.");
@@ -105,7 +105,7 @@ public class TableUI extends UI {
 			case 6: // Remove Reservation
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
-				dateTime = getDateTime(scan);
+				dateTime = getDateTime();
 				if (tableManager.removeReservation(name, number, dateTime)) {
 					System.out.println(
 							"Reservation for " + name + " at " + dateTime + " has been successfully cancelled.");
@@ -116,9 +116,9 @@ public class TableUI extends UI {
 			case 7: // Update Reservation
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
-				dateTime = getDateTime(scan);
+				dateTime = getDateTime();
 				int newPax = getInt("Please enter number of pax: ");
-				LocalDateTime newDateTime = getDateTime(scan);
+				LocalDateTime newDateTime = getDateTime();
 				switch (tableManager.updateReservation(name, number, dateTime, newPax, newDateTime)) {
 				case 1:
 					System.out.println(
@@ -136,7 +136,7 @@ public class TableUI extends UI {
 			case 8: // Check Reservation
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
-				dateTime = getDateTime(scan);
+				dateTime = getDateTime();
 				if (tableManager.checkReservation(name, number, dateTime)) {
 					System.out.println("Reservation for " + name + " at " + dateTime + " found.");
 				} else {
@@ -160,12 +160,10 @@ public class TableUI extends UI {
 		} while (choice != 11);
 	}
 
-	LocalDateTime getDateTime(Scanner sc) {
+	LocalDateTime getDateTime() {
 		LocalDateTime dateTime = null;
-		System.out.println("Please enter a date dd/MM/yyyy");
-		String datestring = sc.next();
-		System.out.println("Please enter a time HH:mm");
-		String timeString = sc.next();
+		String datestring = getString("Please enter a date dd/MM/yyyy");
+		String timeString = getString("Please enter a time HH:mm");
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 		// Try block to check for exceptions
 		try {
