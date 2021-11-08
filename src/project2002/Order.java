@@ -4,13 +4,18 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class Order {
+	private int OrderID;
+	/** Represents the staff attending to the order */
 	private Staff staff;
+	/** Stores the TableID of the order */
 	private String TableID;
+	/** the time that the order was created */
 	private LocalDateTime Time;
+	/** storing the MenuItems and the respective quatity in the order */
 	private HashMap<MenuItem, Integer> Items = new HashMap<MenuItem, Integer>();
+	/**To store the total net price of the order */
 	private double TotalPriceWithoutTax = 0;
 	private double TotalPriceWithTax = 0;
-	private int OrderID;
 	private double GST = 0;
 	private double ServiceTax = 0;
 	private double Discount = 0;
