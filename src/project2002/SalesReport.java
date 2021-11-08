@@ -169,7 +169,7 @@ public class SalesReport {
 		}
 		System.out.println("=============================================");
 		System.out.println("These are the following items in month of " + M + "/" + Y);
-		System.out.println("Qty: MenuItem: ");
+		System.out.println("Qty || MenuItem");
 		for(MenuItem item : Orders.keySet()) {
 			System.out.println(Orders.get(item) + " " + item.getName());
 		}
@@ -219,7 +219,7 @@ public class SalesReport {
 		}
 		System.out.println("=============================================");
 		System.out.println("These are the following items in " + Y + "-" + M + "-" + D);
-		System.out.println("Qty: MenuItem: ");
+		System.out.println("Qty || MenuItem ");
 		for(MenuItem item : Orders.keySet()) {
 			System.out.println(Orders.get(item) + " " + item.getName());
 		}

@@ -161,10 +161,10 @@ public class MenuHandler extends Handler {
 		for (int i = 0; i < MenuItems.size(); i++) {
 			item = MenuItems.get(i);
 			if (item.getID() == itemID) {
-				break;
+				return item;
 			}
 		}
-		return item;
+		return null;
 	}
 
 	public String getName(int id) {
