@@ -125,11 +125,11 @@ public class SalesReport {
 		for(MenuItem item : Orders.keySet()) {
 			System.out.println(Orders.get(item) + " " + item.getName());
 		}
-		String line = String.format("%24s $%.2f", "Total Revenue:", totalrevenue);
+		String line = String.format("%35s $%.2f", "Total Revenue:", totalrevenue);
 		System.out.println(line);
-		line = String.format("%24s $%.2f", "Total GST Collected:", totalGST);
+		line = String.format("%35s $%.2f", "Total GST Collected:", totalGST);
 		System.out.println(line);
-		line = String.format("%24s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
+		line = String.format("%35s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
 		System.out.println(line);
 		System.out.println("=============================================");
 	}
@@ -173,11 +173,11 @@ public class SalesReport {
 		for(MenuItem item : Orders.keySet()) {
 			System.out.println(Orders.get(item) + " " + item.getName());
 		}
-		String line = String.format("%24s $%.2f", "Total Revenue:", totalrevenue);
+		String line = String.format("%35s $%.2f", "Total Revenue:", totalrevenue);
 		System.out.println(line);
-		line = String.format("%24s $%.2f", "Total GST Collected:", totalGST);
+		line = String.format("%35s $%.2f", "Total GST Collected:", totalGST);
 		System.out.println(line);
-		line = String.format("%24s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
+		line = String.format("%35s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
 		System.out.println(line);
 		System.out.println("=============================================");
 	}
@@ -223,11 +223,11 @@ public class SalesReport {
 		for(MenuItem item : Orders.keySet()) {
 			System.out.println(Orders.get(item) + " " + item.getName());
 		}
-		String line = String.format("%24s $%.2f", "Total Revenue:", totalrevenue);
+		String line = String.format("%35cs $%.2f", "Total Revenue:", totalrevenue);
 		System.out.println(line);
-		line = String.format("%24s $%.2f", "Total GST Collected:", totalGST);
+		line = String.format("%35s $%.2f", "Total GST Collected:", totalGST);
 		System.out.println(line);
-		line = String.format("%24s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
+		line = String.format("%35s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
 		System.out.println(line);
 		System.out.println("=============================================");
 	}
