@@ -1,3 +1,6 @@
+/**
+ * The user interface regarding any order issues in the restaurant
+ */
 package project2002;
 
 import java.util.InputMismatchException;
@@ -6,14 +9,18 @@ import java.util.Scanner;
 import project2002.Restaurant.UIType;
 
 public class OrderUI extends UI {
-
+	/**
+	 * to implement the order manager which controls the restaurant orders
+	 */
 	private OrderManager orderManager;
-
+	
 	public OrderUI(Scanner scanner) {
 		super(scanner);
 		this.type = UIType.ORDER;
 	}
-
+	/**
+	 * to print the options that are regarding to the orders in the restaurant
+	 */
 	public void printOptions() {
 		int choice = 0;
 		do {
@@ -104,12 +111,18 @@ public class OrderUI extends UI {
 			}
 		} while (choice != 5);
 	}
-
+	/**
+	 * To get an item ID
+	 * @return an integer which is the item ID
+	 */
 	public int getItemID() {
 		int itemID = this.getInt("Please enter the item ID: ");
 		return itemID;
 	}
-
+	/**
+	 * to get the quantity 
+	 * @return an integer which represent the quantity
+	 */
 	public int getQty() {
 		int qty = this.getInt("Please enter the quantity: ");
 		return qty;
@@ -119,7 +132,10 @@ public class OrderUI extends UI {
 	protected void assignUIManager(Manager m) {
 		orderManager = (OrderManager) m;
 	}
-
+	/**
+	 * to get the amount of discount for a certain customer
+	 * @return a double which shows the amount of discount of a customer
+	 */
 	public Double getDiscount() {
 		double totaldiscount = 0;
 		System.out.println("Is the customer a member? Y/N");
