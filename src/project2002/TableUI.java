@@ -23,6 +23,7 @@ public class TableUI extends UI {
 		int pax;
 		LocalDateTime dateTime;
 		String name;
+		String tableID;
 		int number;
 
 		Scanner scan = new Scanner(System.in);
@@ -32,14 +33,14 @@ public class TableUI extends UI {
 					+ "4.	Update Table\n" + "5.	Book Table\n" + "6.	Remove Reservation\n"
 					+ "7.	Update Reservation\n" + "8.	Check Reservation\n" + "9.	Reserve Tables For The Day\n"
 					+ "10.	Remove Reserved Tables\n" + "11.	Quit\n");
-			choice = this.getInt("Please enter your choice: ");
+			choice = getInt("Please enter your choice: ");
 			switch (choice) {
 			case 1: // Print Available Tables Now
 				tableManager.printAvailableTablesNow(); // print current table status
 				break;
 			case 2: // Add New Tables
-				pax = getPax(scan);
-				name = getTableID(scan);
+				pax = getInt("Please enter number of pax: ");
+				tableID = getString("Please enter table ID: ");
 				switch (pax) {
 				case 2:
 				case 4:
@@ -50,7 +51,7 @@ public class TableUI extends UI {
 					if (result.equals("TableAlreadyExists"))
 						System.out.println("TableID already exists. Retry with new ID!");
 					else {
-						System.out.println(name + " created for " + pax + " pax.");
+						System.out.println(tableID + " created for " + pax + " pax.");
 					}
 					break;
 				default:
@@ -58,31 +59,31 @@ public class TableUI extends UI {
 				}
 				break;
 			case 3: // Remove Table
-				name = getTableID(scan);
-				switch (tableManager.removeTable(name)) {
+				tableID = getString("Please enter table ID: ");
+				switch (tableManager.removeTable(tableID)) {
 				case 1:
-					System.out.println("Table " + name + " removed successfully!");
+					System.out.println("Table " + tableID + " removed successfully!");
 					break;
 				case 0:
-					System.out.println("Table " + name + " cannot be found!");
+					System.out.println("Table " + tableID + " cannot be found!");
 					break;
 				case -1:
-					System.out.println("Table " + name + " is currently booked or occupied, try again later!");
+					System.out.println("Table " + tableID + " is currently booked or occupied, try again later!");
 					break;
 				}
 				break;
 			case 4: // Update Table
-				pax = getPax(scan);
-				name = getTableID(scan);
-				switch (tableManager.updateTable(name, pax)) {
+				pax = getInt("Please enter number of pax: ");
+				tableID = getString("Please enter table ID: ");
+				switch (tableManager.updateTable(tableID, pax)) {
 				case 1:
-					System.out.println("Table " + name + " updated successfully!");
+					System.out.println("Table " + tableID + " updated successfully!");
 					break;
 				case 0:
-					System.out.println("Table " + name + " cannot be found!");
+					System.out.println("Table " + tableID + " cannot be found!");
 					break;
 				case -1:
-					System.out.println("Table " + name + " is currently booked or occupied, try again later!");
+					System.out.println("Table " + tableID + " is currently booked or occupied, try again later!");
 					break;
 				case -2:
 					System.out.println("Bug in the update table code!");
@@ -90,9 +91,9 @@ public class TableUI extends UI {
 				}
 				break;
 			case 5: // Book Table
-				name = getName(scan);
-				number = getNumber(scan);
-				pax = getPax(scan);
+				name = getString("Please enter customer name: ");
+				number = getInt("Please enter customer phone number: ");
+				pax = getInt("Please enter number of pax: ");
 				dateTime = getDateTime(scan);
 				if (tableManager.addReservation(pax, name, number, dateTime)) {
 					System.out.println("Reservation for " + name + " at " + dateTime + " for " + pax
@@ -102,8 +103,8 @@ public class TableUI extends UI {
 				}
 				break;
 			case 6: // Remove Reservation
-				name = getName(scan);
-				number = getNumber(scan);
+				name = getString("Please enter customer name: ");
+				number = getInt("Please enter customer phone number: ");
 				dateTime = getDateTime(scan);
 				if (tableManager.removeReservation(name, number, dateTime)) {
 					System.out.println(
@@ -113,10 +114,10 @@ public class TableUI extends UI {
 				}
 				break;
 			case 7: // Update Reservation
-				name = getName(scan);
-				number = getNumber(scan);
+				name = getString("Please enter customer name: ");
+				number = getInt("Please enter customer phone number: ");
 				dateTime = getDateTime(scan);
-				int newPax = getPax(scan);
+				int newPax = getInt("Please enter number of pax: ");
 				LocalDateTime newDateTime = getDateTime(scan);
 				switch (tableManager.updateReservation(name, number, dateTime, newPax, newDateTime)) {
 				case 1:
@@ -133,8 +134,8 @@ public class TableUI extends UI {
 				}
 				break;
 			case 8: // Check Reservation
-				name = getName(scan);
-				number = getNumber(scan);
+				name = getString("Please enter customer name: ");
+				number = getInt("Please enter customer phone number: ");
 				dateTime = getDateTime(scan);
 				if (tableManager.checkReservation(name, number, dateTime)) {
 					System.out.println("Reservation for " + name + " at " + dateTime + " found.");
@@ -157,45 +158,6 @@ public class TableUI extends UI {
 				System.out.println("Invalid Input.");
 			}
 		} while (choice != 11);
-	}
-
-	/**
-	 * Get number of diners from user
-	 * 
-	 * @return number of pax input by user
-	 */
-	int getPax(Scanner sc) {
-		System.out.println("Please enter number of pax: ");
-		int pax = sc.nextInt();
-		return pax;
-	}
-
-	/**
-	 * Get customer name from user
-	 * 
-	 * @return name of customer input by user
-	 */
-	String getName(Scanner sc) {
-		System.out.println("Please enter customer name: ");
-		String name = sc.next();
-		return name;
-	}
-
-	/**
-	 * Get table ID from user
-	 * 
-	 * @return tableID input by user
-	 */
-	String getTableID(Scanner sc) {
-		System.out.println("Please enter table ID: ");
-		String name = sc.next();
-		return name;
-	}
-
-	int getNumber(Scanner sc) {
-		System.out.println("Please enter customer phone number: ");
-		int number = sc.nextInt();
-		return number;
 	}
 
 	LocalDateTime getDateTime(Scanner sc) {
