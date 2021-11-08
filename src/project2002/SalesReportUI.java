@@ -24,67 +24,31 @@ public class SalesReportUI extends UI {
 			choice = this.getInt("Please enter your choice: ");
 			switch (choice) {
 			case 1:
-				System.out.println("Which Year would you like to print?");
-				while (!scan.hasNextInt()) {
-					System.out.println("Invalid input please try again");
-				}
-				y = scan.nextInt();
-				System.out.println("Which month would you like to print?\n" + "1. January\n" + "2. Feburary\n"
-						+ "3. March\n" + "4. April\n" + "5. May\n" + "6. June\n" + "7. July\n" + "8. August\n"
-						+ "9. September\n" + "10. October\n" + "11. November\n" + "12. December");
-				while (!scan.hasNextInt()) {
-					System.out.println("Invalid input please try again");
-				}
-				m = scan.nextInt();
+				y = this.getInt("Which Year would you like to print?");
+				m = this.getInt("Which month would you like to print?\n" + "1. January\n" + "2. Feburary\n"
+				+ "3. March\n" + "4. April\n" + "5. May\n" + "6. June\n" + "7. July\n" + "8. August\n"
+				+ "9. September\n" + "10. October\n" + "11. November\n" + "12. December");
 				while (m > 12 || m < 1) {
-					System.out.println("Invalid input please try again");
-					while (!scan.hasNextInt()) {
-						System.out.println("Invalid input please try again");
-					}
-					m = scan.nextInt();
+					m = this.getInt("Invalid input please try again");
 				}
-				System.out.println("Which date would you like to print?");
-				while (!scan.hasNextInt()) {
-					System.out.println("Invalid input please try again");
-				}
-				d = scan.nextInt();
+				d = this.getInt("Which date would you like to print?");
 				while (d > 31 || d < 1) {
-					System.out.println("Invalid input please try again");
-					while (!scan.hasNextInt()) {
-						System.out.println("Invalid input please try again");
-					}
-					d = scan.nextInt();
+					d = this.getInt("Invalid input please try again");
 				}
 				srManager.printDailyReport(y, m, d);
 				break;
 			case 2:
-				System.out.println("Which Year would you like to print?");
-				while (!scan.hasNextInt()) {
-					System.out.println("Invalid input please try again");
-				}
-				y = scan.nextInt();
-				System.out.println("Which month would you like to print?\n" + "1. January\n" + "2. Feburary\n"
+				y = this.getInt("Which Year would you like to print?");
+				m = this.getInt("Which month would you like to print?\n" + "1. January\n" + "2. Feburary\n"
 						+ "3. March\n" + "4. April\n" + "5. May\n" + "6. June\n" + "7. July\n" + "8. August\n"
 						+ "9. September\n" + "10. October\n" + "11. November\n" + "12. December");
-				while (!scan.hasNextInt()) {
-					System.out.println("Invalid input please try again");
-				}
-				m = scan.nextInt();
 				while (m > 12 || m < 1) {
-					System.out.println("Invalid input please try again");
-					while (!scan.hasNextInt()) {
-						System.out.println("Invalid input please try again");
-					}
-					m = scan.nextInt();
+					m = this.getInt("Invalid input please try again");
 				}
 				srManager.printMonthlyReport(y, m);
 				break;
 			case 3:
-				System.out.println("Which Year would you like to print?");
-				while (!scan.hasNextInt()) {
-					System.out.println("Invalid input please try again");
-				}
-				y = scan.nextInt();
+				y = this.getInt("Which Year would you like to print?");
 				srManager.printYearlyReport(y);
 				break;
 			case 4:

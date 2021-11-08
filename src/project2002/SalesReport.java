@@ -100,9 +100,9 @@ public class SalesReport {
 				}
 			}
 		}
-		System.out.println("==============================");
-		System.out.println("These are the following items in year" + y);
-		System.out.println("Qty: MenuItem: ");
+		System.out.println("=============================================");
+		System.out.println("These are the following items in year " + y);
+		System.out.println("Qty || MenuItem");
 		for(MenuItem item : Orders.keySet()) {
 			System.out.println(Orders.get(item) + " " + item.getName());
 		}
@@ -111,6 +111,8 @@ public class SalesReport {
 		line = String.format("%24s $%.2f", "Total GST Collected:", totalGST);
 		System.out.println(line);
 		line = String.format("%24s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
+		System.out.println(line);
+		System.out.println("=============================================");
 	}
 	public void printMonthlyReport(int Y, int M) {
 		String MonthFormat = M + "-" + Y;
@@ -141,8 +143,8 @@ public class SalesReport {
 				}
 			}
 		}
-		System.out.println("==============================");
-		System.out.println("These are the following items in year" + Y);
+		System.out.println("=============================================");
+		System.out.println("These are the following items in month of " + M + "/" + Y);
 		System.out.println("Qty: MenuItem: ");
 		for(MenuItem item : Orders.keySet()) {
 			System.out.println(Orders.get(item) + " " + item.getName());
@@ -152,6 +154,8 @@ public class SalesReport {
 		line = String.format("%24s $%.2f", "Total GST Collected:", totalGST);
 		System.out.println(line);
 		line = String.format("%24s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
+		System.out.println(line);
+		System.out.println("=============================================");
 	}
 	public void printDailyReport(int Y, int M, int D) {
 		LocalDate Date = LocalDate.of(Y, M, D);
@@ -182,8 +186,8 @@ public class SalesReport {
 				}
 			}
 		}
-		System.out.println("==============================");
-		System.out.println("These are the following items in year" + Y);
+		System.out.println("=============================================");
+		System.out.println("These are the following items in " + Y + "-" + M + "-" + D);
 		System.out.println("Qty: MenuItem: ");
 		for(MenuItem item : Orders.keySet()) {
 			System.out.println(Orders.get(item) + " " + item.getName());
@@ -193,6 +197,8 @@ public class SalesReport {
 		line = String.format("%24s $%.2f", "Total GST Collected:", totalGST);
 		System.out.println(line);
 		line = String.format("%24s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
+		System.out.println(line);
+		System.out.println("=============================================");
 	}
 	
 }

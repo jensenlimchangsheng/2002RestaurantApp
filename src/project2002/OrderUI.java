@@ -60,6 +60,9 @@ public class OrderUI extends UI {
 				temp = true;
 				while(temp){
 					boolean check = orderManager.removeOrderItem(id);
+					if(check == true){
+						System.out.println("The item have been succesfully deleted");
+					}
 					if(check == false){
 						System.out.println("The quantity you wish to delete is more than what was ordered");
 					}

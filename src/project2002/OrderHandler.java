@@ -5,7 +5,7 @@ import project2002.Restaurant.handlerType;
 
 public class OrderHandler extends Handler {
 	private ArrayList<Order> Orders = new ArrayList<Order>();
-	private int OrderCounter = 0;
+	private int OrderCounter = 1;
 	
 	public OrderHandler(){
 		type=handlerType.ORDER;
@@ -27,6 +27,7 @@ public class OrderHandler extends Handler {
 			}
 		}
 		if(temp == -1) {
+			System.out.println("OrderID doesnt exist");
 			return;
 		}
 		else {
@@ -97,7 +98,7 @@ public class OrderHandler extends Handler {
 		System.out.println("=========================================");
 		String line = String.format("   %30s $%.2f","SubTotal:", Orders.get(temp).getTotalPriceWithoutTax());
 		System.out.println(line);
-		line = String.format("   %30s-$%.2f", "Discount: ", Orders.get(temp).getDiscount());
+		line = String.format("   %30s -$%.2f", "Discount:", Orders.get(temp).getDiscount());
 		System.out.println(line);
 		line = String.format("   %30s $%.2f","GST:", Orders.get(temp).getGST());
 		System.out.println(line);
