@@ -5,12 +5,25 @@ import java.time.LocalDateTime;
 import project2002.Restaurant.UIType;
 import project2002.Restaurant.handlerType;
 
+/**
+ * CustomerManager class for managing new customer for the Restaurant.
+ * 
+ * @author Zhi Kai
+ * @version 1.0
+ * @since 2021-11-09
+ */
+
 public class CustomerManager extends Manager {
 	OrderHandler order;
 	TableHandler table;
 	ReservationHandler reservation;
 	CustomerUI customerUI;
 
+	/**
+	 * Constructor for customer manager
+	 * 
+	 * @return customer manager object
+	 */
 	public CustomerManager() {
 		handlerList.add(handlerType.ORDER);
 		handlerList.add(handlerType.TABLE);
@@ -18,6 +31,15 @@ public class CustomerManager extends Manager {
 		type = UIType.CUSTOMER;
 	}
 
+	/**
+	 * Creating an order for a walk in customer
+	 * 
+	 * @param staff_name
+	 * @param pax
+	 * @param staff_name
+	 * @param staff_title
+	 * @return order id that is linked to the new customer
+	 */
 	int newCustomerOrder(int pax, String name, int id, String title) { // new customer that did not reserve beforehand
 		int orderID = 0;
 		Staff staff = new Staff(name, id, title);
@@ -26,6 +48,17 @@ public class CustomerManager extends Manager {
 		return orderID;
 	}
 
+	/**
+	 * Creating an order for a customer with a reservation
+	 * 
+	 * @param staff_name
+	 * @param pax
+	 * @param staff_name
+	 * @param staff_title
+	 * @param customer_name
+	 * @param customer_phone_number
+	 * @return order id that is linked to the new customer
+	 */
 	int reservedCustomerOrder(int pax, String name, int id, String title, String customername, int number) {
 		int orderID = 0;
 		Staff staff = new Staff(name, id, title);
@@ -39,6 +72,10 @@ public class CustomerManager extends Manager {
 		return orderID;
 	}
 
+	/**
+	 * Assigns handlers to customer manager
+	 * 
+	 */
 	@Override
 	public void assignHandler(Handler h) {
 		if (h.getType() == handlerType.ORDER)
@@ -51,6 +88,10 @@ public class CustomerManager extends Manager {
 
 	}
 
+	/**
+	 * Assigns UIs to customer manager
+	 * 
+	 */
 	@Override
 	public void assignUI(UI ui) {
 		customerUI = (CustomerUI) ui;

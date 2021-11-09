@@ -1,25 +1,36 @@
 package project2002;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import project2002.Restaurant.UIType;
 
 public class CustomerUI extends UI {
-
+	/**
+	 * The customer manager for this customer UI.
+	 */
 	private CustomerManager customerManager;
 
+	/**
+	 * Constructor for customer UI.
+	 * 
+	 * @param scanner
+	 * @return customerUI
+	 */
 	public CustomerUI(Scanner scanner) {
 		super(scanner);
 		this.type = UIType.CUSTOMER;
 	}
 
+	/**
+	 * Printing customer options.
+	 */
 	@Override
 	protected void printOptions() {
 		int choice = 0;
 		do {
 			System.out.printf("-------------Customer Options-----------\n" + "Please select one of this 2 options: \n"
-					+ "1.	Create Order For New Customer\n" + "2.	Create Order For Reserved Customer\n" + "3.	Quit\n");
+					+ "1.	Create Order For New Customer\n" + "2.	Create Order For Reserved Customer\n"
+					+ "3.	Quit\n");
 			choice = this.getInt("Please enter your choice: ");
 			switch (choice) {
 			case 1:
@@ -48,6 +59,11 @@ public class CustomerUI extends UI {
 
 	}
 
+	/**
+	 * Assigns customer manager to UI;
+	 * 
+	 * @param m
+	 */
 	@Override
 	protected void assignUIManager(Manager m) {
 		customerManager = (CustomerManager) m;

@@ -4,24 +4,50 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Restaurant {
+	/**
+	 * Enum HandlerType Class
+	 */
 	public enum handlerType {
 		MENU, SALES, ORDER, TABLE, RESERVATION
 	}
 
+	/**
+	 * Enum UIType Class
+	 */
 	public enum UIType {
 		MENU, SALES, ORDER, TABLE, CUSTOMER
 	}
 
+	/**
+	 * Mapping UIType to UI
+	 */
 	private HashMap<UIType, UI> UIdict = new HashMap<UIType, UI>();
+
+	/**
+	 * ArrayList of managers
+	 */
 	private ArrayList<Manager> managerList = new ArrayList<Manager>();
+
+	/**
+	 * Mapping HandlerType to handler
+	 */
 	private HashMap<handlerType, Handler> handlerdict = new HashMap<handlerType, Handler>();
 
+	/**
+	 * Constructor for Restaurant - Initializes the creation and assignment of
+	 * handlers and manager
+	 * 
+	 * @return Restaurant
+	 */
 	public Restaurant() {
 		createHandler();
 		createManager();
 		assignHandler(managerList);
 	}
 
+	/**
+	 * Create the manager objects and add it to the ArrayList
+	 */
 	private void createManager() {
 		MenuManager menuManager = new MenuManager();
 		managerList.add(menuManager);
@@ -35,6 +61,9 @@ public class Restaurant {
 		managerList.add(srManager);
 	}
 
+	/**
+	 * Create the handler objects and add it to the handlerDict
+	 */
 	private void createHandler() {
 		MenuHandler menuHandler = new MenuHandler();
 		handlerdict.put(handlerType.MENU, menuHandler);
@@ -46,6 +75,9 @@ public class Restaurant {
 		handlerdict.put(handlerType.ORDER, orderHandler);
 	}
 
+	/**
+	 * Assigns the handlers to their respective managers
+	 */
 	private void assignHandler(ArrayList<Manager> mlist) {
 		System.out.println("Assigning managers:");
 		for (Manager m : mlist) {
@@ -57,6 +89,9 @@ public class Restaurant {
 		}
 	}
 
+	/**
+	 * Assigns the UI to their respective managers
+	 */
 	public void assignUI(ArrayList<UI> uiList) {
 		for (UI u : uiList) {
 			UIdict.put(u.getType(), u);
