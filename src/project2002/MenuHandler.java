@@ -4,8 +4,18 @@ import java.util.ArrayList;
 
 import project2002.MenuUI.ItemType;
 import project2002.Restaurant.handlerType;
+/**
+Represents Menu Handler from the restaurant.
+@author Jiam Tzi Yu
+@version 1.0
+@since 2021-11-09
+*/
 
 public class MenuHandler extends Handler {
+	
+	/**
+	 * Initializes a menu with preloaded menu items
+	 */
 	public MenuHandler() {
 		type = handlerType.MENU;
 		addMenuItem("The Feather Blade Steak", 21, "Signature", MenuUI.ItemType.MAIN);
@@ -15,16 +25,40 @@ public class MenuHandler extends Handler {
 		addMenuItem("Lunch Special", 45, "The Feather Blade Steak, Potatoes, Madagascan Vallina Ice Cream, Death on Weekends", MenuUI.ItemType.PROMO);
 	}
 
+	/**
+	 * The array list of menu items for this menu handler.
+	 */
 	ArrayList<MenuItem> MenuItems = new ArrayList<MenuItem>();
+	/**
+	 * The starting ID for MAIN for this menu handler.
+	 */
 	private int maxMainID = 100;
+	/**
+	 * The starting ID for SIDE for this menu handler.
+	 */
 	private int maxSideID = 200;
+	/**
+	 * The starting ID for DRINK for this menu handler.
+	 */
 	private int maxDrinkID = 300;
+	/**
+	 * The starting ID for DESSERT for this menu handler.
+	 */
 	private int maxDessertID = 400;
+	/**
+	 * The starting ID for PROMO for this menu handler.
+	 */
 	private int maxPromoID = 500;
 
 
-
-	// SETTLED
+	/**
+	 * Creates a new menu item with name, price, type and description.
+	 * @param name This menu item's name.
+	 * @param price This menu item's price.
+	 * @param itemType This menu item's type.
+	 * @param description This menu item's description.
+	 * @return this menu item
+	 */
 	public MenuItem addMenuItem(String name, double price, String description, ItemType itemType) {
 		MenuItem newItem = null;
 		for (int i = 0; i < MenuItems.size(); i++) {
@@ -58,8 +92,11 @@ public class MenuHandler extends Handler {
 	}
 
 
-
-	// SETTLED
+	/**
+	 * Generates a unique ID for the menu item depending on its type.
+	 * @param itemType This menu item's type.
+	 * @return this menu item unique ID.
+	 */
 	private int generateID(ItemType itemType) {
 		int newID = 0;
 		switch (itemType) {
@@ -89,7 +126,11 @@ public class MenuHandler extends Handler {
 
 
 
-	//check if item exist
+	/**
+	 * Checks if the menu item already exists using its ID.
+	 * @param itemID the menu item's ID.
+	 * @return 1 or 0.
+	 */
 	public int checkExist(int itemID){
 		MenuItem item = null;
 		for (int i = 0; i < MenuItems.size(); i++) {
@@ -104,7 +145,11 @@ public class MenuHandler extends Handler {
 		return 1;
 	}
 
-	//SETTLED
+	/**
+	 * Removes menu item using its ID.
+	 * @param itemID the menu item's ID.
+	 * @return this menu item's name if exist else null.
+	 */
 	public String removeItem(int itemID) {
 		MenuItem item = null;
 		int index = 0;
@@ -124,7 +169,9 @@ public class MenuHandler extends Handler {
 
 	
 
-	// SETTLED
+	/**
+	 * Prints the array of menu items.
+	 */
 	public void printMenu() {
 		System.out.println("============================================================  MENU ============================================================ ");
 		doSelectionSort(MenuItems);
@@ -137,7 +184,10 @@ public class MenuHandler extends Handler {
 	}
 
 
-	// SETTLED
+	/**
+	 * Sorts the array of menu items based on the IDs of the menu items.
+	 * @param arr The array of menu items.
+	 */
 	public static void doSelectionSort(ArrayList<MenuItem> arr) {
 		for (int i = 0; i < arr.size(); i++) {
 			// find position of smallest itemID between (i + 1)th element and last element
@@ -154,26 +204,38 @@ public class MenuHandler extends Handler {
 	}
 
 
-
-
+	/**
+	 * Gets the menu item using its ID.
+	 * @param itemID the menu item's ID.
+	 * @return menu item.
+	 */
 	public MenuItem getItem(int itemID) {
 		MenuItem item = null;
 		for (int i = 0; i < MenuItems.size(); i++) {
 			item = MenuItems.get(i);
 			if (item.getID() == itemID) {
-				return item;
+				break;
 			}
 		}
-		return null;
+		return item;
 	}
 
+	/**
+	 * Gets the name of the menu item using its ID.
+	 * @param id the menu item's ID.
+	 * @return menu item name.
+	 */
 	public String getName(int id) {
 		MenuItem item = getItem(id);
 		return item.getName();
 	}
 
 
-	//SETTLED
+	/**
+	 * Updates the name of the menu item using its ID, and new name.
+	 * @param iD the menu item's ID.
+	 * @param newname the menu item's new name.
+	 */
 	public void updateName(int iD, String newname) {
 		MenuItem item = getItem(iD);
 		item.setName(newname);
@@ -181,7 +243,11 @@ public class MenuHandler extends Handler {
 	}
 
 
-	//SETTLED
+	/**
+	 * Updates the price of the menu item using its ID and the new price.
+	 * @param iD the menu item's ID.
+	 * @param price the menu item's new price.
+	 */
 	public void updatePrice(int iD, double price) {
 		MenuItem item = getItem(iD);
 		item.setPrice(price);
@@ -189,7 +255,11 @@ public class MenuHandler extends Handler {
 	}
 
 
-	//SETTLED
+	/**
+	 * Updates the description of the menu item using its ID.
+	 * @param iD the menu item's ID.
+	 * @param description the menu item's new description
+	 */
 	public void updateDescription(int iD, String description) {
 		MenuItem item = getItem(iD);
 		item.setDescription(description);

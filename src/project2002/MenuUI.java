@@ -1,17 +1,32 @@
-
 package project2002;
 
 import java.util.Scanner;
 
 import project2002.Restaurant.UIType;
+/**
+Represents each menu item from the restaurant.
+A menu item can consist of MAIN, SIDE, DRINK, DESSERT, PROMO.
+@author Jiam Tzi Yu
+@version 1.0
+@since 2021-11-09
+*/
 
 public class MenuUI extends UI {
+	/**
+	 * The menu manager for this menu UI.
+	 */
 	private MenuManager menuManager;
 
-
+	/**
+	 * Enum ItemType Class
+	 */
 	public enum ItemType {
 		MAIN, DRINK, DESSERT, SIDE, PROMO;
 
+		/**
+		 * Converts enum ItemType to string type
+		 * @return string version of ItemType
+		 */
 		public String toString() {
 			switch (this) {
 			case MAIN:
@@ -29,13 +44,19 @@ public class MenuUI extends UI {
 		}
 	}
 
-	
+	/**
+	 * Creates a menuUI with scanner.
+	 * @param scanner
+	 */
 	public MenuUI(Scanner scanner) {
 		super(scanner);
 		this.type = UIType.MENU;
 	}
 
 
+	/**
+	 * Printing menu options.
+	 */
 	public void printOptions() {
 		int choice = 0;
 		do {
@@ -125,7 +146,10 @@ public class MenuUI extends UI {
 
 	}
 
-
+	/**
+	 * Gets item type based on user input choice
+	 * @return itemType 
+	 */
 	public ItemType getItemType() {
 		int index = 1;
 		int choice = 0;
@@ -149,16 +173,28 @@ public class MenuUI extends UI {
 		return null;
 	}
 
+	/**
+	 * Gets item ID.
+	 * @return itemID This item's ID.
+	 */
 	public int getItemID() {
 		int itemID = this.getInt("Please enter the item ID:");
 		return itemID;
 	}
 
-	@Override
+	/**
+	 * Assigns manager to UI;
+	 * @param m
+	 */
 	protected void assignUIManager(Manager m) {
 		menuManager = (MenuManager) m;
 	}
 
+	/**
+	 * UI for updating menu items' attributes
+	 * @param name This menu item's name.
+	 * @param ID This menu item's ID.
+	 */
 	public void updateItem(String name, int ID) {
 		System.out.println("You have selected " + name + ".");
 		System.out.println("Select:\n1. Update Name\n2. Update Price\n3. Update Description\nInsert -1 when done.");
