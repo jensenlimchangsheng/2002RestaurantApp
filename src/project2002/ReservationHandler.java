@@ -157,6 +157,7 @@ public class ReservationHandler extends Handler {
 
 	public void setTableSize(int[] tableSizes) {
 		this.tableSizes = tableSizes;
+		
 	}
 
 }

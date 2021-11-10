@@ -39,7 +39,7 @@ public class TableManager extends Manager {
 			int[] tableSizes = tableHandler.getTableSizes();
 			reservationHandler.setTableSize(tableSizes);
 		}
-		return result
+		return result;
 	}
 
 	/**
