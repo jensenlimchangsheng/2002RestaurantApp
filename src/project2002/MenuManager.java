@@ -2,7 +2,6 @@ package project2002;
 
 import project2002.Restaurant.handlerType;
 
-
 import project2002.Restaurant.UIType;
 
 /**
@@ -177,4 +176,5 @@ public class MenuManager extends Manager {
 		menu.updateDescription(ID, description);
 
 	}
+
 }

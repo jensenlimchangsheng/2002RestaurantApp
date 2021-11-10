@@ -1,9 +1,11 @@
 package project2002;
 
 import java.util.ArrayList;
-
 import project2002.MenuUI.ItemType;
 import project2002.Restaurant.handlerType;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 /**
 Represents Menu Handler from the restaurant.
 @author Jiam Tzi Yu
@@ -182,7 +184,7 @@ public class MenuHandler extends Handler {
 			//String format = "%1$-7s | %2$3s | %3$-30s | %4$4s | %5$-100s\n";
 			System.out.format(format, eachItem.getItemType(), eachItem.getID(), eachItem.getName(), eachItem.getPrice(), eachItem.getDescription());
 		}
-		System.out.println("===============================================================================================================================");
+		System.out.println("===============================================================================================================================");;
 	}
 
 
@@ -265,6 +267,27 @@ public class MenuHandler extends Handler {
 	public void updateDescription(int iD, String description) {
 		MenuItem item = getItem(iD);
 		item.setDescription(description);
+	}
+
+	public void outputMenu(){
+		File receipt = new File("/Users/jiamtziyu/Desktop/menu.txt");
+		try{
+			FileWriter myWriter = new FileWriter("/Users/jiamtziyu/Desktop/menu.txt");
+			myWriter.write("============================================================  MENU ============================================================\n");
+			String line = String.format("%1$-7s | %2$3s | %3$-30s | %4$6s | %5$-100s\n", "Type", "ID", "Name", "Price", "Description");
+			myWriter.write(line);
+			doSelectionSort(MenuItems);
+			for (int i = 0; i < MenuItems.size(); i++) {
+				MenuItem eachItem = MenuItems.get(i);
+				line = String.format("%1$-7s | %2$3s | %3$-30s | %4$6s | %5$-100s\n", eachItem.getItemType(), eachItem.getID(), eachItem.getName(), eachItem.getPrice(), eachItem.getDescription());
+				myWriter.write(line);
+			}
+			myWriter.write("===============================================================================================================================");
+			myWriter.close();
+		}catch (IOException e) {
+			System.out.println("An error occurred.");
+		}
+		System.out.println("Menu saved as txt file.");
 	}
 
 }
