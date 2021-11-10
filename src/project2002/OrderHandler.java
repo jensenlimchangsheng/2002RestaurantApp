@@ -3,6 +3,9 @@
  */
 package project2002;
 import java.util.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import project2002.Restaurant.handlerType;
 public class OrderHandler extends Handler {
@@ -143,6 +146,39 @@ public class OrderHandler extends Handler {
 		System.out.println(line);
 		System.out.println("=========================================");
 		System.out.println("Thank you for dining with us!");
+		File receipt = new File("C:\\Users\\jense\\Desktop\\receipt.txt");
+		try{
+			FileWriter myWriter = new FileWriter("C:\\Users\\jense\\Desktop\\receipt.txt");
+			myWriter.write("=========================================\n");
+			myWriter.write("Attended to by: " + Orders.get(temp).getStaff().getName()+ "\n");
+			myWriter.write("Table: " + Orders.get(temp).getTableID() + "\n");
+			myWriter.write("=========================================\n");
+			myWriter.write("Orders: \n");
+			for(MenuItem i : Items.keySet()) {
+				line = String.format("%2d %-30s $%.2f\n", Items.get(i), i.getName(), i.getPrice()* Items.get(i));
+				myWriter.write(line);
+			}
+			myWriter.write("=========================================\n");
+			line = String.format("   %30s $%.2f\n","SubTotal:", Orders.get(temp).getTotalPriceWithoutTax());
+			myWriter.write(line);
+			line = String.format("   %30s -$%.2f\n", "Discount:", Orders.get(temp).getDiscount());
+			myWriter.write(line);
+			line = String.format("   %30s $%.2f\n","GST:", Orders.get(temp).getGST());
+			myWriter.write(line);
+			line = String.format("   %30s $%.2f\n","Service Charge:", Orders.get(temp).getServiceTax());
+			myWriter.write(line);
+			line = String.format("   %30s $%.2f\n","Total:", Orders.get(temp).getTotalPriceWithTax());
+			myWriter.write(line);
+			myWriter.write("=========================================\n");
+			myWriter.write("Thank you for dining with us!");
+			myWriter.close();
+
+		}catch (IOException e) {
+			System.out.println("An error occurred.");
+		}
+
+		
+
 		
 		Order j = Orders.get(temp);
 		Orders.remove(temp);
