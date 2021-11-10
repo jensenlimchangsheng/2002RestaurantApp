@@ -174,10 +174,12 @@ public class MenuHandler extends Handler {
 	 */
 	public void printMenu() {
 		System.out.println("============================================================  MENU ============================================================ ");
+		String format = "%1$-7s | %2$3s | %3$-30s | %4$6s | %5$-100s\n";
+		System.out.format(format, "Type", "ID", "Name", "Price", "Description");
 		doSelectionSort(MenuItems);
 		for (int i = 0; i < MenuItems.size(); i++) {
 			MenuItem eachItem = MenuItems.get(i);
-			String format = "%1$-7s | %2$3s | %3$-30s | %4$4s | %5$-100s\n";
+			//String format = "%1$-7s | %2$3s | %3$-30s | %4$4s | %5$-100s\n";
 			System.out.format(format, eachItem.getItemType(), eachItem.getID(), eachItem.getName(), eachItem.getPrice(), eachItem.getDescription());
 		}
 		System.out.println("===============================================================================================================================");
