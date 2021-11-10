@@ -105,7 +105,7 @@ public class TableHandler extends Handler {
 
 	/**
 	 * Seats a customer with booking. Assumes that for pax of size n, they can only
-	 * be seated at tables of size (n+ n%2).
+	 * be seated at tables of size (n + n%2).
 	 * 
 	 * @param pax
 	 * @return TableID if the table is assigned, else "NoTablesAvailable"
@@ -206,6 +206,15 @@ public class TableHandler extends Handler {
 				return false;
 		}
 		return true;
+	}
+
+	/**
+		 * Unseat a customer and change the status to vacant
+		 * 
+		 * @param tableID
+	 */
+	public void unseatCustomer(String tableID) {
+		this.curTableList.get(tableID).setStatus(TableStatus.VACANT);
 	}
 
 

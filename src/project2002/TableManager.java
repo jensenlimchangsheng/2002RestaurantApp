@@ -2,6 +2,9 @@ package project2002;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.text.DateFormat;  
+import java.text.SimpleDateFormat;  
+import java.time.format.DateTimeFormatter;
 
 import project2002.Restaurant.UIType;
 import project2002.Restaurant.handlerType;
@@ -102,7 +105,7 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Checks if a customer has made a reservation at the given time
+	 * Checks if a customer has made a reservation at the given dateTime
 	 * 
 	 * @param cust
 	 * @param dateTime
@@ -121,8 +124,17 @@ public class TableManager extends Manager {
 	 * @param dateTime
 	 * @return Reseration update status.
 	 */
-	public int updateReservation(String name, int number, LocalDateTime dateTime, int newPax,
-			LocalDateTime newDateTime) {
+	public int updateReservation(String name, int number, LocalDateTime dateTime, int newPax, LocalDateTime newDateTime) {
+		
+		LocalDateTime cdateTime = LocalDateTime.now();
+		
+		DateFormat strFormat = new SimpleDateFormat("dd/MM/yyyy HH");  
+		String strDateTime = strFormat.format(cdateTime);  
+		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
+		cdateTime = LocalDateTime.parse(strDateTime, dtFormat);
+
+		if (dateTime == cdateTime | dateTime.minusHours(1) == cdateTime) { return -4; }
+
 		Customer cust = new Customer(name, number);
 		if (reservationHandler.removeReservation(cust, dateTime) != -1) {
 			int result =  reservationHandler.addReservation(cust, newPax, newDateTime); 
@@ -135,24 +147,36 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Automatically update tables at given time 
+	 * Automatically update tables at given dateTime 
 	 * 
 	 * @return update status.
 	 */
 	public boolean reserveTables() {
-		LocalDateTime time = LocalDateTime.now();
-		ArrayList<Reservation> reservationList = reservationHandler.retrieveNextReservationList(time);
+		LocalDateTime dateTime = LocalDateTime.now();
+		
+		DateFormat strFormat = new SimpleDateFormat("dd/MM/yyyy HH");  
+		String strDateTime = strFormat.format(dateTime);  
+		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
+		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
+		
+		ArrayList<Reservation> reservationList = reservationHandler.retrieveNextReservationList(dateTime);
 		return tableHandler.reserveTables(reservationList);
 	}
 
 	/**
-	 * Automatically remove tables at given time 
+	 * Automatically remove tables at given dateTime 
 	 * 
 	 * @return removal status.
 	 */
 	public boolean removeReservedTables() {
-		LocalDateTime time = LocalDateTime.now();
-		ArrayList<Reservation> reservationList = reservationHandler.retrieveBeforeReservationList(time);
+		LocalDateTime dateTime = LocalDateTime.now();
+		
+		DateFormat strFormat = new SimpleDateFormat("dd/MM/yyyy HH");  
+		String strDateTime = strFormat.format(dateTime);  
+		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
+		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
+
+		ArrayList<Reservation> reservationList = reservationHandler.retrieveBeforeReservationList(dateTime);
 		return tableHandler.removeReservations(reservationList);
 	}
 

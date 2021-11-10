@@ -135,6 +135,9 @@ public class TableUI extends UI {
 				case -3:
 					System.out.println("Removing old reservation failed. (Reservation doesn't exist)");
 					break;
+				case -4:
+					System.out.println("Reservation cannot be updated. 1 hour to reservation time.");
+					break;
 				}
 				break;
 			case 8: // Check Reservation
