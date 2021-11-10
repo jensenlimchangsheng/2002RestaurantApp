@@ -159,11 +159,6 @@ public class ReservationHandler extends Handler {
 
 	public void setTableSize(int[] tableSizes) {
 		this.tableSizes = tableSizes;
-		
-		for (var dateTimeTable : availTableSizes.entrySet()) {
-			int[] tableSize = dateTimeTable.getValue();
-
-		}
 	}
 
 	public void addTableToSize(int pax) {
