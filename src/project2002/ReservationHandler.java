@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.TreeMap;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
+
 import project2002.Restaurant.handlerType;
 
 /**
@@ -158,6 +160,18 @@ public class ReservationHandler extends Handler {
 	public void setTableSize(int[] tableSizes) {
 		this.tableSizes = tableSizes;
 		
+		for (var dateTimeTable : availTableSizes.entrySet()) {
+			int[] tableSize = dateTimeTable.getValue();
+
+		}
+	}
+
+	public void addTableToSize(int pax) {
+		this.tableSizes[Math.floorDiv(pax, 2) - 1] += 1;
+		for (var dateTimeTable : availTableSizes.entrySet()) {
+			int[] tableSize = dateTimeTable.getValue();
+			tableSize[Math.floorDiv(pax, 2) - 1] += 1;
+		}
 	}
 
 }

@@ -36,8 +36,7 @@ public class TableManager extends Manager {
 	public String addNewTable(String tableID, int pax) {
 		String result = tableHandler.addNewTable(tableID, pax);
 		if (result == tableID) {
-			int[] tableSizes = tableHandler.getTableSizes();
-			reservationHandler.setTableSize(tableSizes);
+			reservationHandler.addTableToSize(pax);
 		}
 		return result;
 	}
