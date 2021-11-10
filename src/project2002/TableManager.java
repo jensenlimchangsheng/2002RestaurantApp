@@ -80,7 +80,7 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Remove reservation
+	 * Remove reservation and update table status to vacant. 
 	 * 
 	 * @param name
 	 * @param number
@@ -89,7 +89,13 @@ public class TableManager extends Manager {
 	 */
 	public boolean removeReservation(String name, int number, LocalDateTime dateTime) {
 		Customer cust = new Customer(name, number);
-		return reservationHandler.removeReservation(cust, dateTime);
+		
+		boolean removeStatus = reservationHandler.removeReservation(cust, dateTime);
+		
+		// if (removeStatus) {
+		// }
+
+		return removeStatus;
 	}
 
 	/**
