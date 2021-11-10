@@ -143,7 +143,7 @@ public class MenuUI extends UI {
 					
 			}
 		} while (choice != 8);
-
+		menuManager.menu.outputMenu();
 	}
 
 	/**
@@ -223,5 +223,7 @@ public class MenuUI extends UI {
 			choice = getInt("Please select an option: ");
 		}
 		System.out.println("Update Complete.");
+		
 	}
 }
+
