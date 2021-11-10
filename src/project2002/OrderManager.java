@@ -1,6 +1,5 @@
 package project2002;
 
-
 import project2002.Restaurant.UIType;
 import project2002.Restaurant.handlerType;
 
@@ -25,7 +24,7 @@ public class OrderManager extends Manager {
 		itemID = orderUI.getItemID();
 		int quantity = orderUI.getQty();
 		MenuItem MenuItem = menu.getItem(itemID); // Takes in the itemID and returns the menuitem
-		if (MenuItem == null){
+		if (MenuItem == null) {
 			return -1; // item does not exist
 		}
 		if (orderHandler.AddItem(orderID, MenuItem, quantity))
@@ -40,19 +39,13 @@ public class OrderManager extends Manager {
 		itemID = orderUI.getItemID();
 		int quantity = orderUI.getQty();
 		MenuItem MenuItem = menu.getItem(itemID); // Takes in the itemID and returns the menuitem
-		if(MenuItem == null){
+		if (MenuItem == null) {
 			System.out.println("There is no such Menu Item");
 		}
 		return orderHandler.RemoveItem(orderID, MenuItem, quantity); // Add menuitem to the particular orderID
 	}
 
-	void printOrderInvoice(int orderID) {
-		Double discount = orderUI.getDiscount();
-		Order order = orderHandler.printInvoice(orderID, discount);
-		SalesReportManager.addOrder(order);
-	}
-
-	void viewOrder(int orderID){
+	void viewOrder(int orderID) {
 		orderHandler.printOrder(orderID);
 	}
 
