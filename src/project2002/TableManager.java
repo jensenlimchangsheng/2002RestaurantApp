@@ -125,22 +125,43 @@ public class TableManager extends Manager {
 		return -3;
 	}
 
+	/**
+	 * Automatically update tables at given time 
+	 * 
+	 * @return update status.
+	 */
 	public boolean reserveTables() {
 		LocalDateTime time = LocalDateTime.now();
 		ArrayList<Reservation> reservationList = reservationHandler.retrieveNextReservationList(time);
 		return tableHandler.reserveTables(reservationList);
 	}
 
+	/**
+	 * Automatically remove tables at given time 
+	 * 
+	 * @return removal status.
+	 */
 	public boolean removeReservedTables() {
 		LocalDateTime time = LocalDateTime.now();
 		ArrayList<Reservation> reservationList = reservationHandler.retrieveBeforeReservationList(time);
 		return tableHandler.removeReservations(reservationList);
 	}
 
+	/**
+	 * Return table availability
+	 * 
+	 * @param pax
+	 * @return removal status.
+	 */
 	boolean checkTableAvailability(int pax) {
 		return tableHandler.checkAvailability(pax);
 	}
 
+	/**
+	 *  Print all all the tables that are currently available 
+	 * 
+	 * @return removal status.
+	 */
 	void printAvailableTablesNow() {
 		tableHandler.printAvailableTablesNow(); // shows the list of all available tables
 	}

@@ -127,7 +127,6 @@ public class ReservationHandler extends Handler {
 	 * @return ArrayList<Reservation> of all reservations at the current dateTime
 	 */
 	public ArrayList<Reservation> retrieveReservationList(LocalDateTime dateTime) {
-		// TODO Auto-generated method stub
 		return reservations.get(dateTime);
 	}
 
@@ -139,7 +138,6 @@ public class ReservationHandler extends Handler {
 	 *         dateTime
 	 */
 	public ArrayList<Reservation> retrieveNextReservationList(LocalDateTime dateTime) {
-		// TODO Auto-generated method stub
 		dateTime = dateTime.minusMinutes(60);
 		return reservations.get(dateTime);
 	}
@@ -152,15 +150,24 @@ public class ReservationHandler extends Handler {
 	 *         dateTime
 	 */
 	public ArrayList<Reservation> retrieveBeforeReservationList(LocalDateTime dateTime) {
-		// TODO Auto-generated method stub
 		dateTime = dateTime.plusMinutes(60);
 		return reservations.get(dateTime);
 	}
 
+	/**
+	 * Setter function for table sizes
+	 * 
+	 * @param tableSizes 
+	 */
 	public void setTableSize(int[] tableSizes) {
 		this.tableSizes = tableSizes;
 	}
 
+	/**
+	 * Update the capacity tracker for table available for each timing and for the initialization
+	 * 
+	 * @param pax
+	 */
 	public void addTableToSize(int pax) {
 		this.tableSizes[Math.floorDiv(pax, 2) - 1] += 1;
 		for (var dateTimeTable : availTableSizes.entrySet()) {
