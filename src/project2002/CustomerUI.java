@@ -38,7 +38,11 @@ public class CustomerUI extends UI {
 				String name = this.getString("Please enter staff name: ");
 				int id = this.getInt("Please enter staff ID: ");
 				String title = this.getString("Please enter staff title: ");
-				System.out.printf("The orderID is : %d.\n", customerManager.newCustomerOrder(pax, name, id, title));
+				int orderID = customerManager.newCustomerOrder(pax, name, id, title);
+				if (orderID == 0)
+					System.out.printf("No available tables.");
+				else
+					System.out.printf("The orderID is : %d.\n", orderID);
 				break;
 			case 2:
 				pax = this.getInt("Please enter number of pax: ");
@@ -47,8 +51,11 @@ public class CustomerUI extends UI {
 				title = this.getString("Please enter staff title: ");
 				String customername = this.getString("Please enter customer name: ");
 				int number = this.getInt("Please enter customer phone number: ");
-				System.out.printf("The orderID is : %d.\n",
-						customerManager.reservedCustomerOrder(pax, name, id, title, customername, number));
+				orderID = customerManager.reservedCustomerOrder(pax, name, id, title, customername, number);
+				if (orderID == 0)
+					System.out.printf("No reservation found.");
+				else
+					System.out.printf("The orderID is : %d.\n", orderID);
 				break;
 			case 3:
 				break;
