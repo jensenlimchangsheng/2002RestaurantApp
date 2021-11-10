@@ -93,11 +93,16 @@ public class TableUI extends UI {
 				number = getInt("Please enter customer phone number: ");
 				pax = getInt("Please enter number of pax: ");
 				dateTime = getDateTime();
-				if (tableManager.addReservation(pax, name, number, dateTime)) {
-					System.out.println("Reservation for " + name + " at " + dateTime + " for " + pax
-							+ " people has been successfully added.");
-				} else {
-					System.out.println("Reservations for " + dateTime + " is full.");
+				switch (tableManager.addReservation(pax, name, number, dateTime)) {
+					case 1:
+					System.out.println("Reservation for " + name + " for " + pax + " people has been successfully added.");
+						break;
+					case -1: 
+						System.out.println("This restaurant does not support group size of more than 10. Please do split bookings.");
+						break;
+					case -2:
+						System.out.println("Reservations for " + dateTime + " is full.");
+						break;
 				}
 				break;
 			case 6: // Remove Reservation
@@ -119,15 +124,16 @@ public class TableUI extends UI {
 				LocalDateTime newDateTime = getDateTime();
 				switch (tableManager.updateReservation(name, number, dateTime, newPax, newDateTime)) {
 				case 1:
-					System.out.println(
-							"Reservation for " + name + " for " + newPax + " people has been successfully updated.");
+					System.out.println("Reservation for " + name + " for " + newPax + " people has been successfully updated.");
 					break;
-				case -1:
-					System.out.println("Removing old reservation failed.");
+				case -1: 
+					System.out.println("This restaurant does not support group size of more than 10. Please do split bookings.");
 					break;
 				case -2:
-
-					System.out.println("Adding new reservation failed.");
+					System.out.println("Reservations for " + dateTime + " is full.");
+					break;
+				case -3:
+					System.out.println("Removing old reservation failed. (Reservation doesn't exist)");
 					break;
 				}
 				break;
@@ -161,8 +167,8 @@ public class TableUI extends UI {
 	LocalDateTime getDateTime() {
 		LocalDateTime dateTime = null;
 		String datestring = getString("Please enter a date dd/MM/yyyy");
-		String timeString = getString("Please enter a time HH:mm");
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		String timeString = getString("Please enter a time HH");
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
 		// Try block to check for exceptions
 		try {
 

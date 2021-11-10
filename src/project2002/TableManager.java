@@ -67,7 +67,7 @@ public class TableManager extends Manager {
 	 * @param dateTime
 	 * @return whether there reservation is successfully added.
 	 */
-	public boolean addReservation(int pax, String name, int number, LocalDateTime dateTime) {
+	public int addReservation(int pax, String name, int number, LocalDateTime dateTime) {
 		Customer cust = new Customer(name, number);
 
 		// check if there is available table
@@ -111,13 +111,14 @@ public class TableManager extends Manager {
 	public int updateReservation(String name, int number, LocalDateTime dateTime, int newPax,
 			LocalDateTime newDateTime) {
 		Customer cust = new Customer(name, number);
-		if (reservationHandler.addReservation(cust, newPax, newDateTime)) {
-			if (reservationHandler.removeReservation(cust, dateTime)) {
-				return 1;
+		if (reservationHandler.removeReservation(cust, dateTime)) {
+			int result =  reservationHandler.addReservation(cust, newPax, newDateTime); 
+			if (result < 0) {
+				reservationHandler.addReservation(cust, newPax, dateTime); // revert the old record if the adding of a new record fails.
 			}
-			return -1;
+			return result;
 		}
-		return -2;
+		return -3;
 	}
 
 	public boolean reserveTables() {
@@ -150,7 +151,7 @@ public class TableManager extends Manager {
 			// @ shun yao return the tableSizes here. Type: int[] = new int[5]. index 0 >
 			// capacity for pax size 2; index 1 > capacity for pax size 4 and so on.
 			int[] tableSizes = tableHandler.getTableSizes();
-			reservationHandler.setTableSize(tableSizes);
+			// reservationHandler.setTableSize(tableSizes);
 		}
 		return;
 	}

@@ -29,7 +29,7 @@ public class ReservationHandler extends Handler {
 	/**
 	 * Mapping available table sizes to its quantity
 	 */
-	private int[] tableSizes; // [qty for pax size: 2, qty for pax size: 4, qty for pax size: 6, qty for pax
+	private int[] tableSizes = {3,3,3,3,3}; // [qty for pax size: 2, qty for pax size: 4, qty for pax size: 6, qty for pax
 								// size: 8, qty for pax size: 10].
 
 	/**
@@ -50,23 +50,26 @@ public class ReservationHandler extends Handler {
 	 * @return whether adding a reservation is successful - False if reservations
 	 *         are maxed, True otherwise.
 	 */
-	public boolean addReservation(Customer cust, int pax, LocalDateTime dateTime) {
+	public int addReservation(Customer cust, int pax, LocalDateTime dateTime) {
 		ArrayList<Reservation> reservationList;
 		if (!reservations.containsKey(dateTime)) {
 			reservations.put(dateTime, new ArrayList<Reservation>());
 			availTableSizes.put(dateTime, this.tableSizes);
 		}
 
+		if ( pax > 10) { return -1; }
+		if ( pax % 2 == 0) { pax ++; }
+
 		// checking for maxed reservation.
-		if (availTableSizes.get(dateTime)[Math.floorDiv(pax, 2) - 1] == 0) { // if there is not more available table for
+		if (this.availTableSizes.get(dateTime)[Math.floorDiv(pax, 2) - 1] == 0) { // if there is not more available table for
 																				// the pax,
-			return false;
+			return -2;
 		}
 
 		reservationList = reservations.get(dateTime);
 		reservationList.add(new Reservation(pax, cust));
 		availTableSizes.get(dateTime)[Math.floorDiv(pax, 2) - 1] -= 1;
-		return true;
+		return 1;
 	}
 
 	/**
@@ -81,7 +84,8 @@ public class ReservationHandler extends Handler {
 		ArrayList<Reservation> reservationList;
 		reservationList = reservations.get(dateTime);
 		for (Reservation r : reservationList) {
-			if (r.getCustomer() == cust) {
+			Customer reservationCust = r.getCustomer();
+			if (reservationCust.equals(cust)) {
 				return true;
 			}
 		}
@@ -98,11 +102,17 @@ public class ReservationHandler extends Handler {
 	public boolean removeReservation(Customer cust, LocalDateTime dateTime) {
 		ArrayList<Reservation> reservationList;
 		reservationList = reservations.get(dateTime);
-		for (Iterator<Reservation> it = reservationList.iterator(); it.hasNext();) {
-			if (it.next().getCustomer() == cust) {
-				// this will need to be updated for customer class
-				it.remove();
-				return true;
+		if (reservationList != null){
+			for (Iterator<Reservation> it = reservationList.iterator(); it.hasNext();) {
+				Reservation currRes = it.next();
+				Customer reservationCust = currRes.getCustomer();
+				int pax = currRes.getPax();
+				if (reservationCust.equals(cust)) {
+					// this will need to be updated for customer class
+					it.remove();
+					availTableSizes.get(dateTime)[Math.floorDiv(pax, 2) - 1] += 1;
+					return true;
+				}
 			}
 		}
 		return false;
