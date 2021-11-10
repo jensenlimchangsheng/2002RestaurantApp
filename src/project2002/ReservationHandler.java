@@ -100,7 +100,7 @@ public class ReservationHandler extends Handler {
 	 * @param dateTime
 	 * @return whether removal of reservation is succsesful
 	 */
-	public boolean removeReservation(Customer cust, LocalDateTime dateTime) {
+	public int removeReservation(Customer cust, LocalDateTime dateTime) {
 		ArrayList<Reservation> reservationList;
 		reservationList = reservations.get(dateTime);
 		if (reservationList != null){
@@ -112,11 +112,11 @@ public class ReservationHandler extends Handler {
 					// this will need to be updated for customer class
 					it.remove();
 					availTableSizes.get(dateTime)[Math.floorDiv(pax, 2) - 1] += 1;
-					return true;
+					return pax;
 				}
 			}
 		}
-		return false;
+		return -1;
 	}
 
 	/**

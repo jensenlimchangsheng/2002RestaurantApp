@@ -90,12 +90,15 @@ public class TableManager extends Manager {
 	public boolean removeReservation(String name, int number, LocalDateTime dateTime) {
 		Customer cust = new Customer(name, number);
 		
-		boolean removeStatus = reservationHandler.removeReservation(cust, dateTime);
-		
-		// if (removeStatus) {
-		// }
+		int tablePax = reservationHandler.removeReservation(cust, dateTime);
 
-		return removeStatus;
+		// get reservation pax. 
+		
+		if (tablePax != -1) {
+			tableHandler.setTableStatus(tablePax, TableStatus.RESERVED, TableStatus.VACANT);
+		}
+
+		return tablePax != -1;
 	}
 
 	/**
