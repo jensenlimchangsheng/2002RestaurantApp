@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.text.DateFormat;  
 import java.text.SimpleDateFormat;  
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import project2002.Restaurant.UIType;
 import project2002.Restaurant.handlerType;
@@ -96,13 +97,13 @@ public class TableManager extends Manager {
 		int tablePax = reservationHandler.removeReservation(cust, dateTime);
 
 		LocalDateTime cdateTime = LocalDateTime.now();
-		
-		DateFormat strFormat = new SimpleDateFormat("dd/MM/yyyy HH");  
-		String strDateTime = strFormat.format(cdateTime);  
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
-		cdateTime = LocalDateTime.parse(strDateTime, dtFormat);
+		String strDateTime = dateTime.format(dtFormat);  
 
-		if (dateTime == cdateTime | dateTime.minusHours(1) == cdateTime) { return -2; }
+		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
+		long hourDiff = ChronoUnit.HOURS.between(cdateTime, dateTime);
+
+		if (hourDiff <= 1) { return -2; }
 
 		// get reservation pax. 
 		return tablePax;
@@ -131,13 +132,13 @@ public class TableManager extends Manager {
 	public int updateReservation(String name, int number, LocalDateTime dateTime, int newPax, LocalDateTime newDateTime) {
 		
 		LocalDateTime cdateTime = LocalDateTime.now();
-		
-		DateFormat strFormat = new SimpleDateFormat("dd/MM/yyyy HH");  
-		String strDateTime = strFormat.format(cdateTime);  
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
-		cdateTime = LocalDateTime.parse(strDateTime, dtFormat);
+		String strDateTime = dateTime.format(dtFormat);  
 
-		if (dateTime == cdateTime | dateTime.minusHours(1) == cdateTime) { return -4; }
+		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
+		long hourDiff = ChronoUnit.HOURS.between(cdateTime, dateTime);
+
+		if (hourDiff <= 1) { return -4; }
 
 		Customer cust = new Customer(name, number);
 		if (reservationHandler.removeReservation(cust, dateTime) != -1) {
@@ -157,13 +158,13 @@ public class TableManager extends Manager {
 	 */
 	public boolean reserveTables() {
 		LocalDateTime dateTime = LocalDateTime.now();
-		
-		DateFormat strFormat = new SimpleDateFormat("dd/MM/yyyy HH");  
-		String strDateTime = strFormat.format(dateTime);  
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
+		String strDateTime = dateTime.format(dtFormat);  
+
 		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
 		
 		ArrayList<Reservation> reservationList = reservationHandler.retrieveNextReservationList(dateTime);
+		if (reservationList == null) {return true;}
 		return tableHandler.reserveTables(reservationList);
 	}
 
@@ -174,13 +175,13 @@ public class TableManager extends Manager {
 	 */
 	public boolean removeReservedTables() {
 		LocalDateTime dateTime = LocalDateTime.now();
-		
-		DateFormat strFormat = new SimpleDateFormat("dd/MM/yyyy HH");  
-		String strDateTime = strFormat.format(dateTime);  
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
+		String strDateTime = dateTime.format(dtFormat);  
+
 		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
 
 		ArrayList<Reservation> reservationList = reservationHandler.retrieveBeforeReservationList(dateTime);
+		if (reservationList == null) {return true;}
 		return tableHandler.removeReservations(reservationList);
 	}
 
