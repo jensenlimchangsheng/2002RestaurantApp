@@ -44,6 +44,8 @@ public class CustomerManager extends Manager {
 		int orderID = 0;
 		Staff staff = new Staff(name, id, title);
 		String tableID = table.seatNewCustomer(pax); // assigns a table and returns the tableID
+		if (tableID == "NoTablesAvailable")
+			return 0;
 		orderID = order.createOrder(tableID, staff);// create an order
 		return orderID;
 	}
@@ -68,7 +70,8 @@ public class CustomerManager extends Manager {
 			String tableID = table.seatBookedCustomer(pax);
 			reservation.removeReservation(cust, time); // remove the reservation
 			orderID = order.createOrder(tableID, staff);
-		}
+		} else
+			return 0;
 		return orderID;
 	}
 
