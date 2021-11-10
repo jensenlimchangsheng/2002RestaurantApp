@@ -92,7 +92,7 @@ public class TableUI extends UI {
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
 				pax = getInt("Please enter number of pax: ");
-				dateTime = getDateTime();
+				dateTime = getDateTime(false);
 				switch (tableManager.addReservation(pax, name, number, dateTime)) {
 					case 1:
 					System.out.println("Reservation for " + name + " for " + pax + " people has been successfully added.");
@@ -108,7 +108,7 @@ public class TableUI extends UI {
 			case 6: // Remove Reservation
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
-				dateTime = getDateTime();
+				dateTime = getDateTime(false);
 				if (tableManager.removeReservation(name, number, dateTime)) {
 					System.out.println(
 							"Reservation for " + name + " at " + dateTime + " has been successfully cancelled.");
@@ -119,9 +119,9 @@ public class TableUI extends UI {
 			case 7: // Update Reservation
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
-				dateTime = getDateTime();
+				dateTime = getDateTime(false);
 				int newPax = getInt("Please enter number of pax: ");
-				LocalDateTime newDateTime = getDateTime();
+				LocalDateTime newDateTime = getDateTime(true);
 				switch (tableManager.updateReservation(name, number, dateTime, newPax, newDateTime)) {
 				case 1:
 					System.out.println("Reservation for " + name + " for " + newPax + " people has been successfully updated.");
@@ -140,7 +140,7 @@ public class TableUI extends UI {
 			case 8: // Check Reservation
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
-				dateTime = getDateTime();
+				dateTime = getDateTime(false);
 				if (tableManager.checkReservation(name, number, dateTime)) {
 					System.out.println("Reservation for " + name + " at " + dateTime + " found.");
 				} else {
@@ -164,16 +164,24 @@ public class TableUI extends UI {
 		} while (choice != 11);
 	}
 
-	LocalDateTime getDateTime() {
+	LocalDateTime getDateTime(boolean update) {
 		LocalDateTime dateTime = null;
-		String datestring = getString("Please enter a date dd/MM/yyyy");
-		String timeString = getString("Please enter a time HH");
+		String dateString = null;
+		String timeString = null; 
+
+		if (!update) {
+			dateString = getString("Please enter a date dd/MM/yyyy");
+			timeString = getString("Please enter a time HH");
+		} else { 
+			dateString = getString("Please enter a new date dd/MM/yyyy");
+			timeString = getString("Please enter a new time HH");
+		}
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
 		// Try block to check for exceptions
 		try {
 
 			// Getting the Date from String
-			dateTime = LocalDateTime.parse(datestring + " " + timeString, format);
+			dateTime = LocalDateTime.parse(dateString + " " + timeString, format);
 		}
 
 		// Block 1

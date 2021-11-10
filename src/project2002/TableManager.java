@@ -34,7 +34,14 @@ public class TableManager extends Manager {
 	 * @return tableID or error string.
 	 */
 	public String addNewTable(String tableID, int pax) {
-		return tableHandler.addNewTable(tableID, pax);
+		
+		String result = tableHandler.addNewTable(tableID, pax);
+		if ( result == tableID) {
+			int[] tableSizes = tableHandler.getTableSizes();
+			reservationHandler.setTableSize(tableSizes);
+
+		}
+		return result;
 	}
 
 	/**
@@ -147,12 +154,6 @@ public class TableManager extends Manager {
 			tableHandler = (TableHandler) h;
 		} else if (h.getType() == handlerType.RESERVATION)
 			reservationHandler = (ReservationHandler) h;
-		if (tableHandler != null && reservationHandler != null) {
-			// @ shun yao return the tableSizes here. Type: int[] = new int[5]. index 0 >
-			// capacity for pax size 2; index 1 > capacity for pax size 4 and so on.
-			int[] tableSizes = tableHandler.getTableSizes();
-			// reservationHandler.setTableSize(tableSizes);
-		}
 		return;
 	}
 
