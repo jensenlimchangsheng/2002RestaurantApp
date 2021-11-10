@@ -208,8 +208,4 @@ public class TableHandler extends Handler {
 		return true;
 	}
 
-	public String assignTable(int pax) {
-		return null;
-	}
-
 }
