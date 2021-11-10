@@ -29,7 +29,7 @@ public class MainUI {
 		do {
 			System.out.printf("-----Welcome to Restaurant XXX-------\n" + "Please select one of this 5 options: \n"
 					+ "1.	Menu\n" + "2.	Order\n" + "3.	SalesReport\n" + "4.	New Customer\n"
-					+ "5.	Table and Reservation\n" + "6.	Quit\n" + "Please enter your choice: ");
+					+ "5.	Table and Reservation\n" + "6.	Quit\n");
 			validInput = false;
 			while (!validInput) {
 				System.out.println("Please enter your choice: ");
