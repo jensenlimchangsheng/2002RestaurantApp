@@ -25,8 +25,7 @@ public class OrderUI extends UI {
 		int choice = 0;
 		do {
 			System.out.printf("-------------Order Options-----------\n" + "Please select one of this 4 options: \n"
-					+ "1.	Add Order Item\n" + "2.	Remove Order Item\n" + "3.	View Order\n"
-					+ "4.	Print Order Invoice\n" + "5.	Quit\n");
+					+ "1.	Add Order Item\n" + "2.	Remove Order Item\n" + "3.	View Order\n" + "4.	Quit\n");
 			choice = this.getInt("Please enter your choice:");
 			switch (choice) {
 			case 1:
@@ -101,10 +100,6 @@ public class OrderUI extends UI {
 				orderManager.viewOrder(id);
 				break;
 			case 4:
-				id = this.getInt("Please enter orderID: ");
-				orderManager.printOrderInvoice(id);
-				break;
-			case 5:
 				break;
 			default:
 				System.out.println("Invalid Input.");
@@ -135,55 +130,6 @@ public class OrderUI extends UI {
 	@Override
 	protected void assignUIManager(Manager m) {
 		orderManager = (OrderManager) m;
-	}
-
-	/**
-	 * to get the amount of discount for a certain customer
-	 * 
-	 * @return a double which shows the amount of discount of a customer
-	 */
-	public Double getDiscount() {
-		double totaldiscount = 0;
-		System.out.println("Is the customer a member? Y/N");
-		int temp = -1;
-		while (temp == -1) {
-			String in = scan.nextLine();
-			switch (in) {
-			case "Y":
-			case "y":
-				totaldiscount += 0.1;
-				temp = 1;
-				break;
-			case "N":
-			case "n":
-				temp = 1;
-				break;
-			default:
-				System.out.println("invalid input. Please try again");
-				System.out.println("Is the customer a member? Y/N");
-			}
-		}
-		System.out.println("Is there any more additional discounts? Y/N");
-		temp = -1;
-		while (temp == -1) {
-			String in = scan.nextLine();
-			switch (in) {
-			case "Y":
-			case "y":
-				int percent = this.getInt("How many percent is the additional discount");
-				totaldiscount += percent * 0.01;
-				temp = 1;
-				break;
-			case "N":
-			case "n":
-				temp = 1;
-				break;
-			default:
-				System.out.println("invalid input. Please try again");
-				System.out.println("Is there any more additional discounts? Y/N");
-			}
-		}
-		return totaldiscount;
 	}
 
 }

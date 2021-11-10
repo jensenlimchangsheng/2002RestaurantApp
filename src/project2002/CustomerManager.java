@@ -46,6 +46,8 @@ public class CustomerManager extends Manager {
 		String tableID = table.seatNewCustomer(pax); // assigns a table and returns the tableID
 		if (tableID == "NoTablesAvailable")
 			return 0;
+		else
+			System.out.printf("The following table has been assigned %s\n", tableID);
 		orderID = order.createOrder(tableID, staff);// create an order
 		return orderID;
 	}
@@ -73,6 +75,18 @@ public class CustomerManager extends Manager {
 		} else
 			return 0;
 		return orderID;
+	}
+
+	/**
+	 * Closes the order for a customer.
+	 * 
+	 * @param orderID
+	 */
+	void closeCustomerOrder(int orderID) {
+		Double discount = customerUI.getDiscount();
+		Order closedOrder = order.printInvoice(orderID, discount);
+		SalesReportManager.addOrder(closedOrder);
+		table.unseatCustomer(closedOrder.getTableID());
 	}
 
 	/**
