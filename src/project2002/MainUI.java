@@ -8,7 +8,6 @@ public class MainUI {
 	 * Main entry point to the program
 	 */
 	public static void main(String[] args) {
-		String temp = "";
 		boolean validInput = false;
 		String input;
 		Scanner scan = new Scanner(System.in);
