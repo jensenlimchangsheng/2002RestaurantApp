@@ -124,7 +124,7 @@ public class TableManager extends Manager {
 	public int updateReservation(String name, int number, LocalDateTime dateTime, int newPax,
 			LocalDateTime newDateTime) {
 		Customer cust = new Customer(name, number);
-		if (reservationHandler.removeReservation(cust, dateTime)) {
+		if (reservationHandler.removeReservation(cust, dateTime) != -1) {
 			int result =  reservationHandler.addReservation(cust, newPax, newDateTime); 
 			if (result < 0) {
 				reservationHandler.addReservation(cust, newPax, dateTime); // revert the old record if the adding of a new record fails.
