@@ -5,6 +5,9 @@ package project2002;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class SalesReport {
 	/**
@@ -132,6 +135,26 @@ public class SalesReport {
 		line = String.format("%35s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
 		System.out.println(line);
 		System.out.println("=============================================");
+		File salesreport = new File("C:\\Users\\jense\\Desktop\\salesreport.txt");
+		try{
+			FileWriter myWriter = new FileWriter("C:\\Users\\jense\\Desktop\\salesreport.txt");
+			myWriter.write("=============================================\n");
+			myWriter.write("These are the following items in year " + y+ "\n");
+			myWriter.write("Qty || MenuItem\n");
+			for(MenuItem item : Orders.keySet()) {
+				myWriter.write(Orders.get(item) + " " + item.getName() + "\n");
+			}
+			line = String.format("%35s $%.2f\n", "Total Revenue:", totalrevenue);
+			myWriter.write(line);
+			line = String.format("%35s $%.2f\n", "Total GST Collected:", totalGST);
+			myWriter.write(line);
+			line = String.format("%35s $%.2f\n", "Total Service Charge Collected:", totalServiceCharge);
+			myWriter.write(line);
+			myWriter.write("=============================================\n");
+			myWriter.close();
+		}catch (IOException e) {
+			System.out.println("An error occurred.");
+		}
 	}
 	/**
 	 * To print the sales report for a certain month
@@ -180,6 +203,26 @@ public class SalesReport {
 		line = String.format("%35s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
 		System.out.println(line);
 		System.out.println("=============================================");
+		File salesreport = new File("C:\\Users\\jense\\Desktop\\salesreport.txt");
+		try{
+			FileWriter myWriter = new FileWriter("C:\\Users\\jense\\Desktop\\salesreport.txt");
+			myWriter.write("=============================================\n");
+			myWriter.write("These are the following items in month of " + M + "/" + Y + "\n");
+			myWriter.write("Qty || MenuItem\n");
+			for(MenuItem item : Orders.keySet()) {
+				myWriter.write(Orders.get(item) + " " + item.getName() + "\n");
+			}
+			line = String.format("%35s $%.2f\n", "Total Revenue:", totalrevenue);
+			myWriter.write(line);
+			line = String.format("%35s $%.2f\n", "Total GST Collected:", totalGST);
+			myWriter.write(line);
+			line = String.format("%35s $%.2f\n", "Total Service Charge Collected:", totalServiceCharge);
+			myWriter.write(line);
+			myWriter.write("=============================================\n");
+			myWriter.close();
+		}catch (IOException e) {
+			System.out.println("An error occurred.");
+		}
 	}
 
 	/**
@@ -230,6 +273,26 @@ public class SalesReport {
 		line = String.format("%35s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
 		System.out.println(line);
 		System.out.println("=============================================");
+		File salesreport = new File("C:\\Users\\jense\\Desktop\\salesreport.txt");
+		try{
+			FileWriter myWriter = new FileWriter("C:\\Users\\jense\\Desktop\\salesreport.txt");
+			myWriter.write("=============================================\n");
+			myWriter.write("These are the following items in " + Y + "-" + M + "-" + D + "\n");
+			myWriter.write("Qty || MenuItem\n");
+			for(MenuItem item : Orders.keySet()) {
+				myWriter.write(Orders.get(item) + " " + item.getName() + "\n");
+			}
+			line = String.format("%35s $%.2f\n", "Total Revenue:", totalrevenue);
+			myWriter.write(line);
+			line = String.format("%35s $%.2f\n", "Total GST Collected:", totalGST);
+			myWriter.write(line);
+			line = String.format("%35s $%.2f\n", "Total Service Charge Collected:", totalServiceCharge);
+			myWriter.write(line);
+			myWriter.write("=============================================\n");
+			myWriter.close();
+		}catch (IOException e) {
+			System.out.println("An error occurred.");
+		}
 	}
 	
 }
