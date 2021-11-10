@@ -79,7 +79,7 @@ public class TableHandler extends Handler {
 	 * @param desired  status to set to
 	 * @return TableID if table status setting is successful, else "TableNotFound"
 	 */
-	private String setTableStatus(int pax, TableStatus required, TableStatus desired) {
+	protected String setTableStatus(int pax, TableStatus required, TableStatus desired) {
 		for (Table table : curTableList.values()) {
 			if (table.getTableSize() == pax + pax % 2 && table.getStatus() == required) {
 				table.setStatus(desired);
