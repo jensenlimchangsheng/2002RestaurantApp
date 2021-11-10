@@ -137,7 +137,7 @@ public class ReservationHandler extends Handler {
 	 *         dateTime
 	 */
 	public ArrayList<Reservation> retrieveNextReservationList(LocalDateTime dateTime) {
-		dateTime = dateTime.minusMinutes(60);
+		dateTime = dateTime.plusHours(1);		
 		return reservations.get(dateTime);
 	}
 
@@ -149,7 +149,7 @@ public class ReservationHandler extends Handler {
 	 *         dateTime
 	 */
 	public ArrayList<Reservation> retrieveBeforeReservationList(LocalDateTime dateTime) {
-		dateTime = dateTime.plusMinutes(60);
+		dateTime = dateTime.minusHours(1);		
 		return reservations.get(dateTime);
 	}
 

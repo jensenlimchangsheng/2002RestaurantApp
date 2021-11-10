@@ -26,6 +26,14 @@ public class TableHandler extends Handler {
 	public TableHandler() {
 		type = handlerType.TABLE;
 		this.curTableList = new TreeMap<String, Table>();
+		addNewTable("T001", 2);
+		addNewTable("T002", 2);
+		addNewTable("T003", 4);
+		addNewTable("T004", 4);
+		addNewTable("T005", 4);
+		addNewTable("T006", 6);
+		addNewTable("T007", 8);
+		addNewTable("T008", 10);
 	}
 
 	/**
@@ -79,7 +87,7 @@ public class TableHandler extends Handler {
 	 * @param desired  status to set to
 	 * @return TableID if table status setting is successful, else "TableNotFound"
 	 */
-	protected String setTableStatus(int pax, TableStatus required, TableStatus desired) {
+	private String setTableStatus(int pax, TableStatus required, TableStatus desired) {
 		for (Table table : curTableList.values()) {
 			if (table.getTableSize() == pax + pax % 2 && table.getStatus() == required) {
 				table.setStatus(desired);
@@ -105,13 +113,22 @@ public class TableHandler extends Handler {
 
 	/**
 	 * Seats a customer with booking. Assumes that for pax of size n, they can only
-	 * be seated at tables of size (n+ n%2).
+	 * be seated at tables of size (n + n%2).
 	 * 
 	 * @param pax
 	 * @return TableID if the table is assigned, else "NoTablesAvailable"
 	 */
 	public String seatBookedCustomer(int pax) {
 		return this.setTableStatus(pax, TableStatus.RESERVED, TableStatus.OCCUPIED);
+	}
+
+	/**
+	 * Unseat a customer and change the status to vacant
+	 * 
+	 * @param tableID
+	 */
+	public void unseatCustomer(String tableID) {
+		this.curTableList.get(tableID).setStatus(TableStatus.VACANT);
 	}
 
 	/**
@@ -207,6 +224,5 @@ public class TableHandler extends Handler {
 		}
 		return true;
 	}
-
 
 }
