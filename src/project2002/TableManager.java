@@ -34,14 +34,12 @@ public class TableManager extends Manager {
 	 * @return tableID or error string.
 	 */
 	public String addNewTable(String tableID, int pax) {
-		
 		String result = tableHandler.addNewTable(tableID, pax);
-		if ( result == tableID) {
+		if (result == tableID) {
 			int[] tableSizes = tableHandler.getTableSizes();
 			reservationHandler.setTableSize(tableSizes);
-
 		}
-		return result;
+		return result
 	}
 
 	/**
@@ -154,6 +152,10 @@ public class TableManager extends Manager {
 			tableHandler = (TableHandler) h;
 		} else if (h.getType() == handlerType.RESERVATION)
 			reservationHandler = (ReservationHandler) h;
+		if (tableHandler != null && reservationHandler != null) {
+			int[] tableSizes = tableHandler.getTableSizes();
+			reservationHandler.setTableSize(tableSizes);
+		}
 		return;
 	}
 
