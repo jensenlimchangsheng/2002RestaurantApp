@@ -54,13 +54,11 @@ public class TableHandler extends Handler {
 	}
 
 	/**
-	 * Prints all available tables now
+	 * Prints all tables now
 	 */
-	public void printAvailableTablesNow() {
-		for (Table table : curTableList.values()) {
-			if (table.getStatus() == TableStatus.VACANT)
-				System.out.println(table);
-		}
+	public void printAllTablesNow() {
+		for (Table table : curTableList.values())
+			System.out.println(table);
 	}
 
 	/**

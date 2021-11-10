@@ -27,14 +27,14 @@ public class TableUI extends UI {
 		int number;
 		do {
 			System.out.printf("----Table and Reservation Options----\n" + "Please select one of this 9 options: \n"
-					+ "1.	Print Available Tables Now\n" + "2.	Add New Tables\n" + "3.	Remove Table\n"
+					+ "1.	Print All Tables\n" + "2.	Add New Tables\n" + "3.	Remove Table\n"
 					+ "4.	Update Table\n" + "5.	Book Table\n" + "6.	Remove Reservation\n"
 					+ "7.	Update Reservation\n" + "8.	Check Reservation\n" + "9.	Reserve Tables For The Day\n"
 					+ "10.	Remove Reserved Tables\n" + "11.	Quit\n");
 			choice = getInt("Please enter your choice: ");
 			switch (choice) {
-			case 1: // Print Available Tables Now
-				tableManager.printAvailableTablesNow(); // print current table status
+			case 1: // Print Tables Now
+				tableManager.printTablesNow(); // print current table status
 				break;
 			case 2: // Add New Tables
 				pax = getInt("Please enter number of pax: ");
