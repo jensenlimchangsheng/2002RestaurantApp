@@ -90,18 +90,22 @@ public class TableManager extends Manager {
 	 * @param dateTime
 	 * @return whether there reservation is successfully removed.
 	 */
-	public boolean removeReservation(String name, int number, LocalDateTime dateTime) {
+	public int removeReservation(String name, int number, LocalDateTime dateTime) {
 		Customer cust = new Customer(name, number);
 		
 		int tablePax = reservationHandler.removeReservation(cust, dateTime);
 
-		// get reservation pax. 
+		LocalDateTime cdateTime = LocalDateTime.now();
 		
-		if (tablePax != -1) {
-			tableHandler.setTableStatus(tablePax, TableStatus.RESERVED, TableStatus.VACANT);
-		}
+		DateFormat strFormat = new SimpleDateFormat("dd/MM/yyyy HH");  
+		String strDateTime = strFormat.format(cdateTime);  
+		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
+		cdateTime = LocalDateTime.parse(strDateTime, dtFormat);
 
-		return tablePax != -1;
+		if (dateTime == cdateTime | dateTime.minusHours(1) == cdateTime) { return -2; }
+
+		// get reservation pax. 
+		return tablePax;
 	}
 
 	/**

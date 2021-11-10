@@ -109,13 +109,17 @@ public class TableUI extends UI {
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
 				dateTime = getDateTime(false);
-				if (tableManager.removeReservation(name, number, dateTime)) {
-					System.out.println(
-							"Reservation for " + name + " at " + dateTime + " has been successfully cancelled.");
-				} else {
-					System.out.println("Reservation for " + name + " at " + dateTime + " does not exist.");
+				switch (tableManager.removeReservation(name, number, dateTime)) {
+					case -1:
+						System.out.println("Reservation for " + name + " at " + dateTime + " does not exist.");
+						break;
+					case -2:
+						System.out.println("Reservation for " + name + " at " + dateTime + " cannot be deleted.");
+						break;
+					default: 
+						System.out.println("Reservation for " + name + " at " + dateTime + " has been successfully cancelled.");
+						break;
 				}
-				break;
 			case 7: // Update Reservation
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
