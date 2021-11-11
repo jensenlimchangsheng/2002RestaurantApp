@@ -19,7 +19,7 @@ public class SalesReportManager extends Manager {
 		report = new SalesReport();
 		type = UIType.SALES;
 	}
-
+	
 	@Override
 	public void assignHandler(Handler h) {
 	}

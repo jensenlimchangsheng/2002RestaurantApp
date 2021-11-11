@@ -127,7 +127,9 @@ public class OrderUI extends UI {
 		int qty = this.getInt("Please enter the quantity: ");
 		return qty;
 	}
-
+	/**
+	 * assign a UI manager to this UI
+	 */
 	@Override
 	protected void assignUIManager(Manager m) {
 		orderManager = (OrderManager) m;
