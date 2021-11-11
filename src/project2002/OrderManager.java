@@ -10,7 +10,7 @@ public class OrderManager extends Manager {
 	OrderUI orderUI;
 
 	/**
-	 * This function does blah blah
+	 * Constructor for Ordermanager 
 	 */
 	public OrderManager() {
 		handlerList.add(handlerType.MENU);
@@ -18,7 +18,12 @@ public class OrderManager extends Manager {
 		type = UIType.ORDER;
 	}
 
-	int addOrderItem(int orderID) {
+	/**
+	 * to add an order item into an order
+	 * @param orderID the orderID in which you want to add an item to
+	 * @return the value to states whether the addition was successful
+	 */
+	public int addOrderItem(int orderID) {
 		int itemID = 0;
 		menu.printMenu();
 		itemID = orderUI.getItemID();
@@ -32,8 +37,12 @@ public class OrderManager extends Manager {
 		System.out.println("OrderID doesnt Exist");
 		return 0; // unsuccessful
 	}
-
-	boolean removeOrderItem(int orderID) {
+	/**
+	 * to remove an order item from an order
+	 * @param orderID the order ID in which you want to remove an item from
+	 * @return a boolean valyue that states whether the removal was succesful
+	 */
+	public boolean removeOrderItem(int orderID) {
 		int itemID = 0;
 		orderHandler.printOrder(orderID);
 		itemID = orderUI.getItemID();
@@ -44,11 +53,17 @@ public class OrderManager extends Manager {
 		}
 		return orderHandler.RemoveItem(orderID, MenuItem, quantity); // Add menuitem to the particular orderID
 	}
-
-	void viewOrder(int orderID) {
+	/**
+	 * to view the Order of a specific orderID
+	 * @param orderID the orderID in which the user would like to view
+	 */
+	public void viewOrder(int orderID) {
 		orderHandler.printOrder(orderID);
 	}
 
+	/**
+	 * to assign a handler to this Manager
+	 */
 	@Override
 	public void assignHandler(Handler h) {
 		if (h.getType() == handlerType.ORDER)
@@ -58,6 +73,9 @@ public class OrderManager extends Manager {
 		return;
 	}
 
+	/**
+	 * to assign a UI to this Order Manager
+	 */
 	@Override
 	public void assignUI(UI ui) {
 		orderUI = (OrderUI) ui;

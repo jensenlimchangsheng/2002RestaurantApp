@@ -12,7 +12,10 @@ public class OrderUI extends UI {
 	 * to implement the order manager which controls the restaurant orders
 	 */
 	private OrderManager orderManager;
-
+	/**
+	 * to create a constructor to input a scanner into this UI
+	 * @param scanner the scanner that is input into this UI
+	 */
 	public OrderUI(Scanner scanner) {
 		super(scanner);
 		this.type = UIType.ORDER;
@@ -109,7 +112,6 @@ public class OrderUI extends UI {
 
 	/**
 	 * To get an item ID
-	 * 
 	 * @return an integer which is the item ID
 	 */
 	public int getItemID() {
@@ -119,7 +121,6 @@ public class OrderUI extends UI {
 
 	/**
 	 * to get the quantity
-	 * 
 	 * @return an integer which represent the quantity
 	 */
 	public int getQty() {
