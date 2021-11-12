@@ -27,17 +27,14 @@ public class TableUI extends UI {
 		String tableID;
 		int number;
 
-		LocalDateTime cDateTime = LocalDateTime.now(); 
-		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
-		String strDateTime = cDateTime.format(dtFormat);
-		cDateTime = LocalDateTime.parse(strDateTime, dtFormat);
-		LocalDateTime validDateTime = cDateTime.plusHours(1);
+		LocalDateTime cDateTime;
+		LocalDateTime validDateTime;
 		
 		do {
 			System.out.printf("----Table and Reservation Options----\n" + "Please select one of these 11 options: \n"
 					+ "1.	Print All Tables\n" + "2.	Add New Tables\n" + "3.	Remove Table\n" + "4.	Update Table\n"
-					+ "5.	Book Table\n" + "6.	Remove Reservation\n" + "7.	Update Reservation\n"
-					+ "8.	Check Reservation\n" + "9.	Reserve Tables For The Day\n"
+					+ "5.	Book Table\n" + "6.	Cancel Reservation\n" + "7.	Update Reservation\n"
+					+ "8.	Check Reservation\n" + "9.	Reserve Tables\n"
 					+ "10.	Remove Reserved Tables\n" + "11.	Quit\n");
 			choice = getInt("Please enter your choice: ");
 			switch (choice) {
@@ -101,9 +98,12 @@ public class TableUI extends UI {
 				number = getInt("Please enter customer phone number: ");
 				pax = getInt("Please enter number of pax: ");
 				dateTime = getDateTime(false);
+				cDateTime = getCurrDateTime();
+				validDateTime = cDateTime.plusHours(1);
+				
 
 				if (dateTime.isBefore(validDateTime)) {
-					System.out.println("Reservations has to be made at least 1 hour after system time. Current system time is: " + cDateTime);
+					System.out.println("Reservations has to be made at least 1 hour after system time.\nCurrent system time is: " + cDateTime);
 				} else {
 					switch (tableManager.addReservation(pax, name, number, dateTime)) {
 						case 1:
@@ -124,9 +124,11 @@ public class TableUI extends UI {
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
 				dateTime = getDateTime(false);
+				cDateTime = getCurrDateTime();
+				validDateTime = cDateTime.plusHours(1);
 
 				if (dateTime.isBefore(validDateTime)) {
-					System.out.println("Reservations has to be made at least 1 hour after system time. Current system time is: " + cDateTime);
+					System.out.println("Reservations is overdue.\nCurrent system time is: " + cDateTime);
 				} else {
 					switch (tableManager.removeReservation(name, number, dateTime)) {
 						case -1:
@@ -149,9 +151,11 @@ public class TableUI extends UI {
 				dateTime = getDateTime(false);
 				int newPax = getInt("Please enter number of pax: ");
 				LocalDateTime newDateTime = getDateTime(true);
+				cDateTime = getCurrDateTime();
+				validDateTime = cDateTime.plusHours(1);
 				
 				if (newDateTime.isBefore(validDateTime)) {
-					System.out.println("Reservations has to be made at least 1 hour after system time. Current system time is: " + cDateTime);
+					System.out.println("Reservations has to be made at least 1 hour after system time.\nCurrent system time is: " + cDateTime);
 				} else {
 					switch (tableManager.updateReservation(name, number, dateTime, newPax, newDateTime)) {
 						case 1:
@@ -178,9 +182,11 @@ public class TableUI extends UI {
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
 				dateTime = getDateTime(false);
+				cDateTime = getCurrDateTime();
+				validDateTime = cDateTime.plusHours(1);
 				
 				if (dateTime.isBefore(validDateTime)) {
-					System.out.println("Reservations has to be made at least 1 hour after system time. Current system time is: " + cDateTime);
+					System.out.println("Reservation is overdue.\nCurrent system time is: " + cDateTime);
 				} else  {
 					if (tableManager.checkReservation(name, number, dateTime)) {
 						System.out.println("Reservation for " + name + " at " + dateTime + " found.");
@@ -211,6 +217,15 @@ public class TableUI extends UI {
 				System.out.println("Invalid Input.");
 			}
 		} while (choice != 11);
+	}
+
+	LocalDateTime getCurrDateTime(){
+		LocalDateTime cDateTime = LocalDateTime.now(); 
+		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		String strDateTime = cDateTime.format(dtFormat);
+
+		cDateTime = LocalDateTime.parse(strDateTime, dtFormat);
+		return cDateTime;
 	}
 
 	LocalDateTime getDateTime(boolean update) {
