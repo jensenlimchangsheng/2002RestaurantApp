@@ -2,8 +2,6 @@ package project2002;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.text.DateFormat;  
-import java.text.SimpleDateFormat;  
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -84,7 +82,7 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Remove reservation and update table status to vacant. 
+	 * Remove reservation and update table status to vacant.
 	 * 
 	 * @param name
 	 * @param number
@@ -93,19 +91,21 @@ public class TableManager extends Manager {
 	 */
 	public int removeReservation(String name, int number, LocalDateTime dateTime) {
 		Customer cust = new Customer(name, number);
-		
+
 		int tablePax = reservationHandler.removeReservation(cust, dateTime);
 
 		LocalDateTime cdateTime = LocalDateTime.now();
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
-		String strDateTime = dateTime.format(dtFormat);  
+		String strDateTime = dateTime.format(dtFormat);
 
 		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
 		long hourDiff = ChronoUnit.HOURS.between(cdateTime, dateTime);
 
-		if (hourDiff <= 1) { return -2; }
+		if (hourDiff <= 1) {
+			return -2;
+		}
 
-		// get reservation pax. 
+		// get reservation pax.
 		return tablePax;
 	}
 
@@ -129,22 +129,26 @@ public class TableManager extends Manager {
 	 * @param dateTime
 	 * @return Reseration update status.
 	 */
-	public int updateReservation(String name, int number, LocalDateTime dateTime, int newPax, LocalDateTime newDateTime) {
-		
+	public int updateReservation(String name, int number, LocalDateTime dateTime, int newPax,
+			LocalDateTime newDateTime) {
+
 		LocalDateTime cdateTime = LocalDateTime.now();
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
-		String strDateTime = dateTime.format(dtFormat);  
+		String strDateTime = dateTime.format(dtFormat);
 
 		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
 		long hourDiff = ChronoUnit.HOURS.between(cdateTime, dateTime);
 
-		if (hourDiff <= 1) { return -4; }
+		if (hourDiff <= 1) {
+			return -4;
+		}
 
 		Customer cust = new Customer(name, number);
 		if (reservationHandler.removeReservation(cust, dateTime) != -1) {
-			int result =  reservationHandler.addReservation(cust, newPax, newDateTime); 
+			int result = reservationHandler.addReservation(cust, newPax, newDateTime);
 			if (result < 0) {
-				reservationHandler.addReservation(cust, newPax, dateTime); // revert the old record if the adding of a new record fails.
+				reservationHandler.addReservation(cust, newPax, dateTime); // revert the old record if the adding of a
+																			// new record fails.
 			}
 			return result;
 		}
@@ -152,56 +156,59 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Automatically update tables at given dateTime 
+	 * Automatically update tables at given dateTime
 	 * 
-	 * @return update status.
+	 * @return TableIDs that have been reserved.
 	 */
-	public boolean reserveTables() {
+	public ArrayList<String> reserveTables() {
 		LocalDateTime dateTime = LocalDateTime.now();
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
-		String strDateTime = dateTime.format(dtFormat);  
+		String strDateTime = dateTime.format(dtFormat);
 
 		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
-		
+
 		ArrayList<Reservation> reservationList = reservationHandler.retrieveNextReservationList(dateTime);
-		if (reservationList == null) {return true;}
+		if (reservationList == null) {
+			return null;
+		}
 		return tableHandler.reserveTables(reservationList);
 	}
 
 	/**
-	 * Automatically remove tables at given dateTime 
+	 * Automatically remove tables at given dateTime
 	 * 
-	 * @return removal status.
+	 * @return TableIDs that have been removed.
 	 */
-	public boolean removeReservedTables() {
+	public ArrayList<String> removeReservedTables() {
 		LocalDateTime dateTime = LocalDateTime.now();
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
-		String strDateTime = dateTime.format(dtFormat);  
+		String strDateTime = dateTime.format(dtFormat);
 
 		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
 
 		ArrayList<Reservation> reservationList = reservationHandler.retrieveBeforeReservationList(dateTime);
-		if (reservationList == null) {return true;}
+		if (reservationList == null) {
+			return null;
+		}
 		return tableHandler.removeReservations(reservationList);
 	}
 
 	/**
-	 * Return table availability
+	 * Return table availability for a given pax size
 	 * 
 	 * @param pax
-	 * @return removal status.
+	 * @return table availability.
 	 */
 	boolean checkTableAvailability(int pax) {
 		return tableHandler.checkAvailability(pax);
 	}
 
 	/**
-	 *  Print all all the tables that are currently available 
+	 * Print all tables and their current status
 	 * 
-	 * @return removal status.
 	 */
-	void printAvailableTablesNow() {
-		tableHandler.printAvailableTablesNow(); // shows the list of all available tables
+	void printTablesNow() {
+		tableHandler.printAllTablesNow(); // shows the list of all available tables
 	}
 
 	@Override

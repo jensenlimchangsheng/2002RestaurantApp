@@ -5,14 +5,24 @@ import java.util.Scanner;
 import project2002.Restaurant.UIType;
 
 public class SalesReportUI extends UI {
-
+	/**
+	 * the sales report manager that is tied to this sales report UI
+	 */
 	private SalesReportManager srManager;
 
+
+	/**
+	 * constructor for this sales report UI
+	 * @param scanner the scanner that we want to input into our UI
+	 */
 	public SalesReportUI(Scanner scanner) {
 		super(scanner);
 		this.type = UIType.SALES;
 	}
 
+	/**
+	 * Print the options required in this UI
+	 */
 	@Override
 	protected void printOptions() {
 		int y, m, d;
@@ -60,6 +70,9 @@ public class SalesReportUI extends UI {
 
 	}
 
+	/**
+	 * to assign the sales report manager to this UI
+	 */
 	@Override
 	protected void assignUIManager(Manager m) {
 		srManager = (SalesReportManager) m;

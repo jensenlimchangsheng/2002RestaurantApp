@@ -54,13 +54,11 @@ public class TableHandler extends Handler {
 	}
 
 	/**
-	 * Prints all available tables now
+	 * Prints all tables now
 	 */
-	public void printAvailableTablesNow() {
-		for (Table table : curTableList.values()) {
-			if (table.getStatus() == TableStatus.VACANT)
-				System.out.println(table);
-		}
+	public void printAllTablesNow() {
+		for (Table table : curTableList.values())
+			System.out.println(table);
 	}
 
 	/**
@@ -190,15 +188,16 @@ public class TableHandler extends Handler {
 	 * Reserves tables for the current timeslot.
 	 * 
 	 * @param reservationList
-	 * @return true if successfully reserved (should always be the case)
+	 * @return ArrayList of successfully reserved table IDs.
 	 */
-	public boolean reserveTables(ArrayList<Reservation> reservationList) {
+	public ArrayList<String> reserveTables(ArrayList<Reservation> reservationList) {
+		ArrayList<String> tablesReserved = new ArrayList<String>();
 		for (Reservation reservation : reservationList) {
-			if (this.setTableStatus(reservation.getPax(), TableStatus.VACANT, TableStatus.RESERVED)
-					.equals("TableNotFound"))
-				return false;
+			String tableReserved = this.setTableStatus(reservation.getPax(), TableStatus.VACANT, TableStatus.RESERVED);
+			if (!tableReserved.equals("TableNotFound"))
+				tablesReserved.add(tableReserved);
 		}
-		return true;
+		return tablesReserved;
 	}
 
 	/**
@@ -214,15 +213,16 @@ public class TableHandler extends Handler {
 	 * Reverses the effects of reserveTables by unreserving them
 	 * 
 	 * @param reservationList
-	 * @return true if successfully reserved (should always be the case)
+	 * @return ArrayList of unreserved table IDs.
 	 */
-	public boolean removeReservations(ArrayList<Reservation> reservationList) {
+	public ArrayList<String> removeReservations(ArrayList<Reservation> reservationList) {
+		ArrayList<String> tablesUnreserved = new ArrayList<String>();
 		for (Reservation reservation : reservationList) {
-			if (this.setTableStatus(reservation.getPax(), TableStatus.RESERVED, TableStatus.VACANT)
-					.equals("NoTablesAvailable"))
-				return false;
+			String tableUnreserved = this.setTableStatus(reservation.getPax(), TableStatus.RESERVED, TableStatus.VACANT);
+			if (!tableUnreserved.equals("NoTablesAvailable"))
+				tablesUnreserved.add(tableUnreserved);
 		}
-		return true;
+		return tablesUnreserved;
 	}
 
 }
