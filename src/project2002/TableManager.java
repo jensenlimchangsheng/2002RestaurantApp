@@ -93,18 +93,6 @@ public class TableManager extends Manager {
 		Customer cust = new Customer(name, number);
 
 		int tablePax = reservationHandler.removeReservation(cust, dateTime);
-
-		LocalDateTime cdateTime = LocalDateTime.now();
-		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
-		String strDateTime = dateTime.format(dtFormat);
-
-		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
-		long hourDiff = ChronoUnit.HOURS.between(cdateTime, dateTime);
-
-		if (hourDiff <= 1) {
-			return -2;
-		}
-
 		// get reservation pax.
 		return tablePax;
 	}
@@ -131,18 +119,7 @@ public class TableManager extends Manager {
 	 */
 	public int updateReservation(String name, int number, LocalDateTime dateTime, int newPax,
 			LocalDateTime newDateTime) {
-
-		LocalDateTime cdateTime = LocalDateTime.now();
-		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
-		String strDateTime = dateTime.format(dtFormat);
-
-		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
-		long hourDiff = ChronoUnit.HOURS.between(cdateTime, dateTime);
-
-		if (hourDiff <= 1) {
-			return -4;
-		}
-
+				
 		Customer cust = new Customer(name, number);
 		if (reservationHandler.removeReservation(cust, dateTime) != -1) {
 			int result = reservationHandler.addReservation(cust, newPax, newDateTime);

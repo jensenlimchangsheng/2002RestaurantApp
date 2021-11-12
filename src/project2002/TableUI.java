@@ -134,10 +134,6 @@ public class TableUI extends UI {
 						case -1:
 							System.out.println("Reservation for " + name + " at " + dateTime + " does not exist.");
 							break;
-						case -2:
-							System.out.println("Reservation for " + name + " at " + dateTime
-									+ " cannot be deleted. Reservation is within the next hour.");
-							break;
 						default:
 							System.out.println(
 									"Reservation for " + name + " at " + dateTime + " has been successfully cancelled.");
@@ -171,9 +167,6 @@ public class TableUI extends UI {
 							break;
 						case -3:
 							System.out.println("Initial reservation doesn't exist");
-							break;
-						case -4:
-							System.out.println("Reservation cannot be updated. 1 hour to reservation time.");
 							break;
 					}
 				}
