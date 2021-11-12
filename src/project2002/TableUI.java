@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 // import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import project2002.Restaurant.UIType;
 
@@ -19,6 +20,12 @@ public class TableUI extends UI {
 
 	@Override
 	protected void printOptions() {
+
+		LocalDateTime cDateTime = LocalDateTime.now(); 
+		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
+		String strDateTime = cDateTime.format(dtFormat);
+		cDateTime = LocalDateTime.parse(strDateTime, dtFormat);
+
 		int choice = 0;
 		int pax;
 		LocalDateTime dateTime;
@@ -26,7 +33,7 @@ public class TableUI extends UI {
 		String tableID;
 		int number;
 		do {
-			System.out.printf("----Table and Reservation Options----\n" + "Please select one of this 9 options: \n"
+			System.out.printf("----Table and Reservation Options----\n" + "Please select one of these 11 options: \n"
 					+ "1.	Print All Tables\n" + "2.	Add New Tables\n" + "3.	Remove Table\n" + "4.	Update Table\n"
 					+ "5.	Book Table\n" + "6.	Remove Reservation\n" + "7.	Update Reservation\n"
 					+ "8.	Check Reservation\n" + "9.	Reserve Tables For The Day\n"
@@ -93,36 +100,46 @@ public class TableUI extends UI {
 				number = getInt("Please enter customer phone number: ");
 				pax = getInt("Please enter number of pax: ");
 				dateTime = getDateTime(false);
-				switch (tableManager.addReservation(pax, name, number, dateTime)) {
-				case 1:
-					System.out.println(
-							"Reservation for " + name + " for " + pax + " people has been successfully added.");
-					break;
-				case -1:
-					System.out.println(
-							"This restaurant does not support group size of more than 10. Please do split bookings.");
-					break;
-				case -2:
-					System.out.println("Reservations for " + dateTime + " is full.");
-					break;
+
+				if (dateTime.isBefore(cDateTime)) {
+					System.out.println("Reservations cannot be made before system time. Current system time is: " + cDateTime);
+				} else {
+					switch (tableManager.addReservation(pax, name, number, dateTime)) {
+						case 1:
+							System.out.println(
+									"Reservation for " + name + " for " + pax + " people has been successfully added.");
+							break;
+						case -1:
+							System.out.println(
+									"This restaurant does not support group size of more than 10. Please do split bookings.");
+							break;
+						case -2:
+							System.out.println("Reservations for " + dateTime + " is full.");
+							break;
+					}
 				}
 				break;
 			case 6: // Remove Reservation
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
 				dateTime = getDateTime(false);
-				switch (tableManager.removeReservation(name, number, dateTime)) {
-				case -1:
-					System.out.println("Reservation for " + name + " at " + dateTime + " does not exist.");
-					break;
-				case -2:
-					System.out.println("Reservation for " + name + " at " + dateTime
-							+ " cannot be deleted. Reservation is within the next hour.");
-					break;
-				default:
-					System.out.println(
-							"Reservation for " + name + " at " + dateTime + " has been successfully cancelled.");
-					break;
+
+				if (dateTime.isBefore(cDateTime)) {
+					System.out.println("Reservations cannot be made before system time. Current system time is: " + cDateTime);
+				} else {
+					switch (tableManager.removeReservation(name, number, dateTime)) {
+						case -1:
+							System.out.println("Reservation for " + name + " at " + dateTime + " does not exist.");
+							break;
+						case -2:
+							System.out.println("Reservation for " + name + " at " + dateTime
+									+ " cannot be deleted. Reservation is within the next hour.");
+							break;
+						default:
+							System.out.println(
+									"Reservation for " + name + " at " + dateTime + " has been successfully cancelled.");
+							break;
+						}
 				}
 				break;
 			case 7: // Update Reservation
@@ -131,48 +148,62 @@ public class TableUI extends UI {
 				dateTime = getDateTime(false);
 				int newPax = getInt("Please enter number of pax: ");
 				LocalDateTime newDateTime = getDateTime(true);
-				switch (tableManager.updateReservation(name, number, dateTime, newPax, newDateTime)) {
-				case 1:
-					System.out.println(
-							"Reservation for " + name + " for " + newPax + " people has been successfully updated.");
-					break;
-				case -1:
-					System.out.println(
-							"This restaurant does not support group size of more than 10. Please do split bookings.");
-					break;
-				case -2:
-					System.out.println("Reservations for " + dateTime + " is full.");
-					break;
-				case -3:
-					System.out.println("Initial reservation doesn't exist");
-					break;
-				case -4:
-					System.out.println("Reservation cannot be updated. 1 hour to reservation time.");
-					break;
+				
+				if (newDateTime.isBefore(cDateTime)) {
+					System.out.println("Reservations cannot be made before system time. Current system time is: " + cDateTime);
+				} else {
+					switch (tableManager.updateReservation(name, number, dateTime, newPax, newDateTime)) {
+						case 1:
+							System.out.println(
+									"Reservation for " + name + " for " + newPax + " people has been successfully updated.");
+							break;
+						case -1:
+							System.out.println(
+									"This restaurant does not support group size of more than 10. Please do split bookings.");
+							break;
+						case -2:
+							System.out.println("Reservations for " + dateTime + " is full.");
+							break;
+						case -3:
+							System.out.println("Initial reservation doesn't exist");
+							break;
+						case -4:
+							System.out.println("Reservation cannot be updated. 1 hour to reservation time.");
+							break;
+					}
 				}
 				break;
 			case 8: // Check Reservation
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
 				dateTime = getDateTime(false);
-				if (tableManager.checkReservation(name, number, dateTime)) {
-					System.out.println("Reservation for " + name + " at " + dateTime + " found.");
-				} else {
-					System.out.println("Reservation for " + name + " at " + dateTime + " not found.");
+				
+				if (dateTime.isBefore(cDateTime)) {
+					System.out.println("Reservations cannot be made before system time. Current system time is: " + cDateTime);
+				} else  {
+					if (tableManager.checkReservation(name, number, dateTime)) {
+						System.out.println("Reservation for " + name + " at " + dateTime + " found.");
+					} else {
+						System.out.println("Reservation for " + name + " at " + dateTime + " not found.");
+					}
 				}
 				break;
 			case 9: // Reserve Tables For The Day
 				System.out.println("The following tables are now reserved:");
-				if (tableManager.reserveTables() != null)
-					for (String reservedTableID : tableManager.reserveTables())
-						System.out.println(reservedTableID);
+				ArrayList<String> reservationsStatus = tableManager.reserveTables();
+				if (reservationsStatus != null) {
+					for (String reservedTableID : reservationsStatus)
+					System.out.println(reservedTableID);
+				}
 				System.out.println("Table reservation complete!");
 				break;
 			case 10: // Remove Reserved Tables
 				System.out.println("The following tables are no longer reserved:");
-				if (tableManager.removeReservedTables() != null)
-					for (String reservedTableID : tableManager.removeReservedTables())
-						System.out.println(reservedTableID);
+				ArrayList<String> clearReservationsStatus = tableManager.removeReservedTables();
+				if (clearReservationsStatus != null) {
+					for (String reservedTableID : clearReservationsStatus)
+					System.out.println(reservedTableID);
+				}
 				System.out.println("Reserved tables updated!");
 				break;
 			default:
@@ -195,10 +226,13 @@ public class TableUI extends UI {
 		}
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
 		// Try block to check for exceptions
+
+
 		try {
 
 			// Getting the Date from String
 			dateTime = LocalDateTime.parse(dateString + " " + timeString, format);
+
 		}
 
 		// Block 1

@@ -59,7 +59,7 @@ public class ReservationHandler extends Handler {
 		}
 
 		if ( pax > 10) { return -1; }
-		if ( pax % 2 == 0) { pax ++; }
+		if ( pax % 2 == 1) { pax ++; }
 
 		// checking for maxed reservation.
 		if (this.availTableSizes.get(dateTime)[Math.floorDiv(pax, 2) - 1] == 0) { // if there is not more available table for

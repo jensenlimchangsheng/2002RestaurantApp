@@ -87,7 +87,7 @@ public class TableHandler extends Handler {
 	 */
 	private String setTableStatus(int pax, TableStatus required, TableStatus desired) {
 		for (Table table : curTableList.values()) {
-			if (table.getTableSize() == pax + pax % 2 && table.getStatus() == required) {
+			if (table.getTableSize() == pax && table.getStatus() == required) {
 				table.setStatus(desired);
 				return table.getTableID();
 			}
