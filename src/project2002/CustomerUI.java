@@ -59,8 +59,10 @@ public class CustomerUI extends UI {
 				break;
 			case 3:
 				orderID = this.getInt("Please enter order ID: ");
-				customerManager.closeCustomerOrder(orderID);
-				System.out.printf("The order %d has been closed.\n", orderID);
+				int temp = customerManager.closeCustomerOrder(orderID);
+				if(temp == 0){
+					System.out.printf("The order %d has been closed.\n", orderID);
+				}
 				break;
 			case 4:
 				break;
