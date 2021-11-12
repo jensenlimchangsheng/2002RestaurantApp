@@ -197,9 +197,9 @@ public class MenuUI extends UI {
 	 */
 	public void updateItem(String name, int ID) {
 		System.out.println("You have selected " + name + ".");
-		System.out.println("Select:\n1. Update Name\n2. Update Price\n3. Update Description\nInsert -1 when done.");
+		System.out.println("Select:\n1. Update Name\n2. Update Price\n3. Update Description\n4. Quit");
 		int choice = getInt("Please select an option: ");
-		while (choice != -1) {
+		while (choice != 4) {
 			switch (choice) {
 			case 1:
 				String newname = getString("Please enter the new name: ");
@@ -215,6 +215,8 @@ public class MenuUI extends UI {
 				String description = getString("Please enter the new description: ");
 				menuManager.updateDescription(ID, description);
 				System.out.println("Description updated.");
+				break;
+			case 4:
 				break;
 			default:
 				System.out.println("Please select again.");
