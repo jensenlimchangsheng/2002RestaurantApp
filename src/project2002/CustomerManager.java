@@ -82,15 +82,17 @@ public class CustomerManager extends Manager {
 	 * 
 	 * @param orderID
 	 */
-	void closeCustomerOrder(int orderID) {
+	int closeCustomerOrder(int orderID) {
 		Double discount = customerUI.getDiscount();
 		Order closedOrder = order.printInvoice(orderID, discount);
 		if (closedOrder == null){
 			System.out.println("Invalid Order ID");
+			return -1;
 		}
 		else{
 			SalesReportManager.addOrder(closedOrder);
 			table.unseatCustomer(closedOrder.getTableID());
+			return 0;
 		}
 	}
 
