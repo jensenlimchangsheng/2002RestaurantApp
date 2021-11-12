@@ -70,6 +70,7 @@ public class CustomerManager extends Manager {
 		LocalDateTime time = LocalDateTime.now();
 		if (reservation.checkReservation(cust, time)) { // Check if the customer has made a reservatiion
 			String tableID = table.seatBookedCustomer(pax);
+			System.out.printf("The following table has been assigned %s\n", tableID);
 			reservation.removeReservation(cust, time); // remove the reservation
 			orderID = order.createOrder(tableID, staff);
 		} else
@@ -85,11 +86,10 @@ public class CustomerManager extends Manager {
 	int closeCustomerOrder(int orderID) {
 		Double discount = customerUI.getDiscount();
 		Order closedOrder = order.printInvoice(orderID, discount);
-		if (closedOrder == null){
+		if (closedOrder == null) {
 			System.out.println("Invalid Order ID");
 			return -1;
-		}
-		else{
+		} else {
 			SalesReportManager.addOrder(closedOrder);
 			table.unseatCustomer(closedOrder.getTableID());
 			return 0;

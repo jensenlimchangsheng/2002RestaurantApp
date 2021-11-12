@@ -209,16 +209,10 @@ public class TableUI extends UI {
 				}
 
 				cDateTime = getCurrDateTime();
-				validDateTime = cDateTime.plusHours(1);
-
-				if (dateTime.isBefore(validDateTime)) {
-					System.out.println("Reservation is overdue.\nCurrent system time is: " + cDateTime);
+				if (tableManager.checkReservation(name, number, dateTime)) {
+					System.out.println("Reservation for " + name + " at " + dateTime + " found.");
 				} else {
-					if (tableManager.checkReservation(name, number, dateTime)) {
-						System.out.println("Reservation for " + name + " at " + dateTime + " found.");
-					} else {
-						System.out.println("Reservation for " + name + " at " + dateTime + " not found.");
-					}
+					System.out.println("Reservation for " + name + " at " + dateTime + " not found.");
 				}
 				break;
 			case 9: // Reserve Tables For The Day

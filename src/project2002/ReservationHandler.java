@@ -5,6 +5,7 @@ import java.util.TreeMap;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import project2002.Restaurant.handlerType;
 
@@ -55,7 +56,7 @@ public class ReservationHandler extends Handler {
 		Customer cust4 = new Customer("a", 81239124);
 		Customer cust5 = new Customer("b", 81239124);
 		Customer cust6 = new Customer("c", 81239124);
-		Customer cust7 = new Customer("Jensen", 81239124);
+		Customer cust7 = new Customer("zhi kai", 12345678);
 		Customer cust8 = new Customer("e", 81239124);
 		Customer cust9 = new Customer("zhi kai", 12345678);
 
@@ -64,7 +65,7 @@ public class ReservationHandler extends Handler {
 		reservations1.add(new Reservation(6, cust2));
 
 		ArrayList<Reservation> reservations3 = new ArrayList<Reservation>();
-		reservations3.add(new Reservation(2, cust7));
+		reservations3.add(new Reservation(4, cust7));
 		reservations3.add(new Reservation(2, cust8));
 
 		ArrayList<Reservation> reservations2 = new ArrayList<Reservation>();
@@ -86,7 +87,6 @@ public class ReservationHandler extends Handler {
 		int[] tableSizes1 = { 1, 3, 0, 1, 1 };
 		int[] tableSizes2 = { 2, 2, 0, 0, 0 };
 		this.availTableSizes.put(full, tableSizes2);
-		this.availTableSizes.put(reservenext, tableSizes2);
 		this.availTableSizes.put(toremove, tableSizes2);
 
 		type = handlerType.RESERVATION;
@@ -138,6 +138,7 @@ public class ReservationHandler extends Handler {
 	 */
 	public boolean checkReservation(Customer cust, LocalDateTime dateTime) {
 		ArrayList<Reservation> reservationList;
+		dateTime = dateTime.truncatedTo(ChronoUnit.HOURS);
 		reservationList = reservations.get(dateTime);
 		if (reservationList != null) {
 			for (Reservation r : reservationList) {
