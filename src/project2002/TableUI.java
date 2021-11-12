@@ -25,7 +25,8 @@ public class TableUI extends UI {
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
 		String strDateTime = cDateTime.format(dtFormat);
 		cDateTime = LocalDateTime.parse(strDateTime, dtFormat);
-
+		cDateTime = cDateTime.plusHours(1);
+		
 		int choice = 0;
 		int pax;
 		LocalDateTime dateTime;
@@ -102,7 +103,7 @@ public class TableUI extends UI {
 				dateTime = getDateTime(false);
 
 				if (dateTime.isBefore(cDateTime)) {
-					System.out.println("Reservations cannot be made before system time. Current system time is: " + cDateTime);
+					System.out.println("Reservations has to be made at least 1 hour after system time. Current system time is: " + cDateTime);
 				} else {
 					switch (tableManager.addReservation(pax, name, number, dateTime)) {
 						case 1:
@@ -125,7 +126,7 @@ public class TableUI extends UI {
 				dateTime = getDateTime(false);
 
 				if (dateTime.isBefore(cDateTime)) {
-					System.out.println("Reservations cannot be made before system time. Current system time is: " + cDateTime);
+					System.out.println("Reservations has to be made at least 1 hour after system time. Current system time is: " + cDateTime);
 				} else {
 					switch (tableManager.removeReservation(name, number, dateTime)) {
 						case -1:
@@ -150,7 +151,7 @@ public class TableUI extends UI {
 				LocalDateTime newDateTime = getDateTime(true);
 				
 				if (newDateTime.isBefore(cDateTime)) {
-					System.out.println("Reservations cannot be made before system time. Current system time is: " + cDateTime);
+					System.out.println("Reservations has to be made at least 1 hour after system time. Current system time is: " + cDateTime);
 				} else {
 					switch (tableManager.updateReservation(name, number, dateTime, newPax, newDateTime)) {
 						case 1:
@@ -179,7 +180,7 @@ public class TableUI extends UI {
 				dateTime = getDateTime(false);
 				
 				if (dateTime.isBefore(cDateTime)) {
-					System.out.println("Reservations cannot be made before system time. Current system time is: " + cDateTime);
+					System.out.println("Reservations has to be made at least 1 hour after system time. Current system time is: " + cDateTime);
 				} else  {
 					if (tableManager.checkReservation(name, number, dateTime)) {
 						System.out.println("Reservation for " + name + " at " + dateTime + " found.");
