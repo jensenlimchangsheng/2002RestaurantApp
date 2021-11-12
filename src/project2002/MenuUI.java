@@ -62,7 +62,7 @@ public class MenuUI extends UI {
 		do {
 			System.out.printf("-------------Menu Options------------\n" + "Please select one of this 8 options: \n"
 					+ "1.	Print Menu\n" + "2.	Add Menu Item\n" + "3.	Remove Menu Item\n" + "4.	Update Menu Item\n"
-					+ "5.	Add Promo Set\n" + "6.	Remove Promo Set\n" + "7.	Update Promo Set\n" + "8.	Quit\n");
+					+ "5.	Add Promo Set\n" + "6.	Remove Promo Set\n" + "7.	Update Promo Set\n" + "8.	Back\n");
 			choice = this.getInt("Please enter your choice: ");
 
 			switch (choice) {

@@ -30,7 +30,7 @@ public class OrderUI extends UI {
 		int choice = 0;
 		do {
 			System.out.printf("-------------Order Options-----------\n" + "Please select one of this 4 options: \n"
-					+ "1.	Add Order Item\n" + "2.	Remove Order Item\n" + "3.	View Order\n" + "4.	Quit\n");
+					+ "1.	Add Order Item\n" + "2.	Remove Order Item\n" + "3.	View Order\n" + "4.	Back\n");
 			choice = this.getInt("Please enter your choice:");
 			switch (choice) {
 			case 1:

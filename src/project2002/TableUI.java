@@ -35,7 +35,7 @@ public class TableUI extends UI {
 					+ "1.	Print All Tables\n" + "2.	Add New Tables\n" + "3.	Remove Table\n" + "4.	Update Table\n"
 					+ "5.	Book Table\n" + "6.	Cancel Reservation\n" + "7.	Update Reservation\n"
 					+ "8.	Check Reservation\n" + "9.	Reserve Tables\n" + "10.	Remove Reserved Tables\n"
-					+ "11.	Quit\n");
+					+ "11.	Back\n");
 			choice = getInt("Please enter your choice: ");
 			switch (choice) {
 			case 1: // Print Tables Now
