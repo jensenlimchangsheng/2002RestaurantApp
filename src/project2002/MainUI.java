@@ -27,7 +27,7 @@ public class MainUI {
 		rest.assignUI(uiList);
 		do {
 			System.out.printf("-----Welcome to Restaurant XXX-------\n" + "Please select one of this 5 options: \n"
-					+ "1.	Menu\n" + "2.	Order\n" + "3.	SalesReport\n" + "4.	New Customer\n"
+					+ "1.	Menu\n" + "2.	Order\n" + "3.	SalesReport\n" + "4.	Customer\n"
 					+ "5.	Table and Reservation\n" + "6.	Quit\n");
 			validInput = false;
 			while (!validInput) {

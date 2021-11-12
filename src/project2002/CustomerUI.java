@@ -28,7 +28,7 @@ public class CustomerUI extends UI {
 	protected void printOptions() {
 		int choice = 0;
 		do {
-			System.out.printf("-------------Customer Options-----------\n" + "Please select one of this 2 options: \n"
+			System.out.printf("-------------Customer Options-----------\n" + "Please select one of this 3 options: \n"
 					+ "1.	Create Order For New Customer\n" + "2.	Create Order For Reserved Customer\n"
 					+ "3.	Close Order For Customer\n" + "4.	Quit\n");
 			choice = this.getInt("Please enter your choice: ");
@@ -60,7 +60,7 @@ public class CustomerUI extends UI {
 			case 3:
 				orderID = this.getInt("Please enter order ID: ");
 				customerManager.closeCustomerOrder(orderID);
-				System.out.printf("The order %d has been closed.", orderID);
+				System.out.printf("The order %d has been closed.\n", orderID);
 				break;
 			case 4:
 				break;
