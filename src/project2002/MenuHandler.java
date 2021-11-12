@@ -269,6 +269,10 @@ public class MenuHandler extends Handler {
 		item.setDescription(description);
 	}
 
+
+	/**
+	 * Outputs the menu as a txt file 
+	 */
 	public void outputMenu(){
 		File receipt = new File("/Users/jiamtziyu/Desktop/menu.txt");
 		try{
