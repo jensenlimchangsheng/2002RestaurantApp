@@ -12,8 +12,10 @@ public class OrderUI extends UI {
 	 * to implement the order manager which controls the restaurant orders
 	 */
 	private OrderManager orderManager;
+
 	/**
 	 * to create a constructor to input a scanner into this UI
+	 * 
 	 * @param scanner the scanner that is input into this UI
 	 */
 	public OrderUI(Scanner scanner) {
@@ -107,11 +109,12 @@ public class OrderUI extends UI {
 			default:
 				System.out.println("Invalid Input.");
 			}
-		} while (choice != 5);
+		} while (choice != 4);
 	}
 
 	/**
 	 * To get an item ID
+	 * 
 	 * @return an integer which is the item ID
 	 */
 	public int getItemID() {
@@ -121,12 +124,14 @@ public class OrderUI extends UI {
 
 	/**
 	 * to get the quantity
+	 * 
 	 * @return an integer which represent the quantity
 	 */
 	public int getQty() {
 		int qty = this.getInt("Please enter the quantity: ");
 		return qty;
 	}
+
 	/**
 	 * assign a UI manager to this UI
 	 */
