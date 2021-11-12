@@ -30,7 +30,7 @@ public class CustomerUI extends UI {
 		do {
 			System.out.printf("-------------Customer Options-----------\n" + "Please select one of this 3 options: \n"
 					+ "1.	Create Order For New Customer\n" + "2.	Create Order For Reserved Customer\n"
-					+ "3.	Close Order For Customer\n" + "4.	Quit\n");
+					+ "3.	Close Order For Customer\n" + "4.	Back\n");
 			choice = this.getInt("Please enter your choice: ");
 			switch (choice) {
 			case 1:
@@ -40,7 +40,7 @@ public class CustomerUI extends UI {
 				String title = this.getString("Please enter staff title: ");
 				int orderID = customerManager.newCustomerOrder(pax, name, id, title);
 				if (orderID == 0)
-					System.out.printf("No available tables.");
+					System.out.printf("No available tables.\n");
 				else
 					System.out.printf("The orderID is : %d.\n", orderID);
 				break;
@@ -53,7 +53,7 @@ public class CustomerUI extends UI {
 				int number = this.getInt("Please enter customer phone number: ");
 				orderID = customerManager.reservedCustomerOrder(pax, name, id, title, customername, number);
 				if (orderID == 0)
-					System.out.printf("No reservation found.");
+					System.out.printf("No reservation found.\n");
 				else
 					System.out.printf("The orderID is : %d.\n", orderID);
 				break;
@@ -65,7 +65,7 @@ public class CustomerUI extends UI {
 			case 4:
 				break;
 			default:
-				System.out.println("Invalid Input.");
+				System.out.println("Invalid Input.\n");
 			}
 		} while (choice != 4);
 

@@ -30,7 +30,7 @@ public class SalesReportUI extends UI {
 		do {
 			System.out.printf("-------------Sales Report Options------------\n"
 					+ "Please select one of this 3 options: \n" + "1.	Print Daily Sales Report\n"
-					+ "2.	Print Monthly Sales Report\n" + "3.	Print Yearly Sales Report\n" + "4.	Quit\n");
+					+ "2.	Print Monthly Sales Report\n" + "3.	Print Yearly Sales Report\n" + "4.	Back\n");
 			choice = this.getInt("Please enter your choice: ");
 			switch (choice) {
 			case 1:
