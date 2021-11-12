@@ -119,7 +119,7 @@ public class TableManager extends Manager {
 	 */
 	public int updateReservation(String name, int number, LocalDateTime dateTime, int newPax,
 			LocalDateTime newDateTime) {
-				
+
 		Customer cust = new Customer(name, number);
 		if (reservationHandler.removeReservation(cust, dateTime) != -1) {
 			int result = reservationHandler.addReservation(cust, newPax, newDateTime);
@@ -162,7 +162,7 @@ public class TableManager extends Manager {
 		String strDateTime = dateTime.format(dtFormat);
 
 		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
-
+		
 		ArrayList<Reservation> reservationList = reservationHandler.retrieveBeforeReservationList(dateTime);
 		if (reservationList == null) {
 			return null;
