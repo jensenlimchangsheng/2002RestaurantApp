@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.TreeMap;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.time.format.DateTimeFormatter;
 
 import project2002.Restaurant.handlerType;
 
@@ -30,7 +31,7 @@ public class ReservationHandler extends Handler {
 	/**
 	 * Mapping available table sizes to its quantity
 	 */
-	private int[] tableSizes = {3,3,3,3,3}; // [qty for pax size: 2, qty for pax size: 4, qty for pax size: 6, qty for pax
+	private int[] tableSizes = {2,3,1,1,1}; // [qty for pax size: 2, qty for pax size: 4, qty for pax size: 6, qty for pax
 								// size: 8, qty for pax size: 10].
 
 	/**
@@ -38,7 +39,34 @@ public class ReservationHandler extends Handler {
 	 */
 	public ReservationHandler() {
 		this.reservations = new TreeMap<LocalDateTime, ArrayList<Reservation>>();
+
+		/**
+		 * initialize some data.
+		 */
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
+		LocalDateTime dateTime1 = LocalDateTime.parse("12/11/2021 21", format);
+		LocalDateTime dateTime2 = LocalDateTime.parse("12/11/2021 22", format);
+		Customer cust1 = new Customer("jenny", 81239123);
+		Customer cust2 = new Customer("john", 81239113);
+		Customer cust3 = new Customer("bob", 81239124);
+
+		ArrayList<Reservation> reservations1 = new ArrayList<Reservation>();
+		reservations1.add(new Reservation(2, cust1));
+		reservations1.add(new Reservation(6, cust2));
+
+		ArrayList<Reservation> reservations2 = new ArrayList<Reservation>();
+		reservations2.add(new Reservation(4, cust3));
+
+		this.reservations.put(dateTime1, reservations1);
+		this.reservations.put(dateTime2, reservations2);
+
 		this.availTableSizes = new TreeMap<LocalDateTime, int[]>();
+
+		int[] tableSizes1 = {1,3,0,1,1};
+		int[] tableSizes2 = {2,2,1,1,1};
+		this.availTableSizes.put(dateTime1, tableSizes1);
+		this.availTableSizes.put(dateTime2, tableSizes2);
+
 		type = handlerType.RESERVATION;
 	}
 
@@ -84,10 +112,12 @@ public class ReservationHandler extends Handler {
 	public boolean checkReservation(Customer cust, LocalDateTime dateTime) {
 		ArrayList<Reservation> reservationList;
 		reservationList = reservations.get(dateTime);
-		for (Reservation r : reservationList) {
-			Customer reservationCust = r.getCustomer();
-			if (reservationCust.equals(cust)) {
-				return true;
+		if (reservationList != null ){
+			for (Reservation r : reservationList) {
+				Customer reservationCust = r.getCustomer();
+				if (reservationCust.equals(cust)) {
+					return true;
+				}
 			}
 		}
 		return false;
