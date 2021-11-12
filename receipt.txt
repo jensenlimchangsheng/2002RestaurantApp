@@ -3,12 +3,12 @@ Attended to by: Jensen
 Table: T001
 =========================================
 Orders: 
- 1 The Feather Blade Steak        $19.00
+ 1 Potatoes                       $7.00
 =========================================
-                        SubTotal: $15.20
-                        Discount: -$3.80
-                             GST: $1.52
-                  Service Charge: $1.06
-                           Total: $17.78
+                        SubTotal: $5.60
+                        Discount: -$1.40
+                             GST: $0.56
+                  Service Charge: $0.39
+                           Total: $6.55
 =========================================
 Thank you for dining with us!
