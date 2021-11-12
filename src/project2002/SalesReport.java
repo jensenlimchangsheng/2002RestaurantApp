@@ -135,9 +135,9 @@ public class SalesReport {
 		line = String.format("%35s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
 		System.out.println(line);
 		System.out.println("=============================================");
-		File salesreport = new File("C:\\Users\\jense\\Desktop\\salesreport.txt");
+		File salesreport = new File("salesreport.txt");
 		try{
-			FileWriter myWriter = new FileWriter("C:\\Users\\jense\\Desktop\\salesreport.txt");
+			FileWriter myWriter = new FileWriter("salesreport.txt");
 			myWriter.write("=============================================\n");
 			myWriter.write("These are the following items in year " + y+ "\n");
 			myWriter.write("Qty || MenuItem\n");
@@ -203,9 +203,9 @@ public class SalesReport {
 		line = String.format("%35s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
 		System.out.println(line);
 		System.out.println("=============================================");
-		File salesreport = new File("C:\\Users\\jense\\Desktop\\salesreport.txt");
+		File salesreport = new File("salesreport.txt");
 		try{
-			FileWriter myWriter = new FileWriter("C:\\Users\\jense\\Desktop\\salesreport.txt");
+			FileWriter myWriter = new FileWriter("salesreport.txt");
 			myWriter.write("=============================================\n");
 			myWriter.write("These are the following items in month of " + M + "/" + Y + "\n");
 			myWriter.write("Qty || MenuItem\n");
@@ -273,9 +273,9 @@ public class SalesReport {
 		line = String.format("%35s $%.2f", "Total Service Charge Collected:", totalServiceCharge);
 		System.out.println(line);
 		System.out.println("=============================================");
-		File salesreport = new File("C:\\Users\\jense\\Desktop\\salesreport.txt");
+		File salesreport = new File("salesreport.txt");
 		try{
-			FileWriter myWriter = new FileWriter("C:\\Users\\jense\\Desktop\\salesreport.txt");
+			FileWriter myWriter = new FileWriter("salesreport.txt");
 			myWriter.write("=============================================\n");
 			myWriter.write("These are the following items in " + Y + "-" + M + "-" + D + "\n");
 			myWriter.write("Qty || MenuItem\n");
