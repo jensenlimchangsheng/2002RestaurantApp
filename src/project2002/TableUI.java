@@ -98,6 +98,12 @@ public class TableUI extends UI {
 				number = getInt("Please enter customer phone number: ");
 				pax = getInt("Please enter number of pax: ");
 				dateTime = getDateTime(false);
+				
+				while (dateTime == null) {
+					System.out.println("Wrong date and time format");
+					dateTime = getDateTime(false);
+				}
+				
 				cDateTime = getCurrDateTime();
 				validDateTime = cDateTime.plusHours(1);
 				
@@ -124,6 +130,12 @@ public class TableUI extends UI {
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
 				dateTime = getDateTime(false);
+
+				while (dateTime == null) {
+					System.out.println("Wrong date and time format");
+					dateTime = getDateTime(false);
+				}
+				
 				cDateTime = getCurrDateTime();
 				validDateTime = cDateTime.plusHours(1);
 
@@ -145,10 +157,24 @@ public class TableUI extends UI {
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
 				dateTime = getDateTime(false);
+				
+				while (dateTime == null) {
+					System.out.println("Wrong date and time format");
+					dateTime = getDateTime(false);
+				}
+
+
 				int newPax = getInt("Please enter number of pax: ");
 				LocalDateTime newDateTime = getDateTime(true);
+
+				while (newDateTime == null) {
+					System.out.println("Wrong date and time format");
+					newDateTime = getDateTime(false);
+				}
+
 				cDateTime = getCurrDateTime();
 				validDateTime = cDateTime.plusHours(1);
+				
 				
 				if (newDateTime.isBefore(validDateTime)) {
 					System.out.println("Reservations has to be made at least 1 hour after system time.\nCurrent system time is: " + cDateTime);
@@ -175,6 +201,12 @@ public class TableUI extends UI {
 				name = getString("Please enter customer name: ");
 				number = getInt("Please enter customer phone number: ");
 				dateTime = getDateTime(false);
+				
+				while (dateTime == null) {
+					System.out.println("Wrong date and time format");
+					dateTime = getDateTime(false);
+				}
+
 				cDateTime = getCurrDateTime();
 				validDateTime = cDateTime.plusHours(1);
 				
@@ -260,7 +292,6 @@ public class TableUI extends UI {
 			// Display the exception
 			System.out.println("Exception: " + e);
 		}
-
 		return dateTime;
 	}
 
