@@ -4,7 +4,6 @@
 package project2002;
 
 import java.util.*;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -160,7 +159,6 @@ public class OrderHandler extends Handler {
 		System.out.println(line);
 		System.out.println("=========================================");
 		System.out.println("Thank you for dining with us!");
-		File receipt = new File("receipt.txt");
 		try {
 			FileWriter myWriter = new FileWriter("receipt.txt");
 			myWriter.write("=========================================\n");

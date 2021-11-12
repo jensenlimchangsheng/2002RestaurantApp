@@ -31,8 +31,9 @@ public class ReservationHandler extends Handler {
 	/**
 	 * Mapping available table sizes to its quantity
 	 */
-	private int[] tableSizes = {2,3,1,1,1}; // [qty for pax size: 2, qty for pax size: 4, qty for pax size: 6, qty for pax
-								// size: 8, qty for pax size: 10].
+	private int[] tableSizes = { 2, 3, 1, 1, 1 }; // [qty for pax size: 2, qty for pax size: 4, qty for pax size: 6, qty
+													// for pax
+	// size: 8, qty for pax size: 10].
 
 	/**
 	 * Initializes variables
@@ -44,28 +45,49 @@ public class ReservationHandler extends Handler {
 		 * initialize some data.
 		 */
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
-		LocalDateTime dateTime1 = LocalDateTime.parse("12/11/2021 21", format);
-		LocalDateTime dateTime2 = LocalDateTime.parse("12/11/2021 22", format);
+		LocalDateTime overdue = LocalDateTime.parse("12/11/2021 23", format);
+		LocalDateTime full = LocalDateTime.parse("13/11/2021 21", format);
+		LocalDateTime reservenext = LocalDateTime.parse("13/11/2021 01", format);
+		LocalDateTime toremove = LocalDateTime.parse("13/11/2021 12", format);
 		Customer cust1 = new Customer("jenny", 81239123);
 		Customer cust2 = new Customer("john", 81239113);
 		Customer cust3 = new Customer("bob", 81239124);
+		Customer cust4 = new Customer("a", 81239124);
+		Customer cust5 = new Customer("b", 81239124);
+		Customer cust6 = new Customer("c", 81239124);
+		Customer cust7 = new Customer("Jensen", 81239124);
+		Customer cust8 = new Customer("e", 81239124);
+		Customer cust9 = new Customer("zhi kai", 12345678);
 
 		ArrayList<Reservation> reservations1 = new ArrayList<Reservation>();
 		reservations1.add(new Reservation(2, cust1));
 		reservations1.add(new Reservation(6, cust2));
 
+		ArrayList<Reservation> reservations3 = new ArrayList<Reservation>();
+		reservations3.add(new Reservation(2, cust7));
+		reservations3.add(new Reservation(2, cust8));
+
 		ArrayList<Reservation> reservations2 = new ArrayList<Reservation>();
 		reservations2.add(new Reservation(4, cust3));
+		reservations2.add(new Reservation(6, cust4));
+		reservations2.add(new Reservation(2, cust5));
+		reservations2.add(new Reservation(2, cust6));
 
-		this.reservations.put(dateTime1, reservations1);
-		this.reservations.put(dateTime2, reservations2);
+		ArrayList<Reservation> reservations4 = new ArrayList<Reservation>();
+		reservations4.add(new Reservation(2, cust9));
+
+		this.reservations.put(overdue, reservations1);
+		this.reservations.put(full, reservations2);
+		this.reservations.put(reservenext, reservations3);
+		this.reservations.put(toremove, reservations4);
 
 		this.availTableSizes = new TreeMap<LocalDateTime, int[]>();
 
-		int[] tableSizes1 = {1,3,0,1,1};
-		int[] tableSizes2 = {2,2,1,1,1};
-		this.availTableSizes.put(dateTime1, tableSizes1);
-		this.availTableSizes.put(dateTime2, tableSizes2);
+		int[] tableSizes1 = { 1, 3, 0, 1, 1 };
+		int[] tableSizes2 = { 2, 2, 0, 0, 0 };
+		this.availTableSizes.put(full, tableSizes2);
+		this.availTableSizes.put(reservenext, tableSizes2);
+		this.availTableSizes.put(toremove, tableSizes2);
 
 		type = handlerType.RESERVATION;
 	}
@@ -86,12 +108,17 @@ public class ReservationHandler extends Handler {
 			availTableSizes.put(dateTime, this.tableSizes);
 		}
 
-		if ( pax > 10) { return -1; }
-		if ( pax % 2 == 1) { pax ++; }
+		if (pax > 10) {
+			return -1;
+		}
+		if (pax % 2 == 1) {
+			pax++;
+		}
 
 		// checking for maxed reservation.
-		if (this.availTableSizes.get(dateTime)[Math.floorDiv(pax, 2) - 1] == 0) { // if there is not more available table for
-																				// the pax,
+		if (this.availTableSizes.get(dateTime)[Math.floorDiv(pax, 2) - 1] == 0) { // if there is not more available
+																					// table for
+																					// the pax,
 			return -2;
 		}
 
@@ -112,7 +139,7 @@ public class ReservationHandler extends Handler {
 	public boolean checkReservation(Customer cust, LocalDateTime dateTime) {
 		ArrayList<Reservation> reservationList;
 		reservationList = reservations.get(dateTime);
-		if (reservationList != null ){
+		if (reservationList != null) {
 			for (Reservation r : reservationList) {
 				Customer reservationCust = r.getCustomer();
 				if (reservationCust.equals(cust)) {
@@ -133,7 +160,7 @@ public class ReservationHandler extends Handler {
 	public int removeReservation(Customer cust, LocalDateTime dateTime) {
 		ArrayList<Reservation> reservationList;
 		reservationList = reservations.get(dateTime);
-		if (reservationList != null){
+		if (reservationList != null) {
 			for (Iterator<Reservation> it = reservationList.iterator(); it.hasNext();) {
 				Reservation currRes = it.next();
 				Customer reservationCust = currRes.getCustomer();
@@ -163,11 +190,12 @@ public class ReservationHandler extends Handler {
 	 * Retrieve list of reservation
 	 * 
 	 * @param dateTime
-	 * @return ArrayList<Reservation> of all reservations 1 hour before current
+	 * @return ArrayList<Reservation> of all reservations 1 hour before c1urrent
 	 *         dateTime
 	 */
 	public ArrayList<Reservation> retrieveNextReservationList(LocalDateTime dateTime) {
-		dateTime = dateTime.plusHours(1);		
+		dateTime = dateTime.plusHours(1);
+		System.out.printf(dateTime.toString() + "\n");
 		return reservations.get(dateTime);
 	}
 
@@ -179,21 +207,22 @@ public class ReservationHandler extends Handler {
 	 *         dateTime
 	 */
 	public ArrayList<Reservation> retrieveBeforeReservationList(LocalDateTime dateTime) {
-		dateTime = dateTime.minusHours(1);		
+		dateTime = dateTime.minusHours(1);
 		return reservations.get(dateTime);
 	}
 
 	/**
 	 * Setter function for table sizes
 	 * 
-	 * @param tableSizes 
+	 * @param tableSizes
 	 */
 	public void setTableSize(int[] tableSizes) {
 		this.tableSizes = tableSizes;
 	}
 
 	/**
-	 * Update the capacity tracker for table available for each timing and for the initialization
+	 * Update the capacity tracker for table available for each timing and for the
+	 * initialization
 	 * 
 	 * @param pax
 	 */

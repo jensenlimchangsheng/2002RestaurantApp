@@ -3,8 +3,6 @@ package project2002;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-
 import project2002.Restaurant.UIType;
 import project2002.Restaurant.handlerType;
 
@@ -162,7 +160,7 @@ public class TableManager extends Manager {
 		String strDateTime = dateTime.format(dtFormat);
 
 		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
-		
+
 		ArrayList<Reservation> reservationList = reservationHandler.retrieveBeforeReservationList(dateTime);
 		if (reservationList == null) {
 			return null;

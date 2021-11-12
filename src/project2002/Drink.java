@@ -7,6 +7,5 @@ public class Drink extends MenuItem {
 
 	Drink(String name, double price, ItemType itemType, String description) {
 		super(name, price, itemType, description);
-		// TODO Auto-generated constructor stub
 	}
 }

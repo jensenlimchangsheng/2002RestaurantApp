@@ -3,18 +3,19 @@ package project2002;
 import java.util.ArrayList;
 import project2002.MenuUI.ItemType;
 import project2002.Restaurant.handlerType;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 /**
-Represents Menu Handler from the restaurant.
-@author Jiam Tzi Yu
-@version 1.0
-@since 2021-11-09
-*/
+ * Represents Menu Handler from the restaurant.
+ * 
+ * @author Jiam Tzi Yu
+ * @version 1.0
+ * @since 2021-11-09
+ */
 
 public class MenuHandler extends Handler {
-	
+
 	/**
 	 * Initializes a menu with preloaded menu items
 	 */
@@ -24,7 +25,9 @@ public class MenuHandler extends Handler {
 		addMenuItem("Potatoes", 7, "Hand Smashed, Deep Fried in Beef Fat", MenuUI.ItemType.SIDE);
 		addMenuItem("Madagascan Vallina Ice Cream", 8, "Sweet Devil", MenuUI.ItemType.DESSERT);
 		addMenuItem("Death on Weekends", 19, "Prosecco with a splash of green fairy", MenuUI.ItemType.DRINK);
-		addMenuItem("Lunch Special", 45, "The Feather Blade Steak, Potatoes, Madagascan Vallina Ice Cream, Death on Weekends", MenuUI.ItemType.PROMO);
+		addMenuItem("Lunch Special", 45,
+				"The Feather Blade Steak, Potatoes, Madagascan Vallina Ice Cream, Death on Weekends",
+				MenuUI.ItemType.PROMO);
 	}
 
 	/**
@@ -52,12 +55,12 @@ public class MenuHandler extends Handler {
 	 */
 	private int maxPromoID = 500;
 
-
 	/**
 	 * Creates a new menu item with name, price, type and description.
-	 * @param name This menu item's name.
-	 * @param price This menu item's price.
-	 * @param itemType This menu item's type.
+	 * 
+	 * @param name        This menu item's name.
+	 * @param price       This menu item's price.
+	 * @param itemType    This menu item's type.
 	 * @param description This menu item's description.
 	 * @return this menu item
 	 */
@@ -93,9 +96,9 @@ public class MenuHandler extends Handler {
 		return newItem;
 	}
 
-
 	/**
 	 * Generates a unique ID for the menu item depending on its type.
+	 * 
 	 * @param itemType This menu item's type.
 	 * @return this menu item unique ID.
 	 */
@@ -126,14 +129,13 @@ public class MenuHandler extends Handler {
 		return newID;
 	}
 
-
-
 	/**
 	 * Checks if the menu item already exists using its ID.
+	 * 
 	 * @param itemID the menu item's ID.
 	 * @return 1 or 0.
 	 */
-	public int checkExist(int itemID){
+	public int checkExist(int itemID) {
 		MenuItem item = null;
 		for (int i = 0; i < MenuItems.size(); i++) {
 			item = MenuItems.get(i);
@@ -149,6 +151,7 @@ public class MenuHandler extends Handler {
 
 	/**
 	 * Removes menu item using its ID.
+	 * 
 	 * @param itemID the menu item's ID.
 	 * @return this menu item's name if exist else null.
 	 */
@@ -169,27 +172,29 @@ public class MenuHandler extends Handler {
 		return item.getName();
 	}
 
-	
-
 	/**
 	 * Prints the array of menu items.
 	 */
 	public void printMenu() {
-		System.out.println("============================================================  MENU ============================================================ ");
+		System.out.println(
+				"============================================================  MENU ============================================================ ");
 		String format = "%1$-7s | %2$3s | %3$-30s | %4$6s | %5$-100s\n";
 		System.out.format(format, "Type", "ID", "Name", "Price", "Description");
 		doSelectionSort(MenuItems);
 		for (int i = 0; i < MenuItems.size(); i++) {
 			MenuItem eachItem = MenuItems.get(i);
-			//String format = "%1$-7s | %2$3s | %3$-30s | %4$4s | %5$-100s\n";
-			System.out.format(format, eachItem.getItemType(), eachItem.getID(), eachItem.getName(), eachItem.getPrice(), eachItem.getDescription());
+			// String format = "%1$-7s | %2$3s | %3$-30s | %4$4s | %5$-100s\n";
+			System.out.format(format, eachItem.getItemType(), eachItem.getID(), eachItem.getName(), eachItem.getPrice(),
+					eachItem.getDescription());
 		}
-		System.out.println("===============================================================================================================================");;
+		System.out.println(
+				"===============================================================================================================================");
+		;
 	}
-
 
 	/**
 	 * Sorts the array of menu items based on the IDs of the menu items.
+	 * 
 	 * @param arr The array of menu items.
 	 */
 	public static void doSelectionSort(ArrayList<MenuItem> arr) {
@@ -207,9 +212,9 @@ public class MenuHandler extends Handler {
 		}
 	}
 
-
 	/**
 	 * Gets the menu item using its ID.
+	 * 
 	 * @param itemID the menu item's ID.
 	 * @return menu item.
 	 */
@@ -226,6 +231,7 @@ public class MenuHandler extends Handler {
 
 	/**
 	 * Gets the name of the menu item using its ID.
+	 * 
 	 * @param id the menu item's ID.
 	 * @return menu item name.
 	 */
@@ -234,10 +240,10 @@ public class MenuHandler extends Handler {
 		return item.getName();
 	}
 
-
 	/**
 	 * Updates the name of the menu item using its ID, and new name.
-	 * @param iD the menu item's ID.
+	 * 
+	 * @param iD      the menu item's ID.
 	 * @param newname the menu item's new name.
 	 */
 	public void updateName(int iD, String newname) {
@@ -246,10 +252,10 @@ public class MenuHandler extends Handler {
 
 	}
 
-
 	/**
 	 * Updates the price of the menu item using its ID and the new price.
-	 * @param iD the menu item's ID.
+	 * 
+	 * @param iD    the menu item's ID.
 	 * @param price the menu item's new price.
 	 */
 	public void updatePrice(int iD, double price) {
@@ -258,10 +264,10 @@ public class MenuHandler extends Handler {
 
 	}
 
-
 	/**
 	 * Updates the description of the menu item using its ID.
-	 * @param iD the menu item's ID.
+	 * 
+	 * @param iD          the menu item's ID.
 	 * @param description the menu item's new description
 	 */
 	public void updateDescription(int iD, String description) {
@@ -269,26 +275,28 @@ public class MenuHandler extends Handler {
 		item.setDescription(description);
 	}
 
-
 	/**
-	 * Outputs the menu as a txt file 
+	 * Outputs the menu as a txt file
 	 */
-	public void outputMenu(){
-		File receipt = new File("/Users/jiamtziyu/Desktop/menu.txt");
-		try{
+	public void outputMenu() {
+		try {
 			FileWriter myWriter = new FileWriter("/Users/jiamtziyu/Desktop/menu.txt");
-			myWriter.write("============================================================  MENU ============================================================\n");
-			String line = String.format("%1$-7s | %2$3s | %3$-30s | %4$6s | %5$-100s\n", "Type", "ID", "Name", "Price", "Description");
+			myWriter.write(
+					"============================================================  MENU ============================================================\n");
+			String line = String.format("%1$-7s | %2$3s | %3$-30s | %4$6s | %5$-100s\n", "Type", "ID", "Name", "Price",
+					"Description");
 			myWriter.write(line);
 			doSelectionSort(MenuItems);
 			for (int i = 0; i < MenuItems.size(); i++) {
 				MenuItem eachItem = MenuItems.get(i);
-				line = String.format("%1$-7s | %2$3s | %3$-30s | %4$6s | %5$-100s\n", eachItem.getItemType(), eachItem.getID(), eachItem.getName(), eachItem.getPrice(), eachItem.getDescription());
+				line = String.format("%1$-7s | %2$3s | %3$-30s | %4$6s | %5$-100s\n", eachItem.getItemType(),
+						eachItem.getID(), eachItem.getName(), eachItem.getPrice(), eachItem.getDescription());
 				myWriter.write(line);
 			}
-			myWriter.write("===============================================================================================================================");
+			myWriter.write(
+					"===============================================================================================================================");
 			myWriter.close();
-		}catch (IOException e) {
+		} catch (IOException e) {
 			System.out.println("An error occurred.");
 		}
 		System.out.println("Menu saved as txt file.");
