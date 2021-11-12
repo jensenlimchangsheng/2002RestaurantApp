@@ -27,9 +27,9 @@ public class TableUI extends UI {
 		int number;
 		do {
 			System.out.printf("----Table and Reservation Options----\n" + "Please select one of this 9 options: \n"
-					+ "1.	Print All Tables\n" + "2.	Add New Tables\n" + "3.	Remove Table\n"
-					+ "4.	Update Table\n" + "5.	Book Table\n" + "6.	Remove Reservation\n"
-					+ "7.	Update Reservation\n" + "8.	Check Reservation\n" + "9.	Reserve Tables For The Day\n"
+					+ "1.	Print All Tables\n" + "2.	Add New Tables\n" + "3.	Remove Table\n" + "4.	Update Table\n"
+					+ "5.	Book Table\n" + "6.	Remove Reservation\n" + "7.	Update Reservation\n"
+					+ "8.	Check Reservation\n" + "9.	Reserve Tables For The Day\n"
 					+ "10.	Remove Reserved Tables\n" + "11.	Quit\n");
 			choice = getInt("Please enter your choice: ");
 			switch (choice) {
@@ -94,15 +94,17 @@ public class TableUI extends UI {
 				pax = getInt("Please enter number of pax: ");
 				dateTime = getDateTime(false);
 				switch (tableManager.addReservation(pax, name, number, dateTime)) {
-					case 1:
-					System.out.println("Reservation for " + name + " for " + pax + " people has been successfully added.");
-						break;
-					case -1: 
-						System.out.println("This restaurant does not support group size of more than 10. Please do split bookings.");
-						break;
-					case -2:
-						System.out.println("Reservations for " + dateTime + " is full.");
-						break;
+				case 1:
+					System.out.println(
+							"Reservation for " + name + " for " + pax + " people has been successfully added.");
+					break;
+				case -1:
+					System.out.println(
+							"This restaurant does not support group size of more than 10. Please do split bookings.");
+					break;
+				case -2:
+					System.out.println("Reservations for " + dateTime + " is full.");
+					break;
 				}
 				break;
 			case 6: // Remove Reservation
@@ -110,15 +112,17 @@ public class TableUI extends UI {
 				number = getInt("Please enter customer phone number: ");
 				dateTime = getDateTime(false);
 				switch (tableManager.removeReservation(name, number, dateTime)) {
-					case -1:
-						System.out.println("Reservation for " + name + " at " + dateTime + " does not exist.");
-						break;
-					case -2:
-						System.out.println("Reservation for " + name + " at " + dateTime + " cannot be deleted. Reservation is within the next hour.");
-						break;
-					default: 
-						System.out.println("Reservation for " + name + " at " + dateTime + " has been successfully cancelled.");
-						break;
+				case -1:
+					System.out.println("Reservation for " + name + " at " + dateTime + " does not exist.");
+					break;
+				case -2:
+					System.out.println("Reservation for " + name + " at " + dateTime
+							+ " cannot be deleted. Reservation is within the next hour.");
+					break;
+				default:
+					System.out.println(
+							"Reservation for " + name + " at " + dateTime + " has been successfully cancelled.");
+					break;
 				}
 				break;
 			case 7: // Update Reservation
@@ -129,10 +133,12 @@ public class TableUI extends UI {
 				LocalDateTime newDateTime = getDateTime(true);
 				switch (tableManager.updateReservation(name, number, dateTime, newPax, newDateTime)) {
 				case 1:
-					System.out.println("Reservation for " + name + " for " + newPax + " people has been successfully updated.");
+					System.out.println(
+							"Reservation for " + name + " for " + newPax + " people has been successfully updated.");
 					break;
-				case -1: 
-					System.out.println("This restaurant does not support group size of more than 10. Please do split bookings.");
+				case -1:
+					System.out.println(
+							"This restaurant does not support group size of more than 10. Please do split bookings.");
 					break;
 				case -2:
 					System.out.println("Reservations for " + dateTime + " is full.");
@@ -156,15 +162,18 @@ public class TableUI extends UI {
 				}
 				break;
 			case 9: // Reserve Tables For The Day
-				if (tableManager.reserveTables())
-					System.out.println("Table reservation complete!");
-				else
-					System.out.println("Issues reserving tables!");
+				System.out.println("The following tables are now reserved:");
+				if (tableManager.reserveTables() != null)
+					for (String reservedTableID : tableManager.reserveTables())
+						System.out.println(reservedTableID);
+				System.out.println("Table reservation complete!");
 				break;
 			case 10: // Remove Reserved Tables
-				if (tableManager.removeReservedTables())
-					System.out.println("All specified reserved tables are unreserved");
-				System.out.println("Issues unreserving tables!");
+				System.out.println("The following tables are no longer reserved:");
+				if (tableManager.removeReservedTables() != null)
+					for (String reservedTableID : tableManager.removeReservedTables())
+						System.out.println(reservedTableID);
+				System.out.println("Reserved tables updated!");
 				break;
 			default:
 				System.out.println("Invalid Input.");
@@ -175,12 +184,12 @@ public class TableUI extends UI {
 	LocalDateTime getDateTime(boolean update) {
 		LocalDateTime dateTime = null;
 		String dateString = null;
-		String timeString = null; 
+		String timeString = null;
 
 		if (!update) {
 			dateString = getString("Please enter a date dd/MM/yyyy");
 			timeString = getString("Please enter a time HH");
-		} else { 
+		} else {
 			dateString = getString("Please enter a new date dd/MM/yyyy");
 			timeString = getString("Please enter a new time HH");
 		}

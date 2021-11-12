@@ -2,8 +2,6 @@ package project2002;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -160,9 +158,9 @@ public class TableManager extends Manager {
 	/**
 	 * Automatically update tables at given dateTime
 	 * 
-	 * @return update status.
+	 * @return TableIDs that have been reserved.
 	 */
-	public boolean reserveTables() {
+	public ArrayList<String> reserveTables() {
 		LocalDateTime dateTime = LocalDateTime.now();
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
 		String strDateTime = dateTime.format(dtFormat);
@@ -171,7 +169,7 @@ public class TableManager extends Manager {
 
 		ArrayList<Reservation> reservationList = reservationHandler.retrieveNextReservationList(dateTime);
 		if (reservationList == null) {
-			return true;
+			return null;
 		}
 		return tableHandler.reserveTables(reservationList);
 	}
@@ -179,9 +177,9 @@ public class TableManager extends Manager {
 	/**
 	 * Automatically remove tables at given dateTime
 	 * 
-	 * @return removal status.
+	 * @return TableIDs that have been removed.
 	 */
-	public boolean removeReservedTables() {
+	public ArrayList<String> removeReservedTables() {
 		LocalDateTime dateTime = LocalDateTime.now();
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
 		String strDateTime = dateTime.format(dtFormat);
@@ -190,7 +188,7 @@ public class TableManager extends Manager {
 
 		ArrayList<Reservation> reservationList = reservationHandler.retrieveBeforeReservationList(dateTime);
 		if (reservationList == null) {
-			return true;
+			return null;
 		}
 		return tableHandler.removeReservations(reservationList);
 	}
