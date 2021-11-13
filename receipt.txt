@@ -3,13 +3,12 @@ Attended to by: Jensen
 Table: T001
 =========================================
 Orders: 
- 2 Lunch Special                  $90.00
  1 The Feather Blade Steak        $21.00
 =========================================
-                        SubTotal: $88.80
-                        Discount: -$22.20
-                             GST: $8.88
-                  Service Charge: $6.22
-                           Total: $103.90
+                        SubTotal: $18.90
+                        Discount: -$2.10
+                             GST: $1.89
+                  Service Charge: $1.32
+                           Total: $22.11
 =========================================
 Thank you for dining with us!
