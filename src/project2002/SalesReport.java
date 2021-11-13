@@ -25,7 +25,7 @@ public class SalesReport {
 
 	/**
 	 * To insert the order of a customer into the sales report when the customer
-	 * asks for the bill
+	 * asks for the bill. It correctly insert the order into the respective year, month and daily sales report
 	 * 
 	 * @param order the order of the customer who wants his bill
 	 */
@@ -95,7 +95,7 @@ public class SalesReport {
 
 	/**
 	 * To print the sales report for a certain year
-	 * 
+	 * This includes all the qty and menuitem that has been order in that year
 	 * @param y the year that the user wants the report to be on
 	 */
 	public void printYearlyReport(int y) {
@@ -160,6 +160,7 @@ public class SalesReport {
 
 	/**
 	 * To print the sales report for a certain month
+	 * This includes all the qty and menuitem that has been order in that month
 	 * 
 	 * @param Y the year that the user wants the report to be on
 	 * @param M the month that the user wants the report to be on
@@ -228,6 +229,7 @@ public class SalesReport {
 
 	/**
 	 * To print the sales report for a certain date
+	 * This includes all the qty and menuitem that has been order on that day
 	 * 
 	 * @param Y the year that the user wants the report to be on
 	 * @param M the month that the user wants the report to be on
