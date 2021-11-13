@@ -3,33 +3,42 @@ package project2002;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Restaurant class to assign the necessary UIs and handlers to the managers.
+ * 
+ * @author Zhi Kai
+ * @version 1.0
+ * @since 2021-11-07
+ */
 public class Restaurant {
+
 	/**
-	 * Enum HandlerType Class
+	 * Different types of handlers
 	 */
 	public enum handlerType {
 		MENU, SALES, ORDER, TABLE, RESERVATION
 	}
 
 	/**
-	 * Enum UIType Class
+	 * Different types of UIs
 	 */
 	public enum UIType {
 		MENU, SALES, ORDER, TABLE, CUSTOMER
 	}
 
 	/**
-	 * Mapping UIType to UI
+	 * Mapping UIType to UI and will be used to retrieved the necessary UIs
 	 */
 	private HashMap<UIType, UI> UIdict = new HashMap<UIType, UI>();
 
 	/**
-	 * ArrayList of managers
+	 * Stores the different types of managers
 	 */
 	private ArrayList<Manager> managerList = new ArrayList<Manager>();
 
 	/**
-	 * Mapping HandlerType to handler
+	 * Mapping HandlerType to handler and will be used to retrieved the necessary
+	 * Handlers
 	 */
 	private HashMap<handlerType, Handler> handlerdict = new HashMap<handlerType, Handler>();
 

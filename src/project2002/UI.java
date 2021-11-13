@@ -4,8 +4,23 @@ import java.util.Scanner;
 
 import project2002.Restaurant.UIType;
 
+/**
+ * Abstract UI class which the different UI classes will inherit from
+ * 
+ * @author Zhi Kai
+ * @version 1.0
+ * @since 2021-11-07
+ */
+
 public abstract class UI {
+	/**
+	 * Used to read customer inputs
+	 */
 	protected Scanner scan;
+
+	/**
+	 * Type of UI
+	 */
 	protected UIType type;
 
 	abstract protected void printOptions();
@@ -20,11 +35,16 @@ public abstract class UI {
 		this.scan = scanner;
 	}
 
-	UI() {
+	/**
+	 * Blank constructor for UI.
+	 * 
+	 * @return UI
+	 */
+	public UI() {
 	};
 
 	/**
-	 * Getter for UIType.
+	 * To retrieve the UItype that will be used in the assignment by the Restaurant
 	 * 
 	 * @return UIType
 	 */
@@ -33,9 +53,10 @@ public abstract class UI {
 	}
 
 	/**
-	 * Prompts user to input an integer.
+	 * Prompts user to input an integer using the prompt provided.
 	 * 
-	 * @param prompt
+	 * @param prompt the prompt to be displayed and will be repeated if the user
+	 *               inputs an invalid input
 	 * @return integer input
 	 */
 	protected int getInt(String prompt) {
@@ -57,9 +78,10 @@ public abstract class UI {
 	}
 
 	/**
-	 * Prompts user to input an double.
+	 * Prompts user to input an double using the prompt provided.
 	 * 
-	 * @param prompt
+	 * @param prompt the prompt to be displayed and will be repeated if the user
+	 *               inputs an invalid input
 	 * @return double input
 	 */
 	protected double getDouble(String prompt) {
@@ -81,9 +103,10 @@ public abstract class UI {
 	}
 
 	/**
-	 * Prompts user to input an string.
+	 * Prompts user to input an string using the prompt provided.
 	 * 
-	 * @param prompt
+	 * @param prompt the prompt to be displayed and will be repeated if the user
+	 *               inputs an invalid input
 	 * @return string input
 	 */
 	protected String getString(String prompt) {

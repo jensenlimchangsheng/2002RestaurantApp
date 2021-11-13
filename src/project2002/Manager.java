@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import project2002.Restaurant.UIType;
 import project2002.Restaurant.handlerType;
 
+/**
+ * Abstract manager class which the different manager classes will inherit from
+ * 
+ * @author Zhi Kai
+ * @version 1.0
+ * @since 2021-11-07
+ */
 public abstract class Manager {
 	/**
 	 * Type of UI assigned to manager
@@ -16,7 +23,7 @@ public abstract class Manager {
 	protected ArrayList<handlerType> handlerList = new ArrayList<handlerType>();
 
 	/**
-	 * Getter for the ArrayList of handler types
+	 * Used to retrieve the necessary handlers for that manager
 	 * 
 	 * @return ArrayList of handler types
 	 */
@@ -39,7 +46,7 @@ public abstract class Manager {
 	abstract public void assignUI(UI ui);
 
 	/**
-	 * Getter for the type of UI assigned to manager
+	 * Used to retrieve the necessary UI for that manager
 	 * 
 	 * @return UIType
 	 */
