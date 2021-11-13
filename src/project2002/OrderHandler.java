@@ -22,14 +22,14 @@ public class OrderHandler extends Handler {
 	private int OrderCounter = 1;
 
 	/**
-	 * to construct this handler in the manager
+	 * to construct this handler in the manager that contains all the orders in the restaurant
 	 */
 	public OrderHandler() {
 		type = handlerType.ORDER;
 	}
 
 	/**
-	 * To create an order in the restaurant
+	 * To create an order in the restaurant when a customer sits down at a table
 	 * 
 	 * @param TableID the Table identification of the particular order
 	 * @param staff   the staff of the particular order
@@ -44,7 +44,7 @@ public class OrderHandler extends Handler {
 
 	/**
 	 * To print a particular order where it shows the quantity, MenuItem and the
-	 * respective menu item id
+	 * respective menu item id to show the user what a particular orderID contains
 	 * 
 	 * @param OrderID the particular order, order identification
 	 */
@@ -65,7 +65,7 @@ public class OrderHandler extends Handler {
 	}
 
 	/**
-	 * To add an item to a specific order
+	 * To add an item to a specific order when a customer wants to edit that order
 	 * 
 	 * @param OrderID the Order identification of the order you want to add
 	 * @param item    the menu item you want to add to the order
@@ -89,7 +89,7 @@ public class OrderHandler extends Handler {
 	}
 
 	/**
-	 * To remove an menu Item from an order
+	 * To remove an menu Item from an order when the customer wants to edit their order
 	 * 
 	 * @param OrderID the Order identification of the order you want to remove from
 	 * @param item    the menu item you want to remove from that order
@@ -112,7 +112,7 @@ public class OrderHandler extends Handler {
 	}
 
 	/**
-	 * To print the invoice of a certain order
+	 * To print the invoice of a certain order when the customer is leaving the restaurant
 	 * 
 	 * @param OrderID  the Order identification of the order you would like to print
 	 *                 the invoice

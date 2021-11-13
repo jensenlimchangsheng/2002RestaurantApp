@@ -42,35 +42,36 @@ public class Order {
 	}
 
 	/**
-	 * Gets the total price without tax of this order
+	 * Gets the total price without tax of this order to show in the receipt
 	 * @return this order's total price without tax
 	 */
 	public double getTotalPriceWithoutTax() {
 		return this.TotalPriceWithoutTax;
 	}
 	/**
-	 * Gets the total price with tax of this order
+	 * Gets the total price with tax of this order to show in the receipt
 	 * @return this order's total price with tax
 	 */
 	public double getTotalPriceWithTax() {
 		return this.TotalPriceWithTax;
 	}
 	/**
-	 * Gets the total GST of this order
+	 * Gets the total GST of this order to show in the receipt
 	 * @return this order's GST
 	 */
 	public double getGST() {
 		return this.GST;
 	}
 	/**
-	 * gets the service tax of this order
+	 * gets the service tax of this order to show in the receipt
 	 * @return this order's service tax
 	 */
 	public double getServiceTax() {
 		return this.ServiceTax;
 	}
 	/**
-	 * gets the time of this order
+	 * gets the time of this order when the order is made so that it can be organised 
+	 * for the salesreport when the receipt is preinted
 	 * @return	the time the order was created
 	 */
 	public LocalDateTime getDate() {
@@ -115,7 +116,7 @@ public class Order {
 	
 
 	/**
-	 * Too add menu item into the order
+	 * Too add menu item into the order when a customer wants to edit their order
 	 * @param item the menu item that you want to add into this respective order
 	 * @param Qty the amount of this menu item you would like to add into the order
 	 */
@@ -128,7 +129,7 @@ public class Order {
 	}
 
 	/**
-	 * to remove a menu item from the order
+	 * to remove a menu item from the order when a customer wants to edit their order
 	 * @param item the menu item that you want to remove from this respective order
 	 * @param Qty the amount of this menu item you would like to remove from this order
 	 * @return a boolean which shows whether the item was successfully removed the item or not
@@ -162,7 +163,7 @@ public class Order {
 	}
 
 	/**
-	 * To calculate the total price of this order including discounts without tax
+	 * To calculate the total price of this order including discounts without tax to be shown in the receipt
 	 * @param discount the amount of discount that is included in this 
 	 */
 	public void CalculateTotalPriceWithoutTax(double discount) {
@@ -174,7 +175,7 @@ public class Order {
 		this.TotalPriceWithoutTax = price - this.Discount;
 	}
 	/**
-	 * Calculate the service tax for this order
+	 * Calculate the service tax for this order to be shown in the receipt
 	 */
 	public void CalculateServiceTax() {
 		double tax = 0;
@@ -182,7 +183,7 @@ public class Order {
 		this.ServiceTax = tax;
 	}
 	/**
-	 * Calculate the GST for this order
+	 * Calculate the GST for this order to be shown in the receipt
 	 */
 	public void CalculateGST() {
 		double tax = 0;
@@ -190,7 +191,8 @@ public class Order {
 		this.GST = tax;
 	}
 	/**
-	 * calculate the total price of this order including tax and discounts
+	 * calculate the total price of this order including tax and discounts to be shown in the receipt and factor in all the discounts 
+	 * of this order
 	 */
 	public void CalculateTotalPrice() {
 		double price = this.GST + this.ServiceTax + this.TotalPriceWithoutTax;
