@@ -9,9 +9,10 @@ import project2002.Restaurant.handlerType;
 /**
  * TableManager class for managing table bookings for the Restaurant.
  * 
- * @author Jermyn, Shun Yao
+ * @author Jermyn
+ * @author Shun Yao
  * @version 1.0
- * @since 2021-11-07
+ * @since 2021-11-08
  */
 
 public class TableManager extends Manager {
