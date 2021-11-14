@@ -6,7 +6,9 @@ import java.util.Scanner;
 import project2002.Restaurant.UIType;
 /**
  * The user interface regarding any order issues in the restaurant
- * TODO: likewise, author, version,date updated detials!
+ * @author Jensen Lim
+ * @version 1.0
+ * @since 2021-11-01
  */
 public class OrderUI extends UI {
 	/**
