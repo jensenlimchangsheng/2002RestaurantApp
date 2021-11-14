@@ -5,7 +5,22 @@ import java.util.Scanner;
 
 public class MainUI {
 	/**
-	 * Main entry point to the program
+	 * Main entry point to the program. Allows the user to select which UI they
+	 * would like to interact with. This includes:
+	 * 
+	 * 1. Menu
+	 * 
+	 * 2. Order
+	 * 
+	 * 3. Sales Report
+	 * 
+	 * 4. Customer
+	 * 
+	 * 5. Table and Reservation
+	 * 
+	 * @author Zhi Kai
+	 * @version 1.0
+	 * @since 2021-11-09
 	 */
 	public static void main(String[] args) {
 		boolean validInput = false;
