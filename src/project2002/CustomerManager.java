@@ -117,8 +117,15 @@ public class CustomerManager extends Manager {
 	}
 
 	/**
-	 * Assigns handlers to customer manager
+	 * Assigns the following tables to customer manager:
 	 * 
+	 * 1. Order Handler
+	 * 
+	 * 2. Table Handler
+	 * 
+	 * 3. Reservation handler
+	 * 
+	 * @param handler the different types of handler necessary
 	 */
 	@Override
 	public void assignHandler(Handler h) {
@@ -133,8 +140,9 @@ public class CustomerManager extends Manager {
 	}
 
 	/**
-	 * Assigns UIs to customer manager
+	 * Assigns customer UI to customer manager
 	 * 
+	 * @param UI customerUI
 	 */
 	@Override
 	public void assignUI(UI ui) {

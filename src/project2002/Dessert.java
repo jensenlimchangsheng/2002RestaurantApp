@@ -1,8 +1,10 @@
 package project2002;
 
 import project2002.MenuUI.ItemType;
+
 /**
- * Dessert subclass of Menu Item where it contains the attributes nuts to allow customers to specify if they want nuts.
+ * Dessert subclass of Menu Item where it contains the attributes nuts to allow
+ * customers to specify if they want nuts.
  * 
  * @author Tzi Yu
  * @version 1.0
@@ -11,7 +13,7 @@ import project2002.MenuUI.ItemType;
 
 public class Dessert extends MenuItem {
 	/**
-	 * Enum itempType Dessert.
+	 * Enum itemType Dessert.
 	 */
 	ItemType itemType = ItemType.DESSERT;
 	/**
@@ -20,7 +22,9 @@ public class Dessert extends MenuItem {
 	private Boolean nuts;
 
 	/**
-	 * Creating a dessert with name, price, itemType, and description extending menu item class
+	 * Creating a dessert with name, price, itemType, and description extending menu
+	 * item class
+	 * 
 	 * @param name
 	 * @param price
 	 * @param itemType
@@ -32,17 +36,19 @@ public class Dessert extends MenuItem {
 
 	/**
 	 * Gets the private value of nuts if it is true or false.
+	 * 
 	 * @return nuts This dessert presence of nuts.
 	 */
-	public boolean getNuts(){
+	public boolean getNuts() {
 		return nuts;
 	}
 
 	/**
 	 * Sets the private value of nuts.
+	 * 
 	 * @param nuts
 	 */
-	public void setNuts(boolean nuts){
+	public void setNuts(boolean nuts) {
 		this.nuts = nuts;
 	}
 }

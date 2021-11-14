@@ -9,6 +9,7 @@ import project2002.Restaurant.handlerType;
 
 /**
  * Represent the handler that handles all the orders in the restaurant
+ * 
  * @author Jensen Lim
  * @version 1.0
  * @since 2021-11-01
@@ -26,7 +27,8 @@ public class OrderHandler extends Handler {
 	private int orderCounter = 1;
 
 	/**
-	 * to construct this handler in the manager that contains all the orders in the restaurant
+	 * to construct this handler in the manager that contains all the orders in the
+	 * restaurant
 	 */
 	public OrderHandler() {
 		type = handlerType.ORDER;
@@ -93,7 +95,8 @@ public class OrderHandler extends Handler {
 	}
 
 	/**
-	 * To remove an menu Item from an order when the customer wants to edit their order
+	 * To remove an menu Item from an order when the customer wants to edit their
+	 * order
 	 * 
 	 * @param OrderID the Order identification of the order you want to remove from
 	 * @param item    the menu item you want to remove from that order
@@ -116,7 +119,8 @@ public class OrderHandler extends Handler {
 	}
 
 	/**
-	 * To print the invoice of a certain order when the customer is leaving the restaurant
+	 * To print the invoice of a certain order when the customer is leaving the
+	 * restaurant
 	 * 
 	 * @param OrderID  the Order identification of the order you would like to print
 	 *                 the invoice

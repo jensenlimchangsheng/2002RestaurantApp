@@ -7,7 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Represents Menu Handler from the restaurant where all operations of menu item and promoset are done here.
+ * Represents Menu Handler from the restaurant where all operations of menu item
+ * and promoset are done here.
  * 
  * @author Tzi Yu
  * @version 1.0

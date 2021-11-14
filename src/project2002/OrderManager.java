@@ -2,9 +2,11 @@ package project2002;
 
 import project2002.Restaurant.UIType;
 import project2002.Restaurant.handlerType;
+
 /**
- * A Manager that helps to connect the orderhandler which contains all the orders of the restaurant
- * and also the menu of the restaurant
+ * A Manager that helps to connect the orderhandler which contains all the
+ * orders of the restaurant and also the menu of the restaurant
+ * 
  * @author Jensen Lim
  * @version 1.0
  * @since 2021-11-01
@@ -16,7 +18,7 @@ public class OrderManager extends Manager {
 	OrderUI orderUI;
 
 	/**
-	 * Constructor for Ordermanager 
+	 * Constructor for Ordermanager
 	 */
 	public OrderManager() {
 		handlerList.add(handlerType.MENU);
@@ -26,6 +28,7 @@ public class OrderManager extends Manager {
 
 	/**
 	 * to add an order item into an order
+	 * 
 	 * @param orderID the orderID in which you want to add an item to
 	 * @return the value to states whether the addition was successful
 	 */
@@ -43,8 +46,10 @@ public class OrderManager extends Manager {
 		System.out.println("OrderID doesnt Exist");
 		return 0; // unsuccessful
 	}
+
 	/**
 	 * to remove an order item from an order
+	 * 
 	 * @param orderID the order ID in which you want to remove an item from
 	 * @return a boolean valyue that states whether the removal was succesful
 	 */
@@ -57,10 +62,12 @@ public class OrderManager extends Manager {
 		if (MenuItem == null) {
 			System.out.println("There is no such Menu Item");
 		}
-		return orderHandler.RemoveItem(orderID, MenuItem, quantity); // Add menuitem to the particular orderID
+		return orderHandler.removeItem(orderID, MenuItem, quantity); // Add menuitem to the particular orderID
 	}
+
 	/**
 	 * to view the Order of a specific orderID
+	 * 
 	 * @param orderID the orderID in which the user would like to view
 	 */
 	public void viewOrder(int orderID) {
@@ -68,7 +75,13 @@ public class OrderManager extends Manager {
 	}
 
 	/**
-	 * to assign a handler to this Manager
+	 * Assigns the following tables to customer manager:
+	 * 
+	 * 1. Order Handler
+	 * 
+	 * 2. Menu Handler
+	 * 
+	 * @param handler the different types of handler necessary
 	 */
 	@Override
 	public void assignHandler(Handler h) {
@@ -80,7 +93,9 @@ public class OrderManager extends Manager {
 	}
 
 	/**
-	 * to assign a UI to this Order Manager
+	 * Assigns order UI to order manager
+	 * 
+	 * @param UI orderUI
 	 */
 	@Override
 	public void assignUI(UI ui) {

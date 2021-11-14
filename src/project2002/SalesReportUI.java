@@ -5,7 +5,17 @@ import java.util.Scanner;
 import project2002.Restaurant.UIType;
 
 /**
- * A user interface that allows user to choose the choices to print yearly monthly or daily sales reports
+ * A user interface that allows user to choose the choices to print yearly
+ * monthly or daily sales reports. This includes:
+ * 
+ * 1. Printing daily sales report
+ * 
+ * 2. Printing monthly sales report
+ * 
+ * 3. Printing yearly sales report
+ * 
+ * 4. Back
+ * 
  * @author Jensen Lim
  * @version 1.0
  * @since 2021-11-01

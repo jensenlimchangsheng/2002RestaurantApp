@@ -37,7 +37,7 @@ public class MenuUI extends UI {
 	private MenuManager menuManager;
 
 	/**
-	 * Enum ItemType Class
+	 * Different types of menu items
 	 */
 	public enum ItemType {
 		MAIN, DRINK, DESSERT, SIDE, PROMO;

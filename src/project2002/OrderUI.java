@@ -4,8 +4,19 @@ package project2002;
 import java.util.Scanner;
 
 import project2002.Restaurant.UIType;
+
 /**
- * The user interface regarding any order issues in the restaurant
+ * The user interface regarding any order issues in the restaurant. This options
+ * include:
+ * 
+ * 1. Add order item
+ * 
+ * 2. Remove order item
+ * 
+ * 3. View order
+ * 
+ * 4. Back
+ * 
  * @author Jensen Lim
  * @version 1.0
  * @since 2021-11-01

@@ -34,8 +34,8 @@ public class TableManager extends Manager {
 	 * Adds a table to the restaurant with default status "VACANT". This table can
 	 * now be booked.
 	 * 
-	 * @param tableID String tableID used to uniquely identify a table 
-	 * @param pax int pax to indicate the capacity of the table
+	 * @param tableID String tableID used to uniquely identify a table
+	 * @param pax     int pax to indicate the capacity of the table
 	 * @return tableID or error string.
 	 */
 	public String addNewTable(String tableID, int pax) {
@@ -49,7 +49,7 @@ public class TableManager extends Manager {
 	/**
 	 * Removes a table from the restaurant. Only permitted if the table is "VACANT".
 	 * 
-	 * @param tableID String tableID used to uniquely identify a table 
+	 * @param tableID String tableID used to uniquely identify a table
 	 * @return table removal status code: 1 if table is removed. 0 if table is not
 	 *         present -1 if table is currently booked or occupied.
 	 */
@@ -60,8 +60,8 @@ public class TableManager extends Manager {
 	/**
 	 * Update table pax size. This allows the table size to be increased.
 	 * 
-	 * @param tableID String tableID used to uniquely identify a table 
-	 * @param pax int pax to indicate the capacity of the table
+	 * @param tableID String tableID used to uniquely identify a table
+	 * @param pax     int pax to indicate the capacity of the table
 	 * @return table update status code: 1 if table is updated. 0 if table is not
 	 *         present -1 if table is currently booked or occupied, -2 for fatal
 	 *         error (unexpected result)
@@ -81,7 +81,9 @@ public class TableManager extends Manager {
 	 * @param number   phone number as a secondary tool for verification.
 	 * @param dateTime LocalDateTime object for which the reservation is booked for,
 	 *                 will be passed in by TableUI.
-	 * @return whether there reservation is successfully added. -1 suggests invaid pax size, -2 suggests reservation for new datetime is full, 1 suggest successful update
+	 * @return whether there reservation is successfully added. -1 suggests invaid
+	 *         pax size, -2 suggests reservation for new datetime is full, 1 suggest
+	 *         successful update
 	 */
 	public int addReservation(int pax, String name, int number, LocalDateTime dateTime) {
 		Customer cust = new Customer(name, number);
@@ -136,7 +138,9 @@ public class TableManager extends Manager {
 	 * @param newPax   new number of guests expected at the table
 	 * @param dateTime LocalDateTime object for which the reservation is booked for,
 	 *                 will be passed in by TableUI.
-	 * @return Reseration update status. -1 suggests invaid pax size, -2 suggests reservation for new datetime is full, 1 suggest successful update and -3 suggesets that old reservation cannot be removed.
+	 * @return Reseration update status. -1 suggests invaid pax size, -2 suggests
+	 *         reservation for new datetime is full, 1 suggest successful update and
+	 *         -3 suggesets that old reservation cannot be removed.
 	 */
 	public int updateReservation(String name, int number, LocalDateTime dateTime, int newPax,
 			LocalDateTime newDateTime) {
@@ -154,9 +158,9 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Automatically reserve tables an hour after given dateTime (now). 
-	 * Extracts the reservation list 1 hour prior to current datetime. 
-	 * Removes these reservations as they have been overdue / lapsed. 
+	 * Automatically reserve tables an hour after given dateTime (now). Extracts the
+	 * reservation list 1 hour prior to current datetime. Removes these reservations
+	 * as they have been overdue / lapsed.
 	 * 
 	 * @return TableIDs that have been reserved.
 	 */
@@ -175,9 +179,9 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Automatically remove tables an hour before given dateTime (now). 
-	 * Extracts the reservation list 1 hour prior to current datetime. 
-	 * Removes these reservations as they have been overdue / lapsed. 
+	 * Automatically remove tables an hour before given dateTime (now). Extracts the
+	 * reservation list 1 hour prior to current datetime. Removes these reservations
+	 * as they have been overdue / lapsed.
 	 * 
 	 * @return TableIDs that have been removed.
 	 */
@@ -214,6 +218,15 @@ public class TableManager extends Manager {
 		tableHandler.printAllTablesNow(); // shows the list of all available tables
 	}
 
+	/**
+	 * Assigns the following tables to table manager:
+	 * 
+	 * 1. Table Handler
+	 * 
+	 * 2. Reservation Handler
+	 * 
+	 * @param handler the different types of handler necessary
+	 */
 	@Override
 	public void assignHandler(Handler h) {
 		if (h.getType() == handlerType.TABLE) {
@@ -227,6 +240,11 @@ public class TableManager extends Manager {
 		return;
 	}
 
+	/**
+	 * Assigns table UI to table manager
+	 * 
+	 * @param UI tableUI
+	 */
 	@Override
 	public void assignUI(UI ui) {
 		tableUI = (TableUI) ui;

@@ -75,6 +75,12 @@ public class Table {
         this.status = tableStatus;
     }
 
+    /**
+     * Configures the to string method of the table to print the ID, size and status
+     * of the table
+     * 
+     * @return String that contains the id,size and status of the table
+     */
     @Override
     public String toString() {
         return this.tableID + " of size " + tableSize + " is currently " + this.status + ".";
