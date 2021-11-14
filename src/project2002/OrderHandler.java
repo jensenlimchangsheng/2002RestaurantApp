@@ -18,12 +18,12 @@ public class OrderHandler extends Handler {
 	 * contains an arraylist of orders that are in the restaurant at the current
 	 * moment
 	 */
-	private ArrayList<Order> Orders = new ArrayList<Order>();
+	private ArrayList<Order> orders = new ArrayList<Order>();
 	/**
 	 * A order counter to count the amount of order and provide each order with a
 	 * unique order identification
 	 */
-	private int OrderCounter = 1;
+	private int orderCounter = 1;
 
 	/**
 	 * to construct this handler in the manager that contains all the orders in the restaurant
@@ -40,10 +40,10 @@ public class OrderHandler extends Handler {
 	 * @return the order identification of this order
 	 */
 	public int createOrder(String TableID, Staff staff) {
-		Order temp = new Order(staff, TableID, OrderCounter);
-		Orders.add(temp);
-		OrderCounter++;
-		return OrderCounter - 1;
+		Order temp = new Order(staff, TableID, orderCounter);
+		orders.add(temp);
+		orderCounter++;
+		return orderCounter - 1;
 	}
 
 	/**
@@ -54,8 +54,8 @@ public class OrderHandler extends Handler {
 	 */
 	public void printOrder(int OrderID) {
 		int temp = -1;
-		for (int j = 0; j < Orders.size(); j++) {
-			if (Orders.get(j).getOrderID() == OrderID) {
+		for (int j = 0; j < orders.size(); j++) {
+			if (orders.get(j).getOrderID() == OrderID) {
 				temp = j;
 				break;
 			}
@@ -64,7 +64,7 @@ public class OrderHandler extends Handler {
 			System.out.println("OrderID doesnt exist");
 			return;
 		} else {
-			Orders.get(temp).printOrder();
+			orders.get(temp).printOrder();
 		}
 	}
 
@@ -78,8 +78,8 @@ public class OrderHandler extends Handler {
 	 */
 	public boolean addItem(int OrderID, MenuItem item, int Qty) {
 		int temp = -1;
-		for (int j = 0; j < Orders.size(); j++) {
-			if (Orders.get(j).getOrderID() == OrderID) {
+		for (int j = 0; j < orders.size(); j++) {
+			if (orders.get(j).getOrderID() == OrderID) {
 				temp = j;
 				break;
 			}
@@ -87,7 +87,7 @@ public class OrderHandler extends Handler {
 		if (temp == -1) {
 			return false;
 		} else {
-			Orders.get(temp).addItems(item, Qty);
+			orders.get(temp).addItems(item, Qty);
 			return true;
 		}
 	}
@@ -100,10 +100,10 @@ public class OrderHandler extends Handler {
 	 * @param Qty     the quantity of the menu item you want to remove
 	 * @return
 	 */
-	public boolean RemoveItem(int OrderID, MenuItem item, int Qty) {
+	public boolean removeItem(int OrderID, MenuItem item, int Qty) {
 		int temp = -1;
-		for (int j = 0; j < Orders.size(); j++) {
-			if (Orders.get(j).getOrderID() == OrderID) {
+		for (int j = 0; j < orders.size(); j++) {
+			if (orders.get(j).getOrderID() == OrderID) {
 				temp = j;
 				break;
 			}
@@ -111,7 +111,7 @@ public class OrderHandler extends Handler {
 		if (temp == -1) {
 			return false;
 		} else {
-			return Orders.get(temp).removeItems(item, Qty);
+			return orders.get(temp).removeItems(item, Qty);
 		}
 	}
 
@@ -125,8 +125,8 @@ public class OrderHandler extends Handler {
 	 */
 	public Order printInvoice(int OrderID, double discount) {
 		int temp = -1;
-		for (int j = 0; j < Orders.size(); j++) {
-			if (Orders.get(j).getOrderID() == OrderID) {
+		for (int j = 0; j < orders.size(); j++) {
+			if (orders.get(j).getOrderID() == OrderID) {
 				temp = j;
 				break;
 			}
@@ -136,38 +136,38 @@ public class OrderHandler extends Handler {
 			return null;
 		}
 
-		Orders.get(temp).calculateTotalPriceWithoutTax(discount);
-		Orders.get(temp).calculateServiceTax();
-		Orders.get(temp).calculateGST();
-		Orders.get(temp).calculateTotalPrice();
+		orders.get(temp).calculateTotalPriceWithoutTax(discount);
+		orders.get(temp).calculateServiceTax();
+		orders.get(temp).calculateGST();
+		orders.get(temp).calculateTotalPrice();
 		System.out.println("=========================================");
-		System.out.println("Attended to by: " + Orders.get(temp).getStaff().getName());
-		System.out.println("Table: " + Orders.get(temp).getTableID());
+		System.out.println("Attended to by: " + orders.get(temp).getStaff().getName());
+		System.out.println("Table: " + orders.get(temp).getTableID());
 		System.out.println("=========================================");
 		System.out.println("Orders: ");
-		HashMap<MenuItem, Integer> Items = Orders.get(temp).getItems();
+		HashMap<MenuItem, Integer> Items = orders.get(temp).getItems();
 		for (MenuItem i : Items.keySet()) {
 			String line = String.format("%2d %-30s $%.2f", Items.get(i), i.getName(), i.getPrice() * Items.get(i));
 			System.out.println(line);
 		}
 		System.out.println("=========================================");
-		String line = String.format("   %30s $%.2f", "SubTotal:", Orders.get(temp).getTotalPriceWithoutTax());
+		String line = String.format("   %30s $%.2f", "SubTotal:", orders.get(temp).getTotalPriceWithoutTax());
 		System.out.println(line);
-		line = String.format("   %30s -$%.2f", "Discount:", Orders.get(temp).getDiscount());
+		line = String.format("   %30s -$%.2f", "Discount:", orders.get(temp).getDiscount());
 		System.out.println(line);
-		line = String.format("   %30s $%.2f", "GST:", Orders.get(temp).getGST());
+		line = String.format("   %30s $%.2f", "GST:", orders.get(temp).getGST());
 		System.out.println(line);
-		line = String.format("   %30s $%.2f", "Service Charge:", Orders.get(temp).getServiceTax());
+		line = String.format("   %30s $%.2f", "Service Charge:", orders.get(temp).getServiceTax());
 		System.out.println(line);
-		line = String.format("   %30s $%.2f", "Total:", Orders.get(temp).getTotalPriceWithTax());
+		line = String.format("   %30s $%.2f", "Total:", orders.get(temp).getTotalPriceWithTax());
 		System.out.println(line);
 		System.out.println("=========================================");
 		System.out.println("Thank you for dining with us!");
 		try {
 			FileWriter myWriter = new FileWriter("receipt.txt");
 			myWriter.write("=========================================\n");
-			myWriter.write("Attended to by: " + Orders.get(temp).getStaff().getName() + "\n");
-			myWriter.write("Table: " + Orders.get(temp).getTableID() + "\n");
+			myWriter.write("Attended to by: " + orders.get(temp).getStaff().getName() + "\n");
+			myWriter.write("Table: " + orders.get(temp).getTableID() + "\n");
 			myWriter.write("=========================================\n");
 			myWriter.write("Orders: \n");
 			for (MenuItem i : Items.keySet()) {
@@ -175,15 +175,15 @@ public class OrderHandler extends Handler {
 				myWriter.write(line);
 			}
 			myWriter.write("=========================================\n");
-			line = String.format("   %30s $%.2f\n", "SubTotal:", Orders.get(temp).getTotalPriceWithoutTax());
+			line = String.format("   %30s $%.2f\n", "SubTotal:", orders.get(temp).getTotalPriceWithoutTax());
 			myWriter.write(line);
-			line = String.format("   %30s -$%.2f\n", "Discount:", Orders.get(temp).getDiscount());
+			line = String.format("   %30s -$%.2f\n", "Discount:", orders.get(temp).getDiscount());
 			myWriter.write(line);
-			line = String.format("   %30s $%.2f\n", "GST:", Orders.get(temp).getGST());
+			line = String.format("   %30s $%.2f\n", "GST:", orders.get(temp).getGST());
 			myWriter.write(line);
-			line = String.format("   %30s $%.2f\n", "Service Charge:", Orders.get(temp).getServiceTax());
+			line = String.format("   %30s $%.2f\n", "Service Charge:", orders.get(temp).getServiceTax());
 			myWriter.write(line);
-			line = String.format("   %30s $%.2f\n", "Total:", Orders.get(temp).getTotalPriceWithTax());
+			line = String.format("   %30s $%.2f\n", "Total:", orders.get(temp).getTotalPriceWithTax());
 			myWriter.write(line);
 			myWriter.write("=========================================\n");
 			myWriter.write("Thank you for dining with us!");
@@ -193,8 +193,8 @@ public class OrderHandler extends Handler {
 			System.out.println("An error occurred.");
 		}
 
-		Order j = Orders.get(temp);
-		Orders.remove(temp);
+		Order j = orders.get(temp);
+		orders.remove(temp);
 		return j;
 	}
 

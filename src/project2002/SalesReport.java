@@ -16,15 +16,15 @@ public class SalesReport {
 	/**
 	 * contains the orders for the retaurant for a certain year
 	 */
-	private HashMap<Integer, ArrayList<Order>> Year = new HashMap<Integer, ArrayList<Order>>();
+	private HashMap<Integer, ArrayList<Order>> year = new HashMap<Integer, ArrayList<Order>>();
 	/**
 	 * contains the orders for the restaurant for a certain month
 	 */
-	private HashMap<String, ArrayList<Order>> Month = new HashMap<String, ArrayList<Order>>();
+	private HashMap<String, ArrayList<Order>> month = new HashMap<String, ArrayList<Order>>();
 	/**
 	 * contains the orders for the restaurant for a certain day
 	 */
-	private HashMap<LocalDate, ArrayList<Order>> Day = new HashMap<LocalDate, ArrayList<Order>>();
+	private HashMap<LocalDate, ArrayList<Order>> day = new HashMap<LocalDate, ArrayList<Order>>();
 
 	/**
 	 * To insert the order of a customer into the sales report when the customer
@@ -39,59 +39,59 @@ public class SalesReport {
 		int d = temp.getDayOfMonth();
 		LocalDate date = LocalDate.of(y, m, d);
 		String monthformat = m + "-" + y;
-		if (Day.size() == 0) {
+		if (day.size() == 0) {
 			ArrayList<Order> i = new ArrayList<Order>();
 			i.add(order);
-			Day.put(date, i);
-			Month.put(monthformat, i);
-			Year.put(y, i);
+			day.put(date, i);
+			month.put(monthformat, i);
+			year.put(y, i);
 		} else {
 			boolean s = false;
-			for (LocalDate j : Day.keySet()) {
+			for (LocalDate j : day.keySet()) {
 				if (s = j.isEqual(date)) {
 					ArrayList<Order> i = new ArrayList<Order>();
-					i = Day.get(j);
+					i = day.get(j);
 					i.add(order);
-					Day.put(j, i);
+					day.put(j, i);
 					break;
 				}
 			}
 			if (!s) {
 				ArrayList<Order> i = new ArrayList<Order>();
 				i.add(order);
-				Day.put(date, i);
+				day.put(date, i);
 			}
 			s = false;
-			for (String x : Month.keySet()) {
+			for (String x : month.keySet()) {
 				if (x == monthformat) {
 					s = true;
 					ArrayList<Order> i = new ArrayList<Order>();
-					i = Month.get(x);
+					i = month.get(x);
 					i.add(order);
-					Month.put(x, i);
+					month.put(x, i);
 					break;
 				}
 			}
 			if (!s) {
 				ArrayList<Order> i = new ArrayList<Order>();
 				i.add(order);
-				Month.put(monthformat, i);
+				month.put(monthformat, i);
 			}
 			s = false;
-			for (int z : Year.keySet()) {
+			for (int z : year.keySet()) {
 				if (z == y) {
 					s = true;
 					ArrayList<Order> i = new ArrayList<Order>();
-					i = Year.get(z);
+					i = year.get(z);
 					i.add(order);
-					Year.put(z, i);
+					year.put(z, i);
 					break;
 				}
 			}
 			if (!s) {
 				ArrayList<Order> i = new ArrayList<Order>();
 				i.add(order);
-				Year.put(y, i);
+				year.put(y, i);
 			}
 		}
 	}
@@ -102,7 +102,7 @@ public class SalesReport {
 	 * @param y the year that the user wants the report to be on
 	 */
 	public void printYearlyReport(int y) {
-		ArrayList<Order> temp = Year.get(y);
+		ArrayList<Order> temp = year.get(y);
 		if (temp == null) {
 			System.out.println("There are no records in Year " + y);
 			return;
@@ -170,7 +170,7 @@ public class SalesReport {
 	 */
 	public void printMonthlyReport(int Y, int M) {
 		String MonthFormat = M + "-" + Y;
-		ArrayList<Order> temp = Month.get(MonthFormat);
+		ArrayList<Order> temp = month.get(MonthFormat);
 
 		if (temp == null) {
 			System.out.println("There are no records in " + temp);
@@ -240,7 +240,7 @@ public class SalesReport {
 	 */
 	public void printDailyReport(int Y, int M, int D) {
 		LocalDate Date = LocalDate.of(Y, M, D);
-		ArrayList<Order> temp = Day.get(Date);
+		ArrayList<Order> temp = day.get(Date);
 
 		if (temp == null) {
 			System.out.println("There are no records in " + Y + "-" + M + "-" + D);

@@ -5,7 +5,10 @@ import java.util.Scanner;
 import project2002.Restaurant.UIType;
 
 /**
- * TODO: claim your class pls
+ * A user interface that allows user to choose the choices to print yearly monthly or daily sales reports
+ * @author Jensen Lim
+ * @version 1.0
+ * @since 2021-11-01
  */
 public class SalesReportUI extends UI {
 	/**
