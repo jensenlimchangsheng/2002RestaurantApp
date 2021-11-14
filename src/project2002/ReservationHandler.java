@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.TreeMap;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 import project2002.Restaurant.handlerType;
@@ -92,10 +91,10 @@ public class ReservationHandler extends Handler {
 	}
 
 	/**
-	 * Adds a new reservation to the restaurant. 
-	 * Checks if the datetime exists as a key in existing reservations. 
-	 * if it doesn't exist, the arraylist of reservations will be initialized 
-	 * Subsequently, the values will be appended to the arraylist, reservationList accordingly
+	 * Adds a new reservation to the restaurant. Checks if the datetime exists as a
+	 * key in existing reservations. if it doesn't exist, the arraylist of
+	 * reservations will be initialized Subsequently, the values will be appended to
+	 * the arraylist, reservationList accordingly
 	 * 
 	 * @param cust customer information as a customer object.
 	 * @param pax number of customers for the reservation
@@ -153,7 +152,8 @@ public class ReservationHandler extends Handler {
 	}
 
 	/**
-	 * Cancel a customer's reservation given their information and reservation datetime.
+	 * Cancel a customer's reservation given their information and reservation
+	 * datetime.
 	 * 
 	 * @param cust customer information as a customer object.
 	 * @param dateTime reservation datetime in LocalDateTime format.
