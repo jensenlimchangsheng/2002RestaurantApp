@@ -14,9 +14,9 @@ public class Side extends MenuItem {
 	 */
 	ItemType itemType = ItemType.SIDE;
 	/**
-	 * size string: Large, Small
+	 * Allows customer to request for less salt for the side.
 	 */
-	String size;
+	private boolean lessSalt;
 	/**
 	 * Creating a sude with name, price, itemType, and description extending menu item class
 	 * @param name
@@ -28,17 +28,17 @@ public class Side extends MenuItem {
 		super(name, price, itemType, description);
 	}
 	/**
-	 * Gets the private value of size.
-	 * @return size The size of this side.
+	 * Gets the private value of lessSalt.
+	 * @return lessSalt The salt level of this side.
 	 */
-	public String getSize(){
-		return size;
+	public boolean getLessSalt(){
+		return lessSalt;
 	}
 	/**
-	 * Sets the private value of size.
-	 * @param size
+	 * Sets the boolean value of lessSalt.
+	 * @param lessSalt
 	 */
-	public void setSize(String size){
-		this.size = size;
+	public void setSize(boolean lessSalt){
+		this.lessSalt = lessSalt;
 	}
 }

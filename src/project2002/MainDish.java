@@ -14,9 +14,9 @@ public class MainDish extends MenuItem {
 	 */
 	ItemType itemType = ItemType.MAIN;
 	/**
-	 * Level of doneness: Well Done, Medium Well, Medium, Medium Rare.
+	 * Indicate if the customer wants sauce on this menu item.
 	 */
-	private String doneness;
+	private boolean sauce;
 	/**
 	 * Creating a main with name, price, itemType, and description extending menu item class
 	 * @param name
@@ -28,18 +28,18 @@ public class MainDish extends MenuItem {
 		super(name, price, itemType, description);
 	}
 	/**
-	 * Gets the private value of doneness.
-	 * @return doneness This doneness of this main.
+	 * Gets the private value of sauce.
+	 * @return sauce This presence of sauce for this main.
 	 */
-	public String getDoneness(){
-		return doneness;
+	public boolean getSauce(){
+		return sauce;
 	}
 
 	/**
-	 * Sets the private value of doneness.
-	 * @param doneness
+	 * Sets the private value of sauce.
+	 * @param sauce
 	 */
-	void setDoneness(String doneness){
-		this.doneness = doneness;
+	void setSauce(boolean sauce){
+		this.sauce = sauce;
 	}
 }
