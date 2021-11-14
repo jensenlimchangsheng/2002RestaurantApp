@@ -8,7 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 /**
  * contains all the sales reports based on year, month and day for the restaurant
- * TODO: claim your class eh
+ * @author Jensen Lim
+ * @version 1.0
+ * @since 2021-11-01
  */
 public class SalesReport {
 	/**
@@ -30,7 +32,7 @@ public class SalesReport {
 	 * 
 	 * @param order the order of the customer who wants his bill
 	 */
-	public void InsertOrder(Order order) {
+	public void insertOrder(Order order) {
 		LocalDateTime temp = order.getDate();
 		int y = temp.getYear();
 		int m = temp.getMonthValue();

@@ -9,7 +9,9 @@ import project2002.Restaurant.handlerType;
 
 /**
  * Represent the handler that handles all the orders in the restaurant
- * TODO: @jensen update your method calls and change Orders to orders, OrderCounter to orderCounter
+ * @author Jensen Lim
+ * @version 1.0
+ * @since 2021-11-01
  */
 public class OrderHandler extends Handler {
 	/**
@@ -62,7 +64,7 @@ public class OrderHandler extends Handler {
 			System.out.println("OrderID doesnt exist");
 			return;
 		} else {
-			Orders.get(temp).PrintOrder();
+			Orders.get(temp).printOrder();
 		}
 	}
 
@@ -74,7 +76,7 @@ public class OrderHandler extends Handler {
 	 * @param Qty     the quantity of the menuitem you want to add
 	 * @return a boolean value to show whether the addition was successful or not
 	 */
-	public boolean AddItem(int OrderID, MenuItem item, int Qty) {
+	public boolean addItem(int OrderID, MenuItem item, int Qty) {
 		int temp = -1;
 		for (int j = 0; j < Orders.size(); j++) {
 			if (Orders.get(j).getOrderID() == OrderID) {
@@ -85,7 +87,7 @@ public class OrderHandler extends Handler {
 		if (temp == -1) {
 			return false;
 		} else {
-			Orders.get(temp).AddItems(item, Qty);
+			Orders.get(temp).addItems(item, Qty);
 			return true;
 		}
 	}
@@ -134,10 +136,10 @@ public class OrderHandler extends Handler {
 			return null;
 		}
 
-		Orders.get(temp).CalculateTotalPriceWithoutTax(discount);
-		Orders.get(temp).CalculateServiceTax();
-		Orders.get(temp).CalculateGST();
-		Orders.get(temp).CalculateTotalPrice();
+		Orders.get(temp).calculateTotalPriceWithoutTax(discount);
+		Orders.get(temp).calculateServiceTax();
+		Orders.get(temp).calculateGST();
+		Orders.get(temp).calculateTotalPrice();
 		System.out.println("=========================================");
 		System.out.println("Attended to by: " + Orders.get(temp).getStaff().getName());
 		System.out.println("Table: " + Orders.get(temp).getTableID());

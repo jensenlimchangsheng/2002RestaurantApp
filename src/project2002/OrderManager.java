@@ -38,7 +38,7 @@ public class OrderManager extends Manager {
 		if (MenuItem == null) {
 			return -1; // item does not exist
 		}
-		if (orderHandler.AddItem(orderID, MenuItem, quantity))
+		if (orderHandler.addItem(orderID, MenuItem, quantity))
 			return 1; // successful
 		System.out.println("OrderID doesnt Exist");
 		return 0; // unsuccessful

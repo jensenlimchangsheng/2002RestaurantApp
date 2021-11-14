@@ -6,30 +6,31 @@ import java.util.*;
 
 /**
  * Represent a single order in the restaurant
- * TODO: @jensen change methods and attributes to snakeCase, e.g. your hashmap should be items, table ID as tableID..., AddItems as addItems
- * TODO: @jensen fixed related dependencies where the method is called 
+ * @author Jensen Lim
+ * @version 1.0
+ * @since 2021-11-01
  */
 public class Order {
 	/** The unique OrderID for each order */
-	private int OrderID;
+	private int orderID;
 	/** Represents the staff attending to the order */
 	private Staff staff;
 	/** Stores the TableID of the order */
-	private String TableID;
+	private String tableID;
 	/** the time that the order was created */
-	private LocalDateTime Time;
+	private LocalDateTime time;
 	/** storing the MenuItems and the respective quatity in the order */
-	private HashMap<MenuItem, Integer> Items = new HashMap<MenuItem, Integer>();
+	private HashMap<MenuItem, Integer> items = new HashMap<MenuItem, Integer>();
 	/**To store the total net price of the order */
-	private double TotalPriceWithoutTax = 0;
+	private double totalPriceWithoutTax = 0;
 	/**The calculated total price including GST and Service Tax */
-	private double TotalPriceWithTax = 0;
+	private double totalPriceWithTax = 0;
 	/**The GST collected for this order */
 	private double GST = 0;
 	/**The service tax for this order */
-	private double ServiceTax = 0;
+	private double serviceTax = 0;
 	/**Amount of dicsount in for this order */
-	private double Discount = 0;
+	private double discount = 0;
 
 	/**
 	 * Creates a new order with a given staff, table Id and order Id
@@ -39,9 +40,9 @@ public class Order {
 	 */
 	public Order(Staff staff, String TableID, int OrderID) {
 		this.staff = staff;
-		this.TableID = TableID;
-		this.OrderID = OrderID;
-		this.Time = LocalDateTime.now();
+		this.tableID = TableID;
+		this.orderID = OrderID;
+		this.time = LocalDateTime.now();
 	}
 
 	/**
@@ -49,14 +50,14 @@ public class Order {
 	 * @return this order's total price without tax
 	 */
 	public double getTotalPriceWithoutTax() {
-		return this.TotalPriceWithoutTax;
+		return this.totalPriceWithoutTax;
 	}
 	/**
 	 * Gets the total price with tax of this order to show in the receipt
 	 * @return this order's total price with tax
 	 */
 	public double getTotalPriceWithTax() {
-		return this.TotalPriceWithTax;
+		return this.totalPriceWithTax;
 	}
 	/**
 	 * Gets the total GST of this order to show in the receipt
@@ -70,7 +71,7 @@ public class Order {
 	 * @return this order's service tax
 	 */
 	public double getServiceTax() {
-		return this.ServiceTax;
+		return this.serviceTax;
 	}
 	/**
 	 * gets the time of this order when the order is made so that it can be organised 
@@ -78,7 +79,7 @@ public class Order {
 	 * @return	the time the order was created
 	 */
 	public LocalDateTime getDate() {
-		return this.Time;
+		return this.time;
 	}
 	/**
 	 * gets the staff who attended this order
@@ -92,28 +93,28 @@ public class Order {
 	 * @return the order's table id
 	 */
 	public String getTableID() {
-		return this.TableID;
+		return this.tableID;
 	}
 	/**
 	 * gets the order identification of this order
 	 * @return the order's id
 	 */
 	public int getOrderID() {
-		return this.OrderID;
+		return this.orderID;
 	}
 	/**
 	 * get the menu Item and quantity of this order
 	 * @return the hashmap that contain the menutems and the respective quantity
 	 */
 	public HashMap<MenuItem, Integer> getItems() {
-		return this.Items;
+		return this.items;
 	}
 	/**
 	 * get the discount of this order
 	 * @return the order's discount
 	 */
 	public double getDiscount() {
-		return this.Discount;
+		return this.discount;
 	}
 
 	
@@ -123,11 +124,11 @@ public class Order {
 	 * @param item the menu item that you want to add into this respective order
 	 * @param Qty the amount of this menu item you would like to add into the order
 	 */
-	public void AddItems(MenuItem item, int Qty) {
-		if (Items.get(item) == null) {
-			Items.put(item, Qty);
+	public void addItems(MenuItem item, int Qty) {
+		if (items.get(item) == null) {
+			items.put(item, Qty);
 		} else {
-			Items.put(item, Items.get(item) + Qty);
+			items.put(item, items.get(item) + Qty);
 		}
 	}
 
@@ -138,13 +139,13 @@ public class Order {
 	 * @return a boolean which shows whether the item was successfully removed the item or not
 	 */
 	public boolean removeItems(MenuItem item, int qty) {
-		if (Items.get(item) == null || Items.get(item) < qty) {
+		if (items.get(item) == null || items.get(item) < qty) {
 			return false;
-		} else if (Items.get(item) < qty || Items.get(item) == qty) {
-			Items.remove(item);
+		} else if (items.get(item) < qty || items.get(item) == qty) {
+			items.remove(item);
 			return true;
 		} else {
-			Items.put(item, Items.get(item) - qty);
+			items.put(item, items.get(item) - qty);
 			return true;
 		}
 	}
@@ -152,15 +153,15 @@ public class Order {
 	/**
 	 * To print this order to showing the Order ID table ID and the quantity of menu items and their respective item ID in this order
 	 */
-	public void PrintOrder() {
+	public void printOrder() {
 		System.out.println("==============================");
 		System.out.print("Order ID: ");
 		System.out.println(this.getOrderID());
 		System.out.print("Table ID: ");
 		System.out.println(this.getTableID());
 		System.out.println("Qty || MenuItem || Item ID");
-		for (MenuItem i : Items.keySet()) {
-			System.out.println(Items.get(i) + " " + i.getName() + " " + i.getID());
+		for (MenuItem i : items.keySet()) {
+			System.out.println(items.get(i) + " " + i.getName() + " " + i.getID());
 		}
 		System.out.println("==============================");
 	}
@@ -169,36 +170,36 @@ public class Order {
 	 * To calculate the total price of this order including discounts without tax to be shown in the receipt
 	 * @param discount the amount of discount that is included in this 
 	 */
-	public void CalculateTotalPriceWithoutTax(double discount) {
+	public void calculateTotalPriceWithoutTax(double discount) {
 		double price = 0;
-		for (MenuItem i : Items.keySet()) {
-			price += i.getPrice() * Items.get(i);
+		for (MenuItem i : items.keySet()) {
+			price += i.getPrice() * items.get(i);
 		}
-		this.Discount = price * discount;
-		this.TotalPriceWithoutTax = price - this.Discount;
+		this.discount = price * discount;
+		this.totalPriceWithoutTax = price - this.discount;
 	}
 	/**
 	 * Calculate the service tax for this order to be shown in the receipt
 	 */
-	public void CalculateServiceTax() {
+	public void calculateServiceTax() {
 		double tax = 0;
-		tax += this.TotalPriceWithoutTax * 0.07;
-		this.ServiceTax = tax;
+		tax += this.totalPriceWithoutTax * 0.07;
+		this.serviceTax = tax;
 	}
 	/**
 	 * Calculate the GST for this order to be shown in the receipt
 	 */
-	public void CalculateGST() {
+	public void calculateGST() {
 		double tax = 0;
-		tax += this.TotalPriceWithoutTax * 0.1;
+		tax += this.totalPriceWithoutTax * 0.1;
 		this.GST = tax;
 	}
 	/**
 	 * calculate the total price of this order including tax and discounts to be shown in the receipt and factor in all the discounts 
 	 * of this order
 	 */
-	public void CalculateTotalPrice() {
-		double price = this.GST + this.ServiceTax + this.TotalPriceWithoutTax;
-		this.TotalPriceWithTax = price;
+	public void calculateTotalPrice() {
+		double price = this.GST + this.serviceTax + this.totalPriceWithoutTax;
+		this.totalPriceWithTax = price;
 	}
 }

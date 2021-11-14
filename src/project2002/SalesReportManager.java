@@ -4,7 +4,9 @@ package project2002;
 import project2002.Restaurant.UIType;
 /**
  * a sales report manager to help link the sales report user interface and the sales report 
- * TODO: claim your class pls
+ * @author Jensen Lim
+ * @version 1.0
+ * @since 2021-11-01
  */
 public class SalesReportManager extends Manager {
 	/**
@@ -35,7 +37,7 @@ public class SalesReportManager extends Manager {
 	 * @param order the order that the user wants to place into the report
 	 */
 	static public void addOrder(Order order) {
-		report.InsertOrder(order);
+		report.insertOrder(order);
 	}
 	/**
 	 * To print the yearly report of a chosen year
