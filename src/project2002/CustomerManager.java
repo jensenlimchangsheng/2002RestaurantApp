@@ -14,15 +14,30 @@ import project2002.Restaurant.handlerType;
  */
 
 public class CustomerManager extends Manager {
+	/**
+	 * To create and close orders for the customer
+	 */
 	OrderHandler order;
+
+	/**
+	 * To assign the necessary tables to the customer
+	 */
 	TableHandler table;
+
+	/**
+	 * To check if the customer has made a prior reservation
+	 */
 	ReservationHandler reservation;
+
+	/**
+	 * To interact with the user to get inputs
+	 */
 	CustomerUI customerUI;
 
 	/**
 	 * Constructor for customer manager
 	 * 
-	 * @return customer manager object
+	 * @return customermanager object
 	 */
 	public CustomerManager() {
 		handlerList.add(handlerType.ORDER);
@@ -32,11 +47,12 @@ public class CustomerManager extends Manager {
 	}
 
 	/**
-	 * Creating an order for a walk in customer
+	 * Creating an order for a walk in customer and assigns a staff member to the
+	 * customer
 	 * 
-	 * @param staff_name
 	 * @param pax
 	 * @param staff_name
+	 * @param staff_id
 	 * @param staff_title
 	 * @return order id that is linked to the new customer
 	 */
@@ -53,10 +69,11 @@ public class CustomerManager extends Manager {
 	}
 
 	/**
-	 * Creating an order for a customer with a reservation
+	 * Creating an order for a customer with a prior reservation and assigns a staff
+	 * member to the customer
 	 * 
-	 * @param staff_name
 	 * @param pax
+	 * @param staff_id
 	 * @param staff_name
 	 * @param staff_title
 	 * @param customer_name
@@ -70,6 +87,7 @@ public class CustomerManager extends Manager {
 		LocalDateTime time = LocalDateTime.now();
 		if (reservation.checkReservation(cust, time)) { // Check if the customer has made a reservatiion
 			String tableID = table.seatBookedCustomer(pax);
+			System.out.printf("The following table has been assigned %s\n", tableID);
 			reservation.removeReservation(cust, time); // remove the reservation
 			orderID = order.createOrder(tableID, staff);
 		} else
@@ -78,15 +96,24 @@ public class CustomerManager extends Manager {
 	}
 
 	/**
-	 * Closes the order for a customer.
+	 * Closes the order for a customer and checks if there are any discount
+	 * available for the customer
+	 * 
 	 * 
 	 * @param orderID
+	 * @return -1 if invalid order and 0 if valid order
 	 */
-	void closeCustomerOrder(int orderID) {
+	int closeCustomerOrder(int orderID) {
 		Double discount = customerUI.getDiscount();
 		Order closedOrder = order.printInvoice(orderID, discount);
-		SalesReportManager.addOrder(closedOrder);
-		table.unseatCustomer(closedOrder.getTableID());
+		if (closedOrder == null) {
+			System.out.println("Invalid Order ID");
+			return -1;
+		} else {
+			SalesReportManager.addOrder(closedOrder);
+			table.unseatCustomer(closedOrder.getTableID());
+			return 0;
+		}
 	}
 
 	/**

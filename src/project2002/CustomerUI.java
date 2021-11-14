@@ -4,6 +4,15 @@ import java.util.Scanner;
 
 import project2002.Restaurant.UIType;
 
+/**
+ * CustomerUI class for interacting with the user with regards to the customer
+ * options
+ * 
+ * @author Zhi Kai
+ * @version 1.0
+ * @since 2021-11-09
+ */
+
 public class CustomerUI extends UI {
 	/**
 	 * The customer manager for this customer UI.
@@ -13,7 +22,7 @@ public class CustomerUI extends UI {
 	/**
 	 * Constructor for customer UI.
 	 * 
-	 * @param scanner
+	 * @param scanner used to retrieve user inputs
 	 * @return customerUI
 	 */
 	public CustomerUI(Scanner scanner) {
@@ -59,8 +68,10 @@ public class CustomerUI extends UI {
 				break;
 			case 3:
 				orderID = this.getInt("Please enter order ID: ");
-				customerManager.closeCustomerOrder(orderID);
-				System.out.printf("The order %d has been closed.\n", orderID);
+				int temp = customerManager.closeCustomerOrder(orderID);
+				if (temp == 0) {
+					System.out.printf("The order %d has been closed.\n", orderID);
+				}
 				break;
 			case 4:
 				break;
@@ -72,7 +83,8 @@ public class CustomerUI extends UI {
 	}
 
 	/**
-	 * to get the amount of discount for a certain customer
+	 * to get the amount of discount for a certain customer by checking for
+	 * membership status as well as additional discounts
 	 * 
 	 * @return a double which shows the amount of discount of a customer
 	 */

@@ -1,5 +1,13 @@
 package project2002;
 
+/**
+ * Staff class that will contain staff details
+ * 
+ * @author Zhi Kai
+ * @version 1.0
+ * @since 2021-11-07
+ */
+
 public class Staff {
 
 	/**
@@ -18,7 +26,7 @@ public class Staff {
 	private String title;
 
 	/**
-	 * Constructor for the customer class
+	 * Creates a staff object using the name, id and title
 	 * 
 	 * @param staffName
 	 * @param staffID
@@ -32,16 +40,7 @@ public class Staff {
 	}
 
 	/**
-	 * Setter for staff name
-	 * 
-	 * @param staffName
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * Getter for staff name
+	 * To retrieve the staff id to be displayed in the order invoice
 	 * 
 	 * @return staffID
 	 */
@@ -50,16 +49,7 @@ public class Staff {
 	}
 
 	/**
-	 * Setter for staff id
-	 * 
-	 * @param staffID
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	/**
-	 * Getter for staff title
+	 * To retrieve the staff title to be displayed in the order invoice
 	 * 
 	 * @return staffTitle
 	 */
@@ -68,16 +58,7 @@ public class Staff {
 	}
 
 	/**
-	 * Setter for title
-	 * 
-	 * @param staffTitle
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	/**
-	 * Getter for staff name
+	 * To retrieve the staff name to be displayed in the order invoice
 	 * 
 	 * @return staffName
 	 */

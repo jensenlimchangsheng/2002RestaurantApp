@@ -1,5 +1,12 @@
 package project2002;
 
+/**
+ * Customer class to store customer information.
+ * 
+ * @author Zhi Kai
+ * @version 1.0
+ * @since 2021-11-07
+ */
 public class Customer {
 
 	/**
@@ -12,7 +19,7 @@ public class Customer {
 	private int number;
 
 	/**
-	 * Constructor for the customer class
+	 * Creates a customer object using the name and phone number
 	 * 
 	 * @param customerName
 	 * @param phoneNumber
@@ -24,7 +31,7 @@ public class Customer {
 	}
 
 	/**
-	 * Getter for the customer name
+	 * Provide the customer name for verification purposes
 	 * 
 	 * @return Customer name
 	 */
@@ -33,7 +40,7 @@ public class Customer {
 	}
 
 	/**
-	 * Getter for the phone number
+	 * Provide the customer number for verification purposes
 	 * 
 	 * @return Phone number
 	 */
@@ -42,9 +49,10 @@ public class Customer {
 	}
 
 	/**
-	 * Check if customer object is equal to parameter
+	 * Check if customer object is equal to the object passed by comparing the
+	 * associated name and phone number
 	 * 
-	 * @param object
+	 * @param object customer object
 	 * @return True if customer object is equal, False if customer object is not
 	 *         equal
 	 */

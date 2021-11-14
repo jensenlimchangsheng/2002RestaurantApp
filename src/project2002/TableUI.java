@@ -108,7 +108,9 @@ public class TableUI extends UI {
 				validDateTime = cDateTime.plusHours(1);
 
 				if (dateTime.isBefore(validDateTime)) {
-					System.out.println("Reservations have to be made at least 1 hour after system time.\nCurrent system time is: " + cDateTime);
+					System.out.println(
+							"Reservations have to be made at least 1 hour after system time.\nCurrent system time is: "
+									+ cDateTime);
 				} else {
 					switch (tableManager.addReservation(pax, name, number, dateTime)) {
 					case 1:
@@ -174,7 +176,9 @@ public class TableUI extends UI {
 				validDateTime = cDateTime.plusHours(1);
 
 				if (newDateTime.isBefore(validDateTime)) {
-					System.out.println("Reservations have to be made at least 1 hour after system time.\nCurrent system time is: " + cDateTime);
+					System.out.println(
+							"Reservations have to be made at least 1 hour after system time.\nCurrent system time is: "
+									+ cDateTime);
 				} else {
 					switch (tableManager.updateReservation(name, number, dateTime, newPax, newDateTime)) {
 					case 1:
@@ -205,16 +209,10 @@ public class TableUI extends UI {
 				}
 
 				cDateTime = getCurrDateTime();
-				validDateTime = cDateTime.plusHours(1);
-
-				if (dateTime.isBefore(validDateTime)) {
-					System.out.println("Reservation is overdue.\nCurrent system time is: " + cDateTime);
+				if (tableManager.checkReservation(name, number, dateTime)) {
+					System.out.println("Reservation for " + name + " at " + dateTime + " found.");
 				} else {
-					if (tableManager.checkReservation(name, number, dateTime)) {
-						System.out.println("Reservation for " + name + " at " + dateTime + " found.");
-					} else {
-						System.out.println("Reservation for " + name + " at " + dateTime + " not found.");
-					}
+					System.out.println("Reservation for " + name + " at " + dateTime + " not found.");
 				}
 				break;
 			case 9: // Reserve Tables For The Day

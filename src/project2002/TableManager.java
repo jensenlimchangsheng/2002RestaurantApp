@@ -3,17 +3,16 @@ package project2002;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-
 import project2002.Restaurant.UIType;
 import project2002.Restaurant.handlerType;
 
 /**
  * TableManager class for managing table bookings for the Restaurant.
  * 
- * @author Jermyn, Shun Yao
+ * @author Jermyn
+ * @author Shun Yao
  * @version 1.0
- * @since 2021-11-07
+ * @since 2021-11-08
  */
 
 public class TableManager extends Manager {
@@ -162,7 +161,7 @@ public class TableManager extends Manager {
 		String strDateTime = dateTime.format(dtFormat);
 
 		dateTime = LocalDateTime.parse(strDateTime, dtFormat);
-		
+
 		ArrayList<Reservation> reservationList = reservationHandler.retrieveBeforeReservationList(dateTime);
 		if (reservationList == null) {
 			return null;

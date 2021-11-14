@@ -1,8 +1,9 @@
 =============================================
 These are the following items in 2021-11-12
 Qty || MenuItem
-1 Lunch Special
-                     Total Revenue: $42.12
-               Total GST Collected: $3.60
-    Total Service Charge Collected: $2.52
+2 Lunch Special
+1 The Feather Blade Steak
+                     Total Revenue: $103.90
+               Total GST Collected: $8.88
+    Total Service Charge Collected: $6.22
 =============================================
