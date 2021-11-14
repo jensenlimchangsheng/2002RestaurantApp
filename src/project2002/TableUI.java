@@ -241,6 +241,10 @@ public class TableUI extends UI {
 		} while (choice != 11);
 	}
 
+	/**
+	 * Returns the system time now as a LocalDateTime object
+	 * @return current system time as a LocalDateTime object
+	 */
 	LocalDateTime getCurrDateTime() {
 		LocalDateTime cDateTime = LocalDateTime.now();
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -250,6 +254,12 @@ public class TableUI extends UI {
 		return cDateTime;
 	}
 
+	/**
+	 * Parse a date time string as input by the user.
+	 * @param update True if called again
+	 * @return LocalDateTime if successful, else
+	 * TODO: @zhikai can help verify?
+	 */
 	LocalDateTime getDateTime(boolean update) {
 		LocalDateTime dateTime = null;
 		String dateString = null;
