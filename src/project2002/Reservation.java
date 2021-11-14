@@ -10,18 +10,37 @@ package project2002;
 
 public class Reservation {
 
+	/**
+	 * Track customer information for the reservation
+	 */
     private Customer customer;
+    
+	/**
+	 * Number of customers for this reservation
+	 */
     private int pax;
 
+	/**
+	 * Initialize reservation
+     * 
+     * @param pax The number of customers for this reservation
+     * @param pax Customer information for this reservation
+	 */
     public Reservation(int pax, Customer customer) {
         this.pax = pax;
         this.customer = customer;
     }
 
+    /**
+	 * Getter function for customer information
+	 */
     public Customer getCustomer() {
         return customer;
     }
 
+    /**
+	 * Getter function for the number of pax. 
+	 */
     public int getPax() {
         return pax;
     }
