@@ -34,8 +34,8 @@ public class TableManager extends Manager {
 	 * Adds a table to the restaurant with default status "VACANT". This table can
 	 * now be booked.
 	 * 
-	 * @param tableID
-	 * @param pax
+	 * @param tableID String tableID used to uniquely identify a table 
+	 * @param pax int pax to indicate the capacity of the table
 	 * @return tableID or error string.
 	 */
 	public String addNewTable(String tableID, int pax) {
@@ -49,7 +49,7 @@ public class TableManager extends Manager {
 	/**
 	 * Removes a table from the restaurant. Only permitted if the table is "VACANT".
 	 * 
-	 * @param tableID
+	 * @param tableID String tableID used to uniquely identify a table 
 	 * @return table removal status code: 1 if table is removed. 0 if table is not
 	 *         present -1 if table is currently booked or occupied.
 	 */
@@ -60,8 +60,8 @@ public class TableManager extends Manager {
 	/**
 	 * Update table pax size. This allows the table size to be increased.
 	 * 
-	 * @param tableID
-	 * @param pax
+	 * @param tableID String tableID used to uniquely identify a table 
+	 * @param pax int pax to indicate the capacity of the table
 	 * @return table update status code: 1 if table is updated. 0 if table is not
 	 *         present -1 if table is currently booked or occupied, -2 for fatal
 	 *         error (unexpected result)
