@@ -87,7 +87,7 @@ public class TableHandler extends Handler {
 	 * Assumes that for pax of size n, they can only be seated at tables of size (n+
 	 * n%2).
 	 * 
-	 * @param pax
+	 * @param pax      number of guests to be seated
 	 * @param required status to match
 	 * @param desired  status to set to
 	 * @return TableID if table status setting is successful, else "TableNotFound"
@@ -109,7 +109,7 @@ public class TableHandler extends Handler {
 	 * Assumes that for pax of size n, they can only be seated at tables of size (n+
 	 * n%2).
 	 * 
-	 * @param pax
+	 * @param pax number of guests to be seated
 	 * @return TableID if the table is assigned, else "NoTablesAvailable"
 	 */
 	public String seatNewCustomer(int pax) {
@@ -144,8 +144,8 @@ public class TableHandler extends Handler {
 	/**
 	 * Adds a new possible table to the list of all tables.
 	 * 
-	 * @param tableID
-	 * @param pax
+	 * @param tableID TableID of table to be added
+	 * @param pax     number of guests to be seated
 	 * @return whether table adding is successful - any present table with the same
 	 *         ID will return false.
 	 */
@@ -159,7 +159,7 @@ public class TableHandler extends Handler {
 	 * Removes a table from tables that can be booked. Requires the table to be
 	 * "VACANT" at the moment.
 	 * 
-	 * @param tableID
+	 * @param tableID TableID of table to be removed
 	 * @return 1 if table is removed. 0 if table is not present -1 if table is
 	 *         currently booked or occupied,
 	 */
@@ -177,8 +177,8 @@ public class TableHandler extends Handler {
 	 * Update number of pax available for all tables, present and future. Requires
 	 * the table to be "VACANT" at the moment.
 	 * 
-	 * @param tableID
-	 * @param pax
+	 * @param tableID tableID of tabble to be removed
+	 * @param pax     number of guests to be seated
 	 * @return 1 if table is updated. 0 if table is not present -1 if table is
 	 *         currently booked or occupied, -2 for fatal error (unexpected result)
 	 */
@@ -200,7 +200,8 @@ public class TableHandler extends Handler {
 	 * Reserves tables for the timeslot. For each timeslot, an appropriate table
 	 * will be found and set to "RESERVED".
 	 * 
-	 * @param reservationList
+	 * @param reservationList ArrayList of Reservation objects to set aside tables
+	 *                        for
 	 * @return ArrayList of successfully reserved table IDs.
 	 */
 	public ArrayList<String> reserveTables(ArrayList<Reservation> reservationList) {
@@ -226,7 +227,8 @@ public class TableHandler extends Handler {
 	/**
 	 * Reverses the effects of reserveTables by unreserving them
 	 * 
-	 * @param reservationList
+	 * @param reservationList ArrayList of Reservation objects to remove their
+	 *                        reserved tables for
 	 * @return ArrayList of unreserved table IDs.
 	 */
 	public ArrayList<String> removeReservations(ArrayList<Reservation> reservationList) {
