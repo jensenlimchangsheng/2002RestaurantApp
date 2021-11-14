@@ -13,8 +13,8 @@ import project2002.Restaurant.handlerType;
  * ReservationHandler class for managing reservations of the restaurant
  * 
  * @author Jermyn
- * @version 1.0
- * @since 2021-11-02
+ * @version 2.0
+ * @since 2021-11-14
  */
 
 public class ReservationHandler extends Handler {
@@ -43,7 +43,7 @@ public class ReservationHandler extends Handler {
 		this.reservations = new TreeMap<LocalDateTime, ArrayList<Reservation>>();
 
 		/**
-		 * initialize some data.
+		 * initialize dummy variables
 		 */
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
 		LocalDateTime overdue = LocalDateTime.parse("12/11/2021 23", format);
@@ -84,22 +84,23 @@ public class ReservationHandler extends Handler {
 
 		this.availTableSizes = new TreeMap<LocalDateTime, int[]>();
 
-		int[] tableSizes1 = { 1, 3, 0, 1, 1 };
-		int[] tableSizes2 = { 2, 2, 0, 0, 0 };
-		this.availTableSizes.put(full, tableSizes2);
-		this.availTableSizes.put(toremove, tableSizes2);
+		int[] tableSizes = { 2, 2, 0, 0, 0 };
+		this.availTableSizes.put(full, tableSizes);
+		this.availTableSizes.put(toremove, tableSizes);
 
 		type = handlerType.RESERVATION;
 	}
 
 	/**
-	 * Adds a new reservation to the restaurant
+	 * Adds a new reservation to the restaurant. 
+	 * Checks if the datetime exists as a key in existing reservations. 
+	 * if it doesn't exist, the arraylist of reservations will be initialized 
+	 * Subsequently, the values will be appended to the arraylist, reservationList accordingly
 	 * 
 	 * @param cust
 	 * @param pax
 	 * @param dateTime
-	 * @return whether adding a reservation is successful - False if reservations
-	 *         are maxed, True otherwise.
+	 * @return -1 if invalid pax size, -2 if the reservations are full and 1 for success. 
 	 */
 	public int addReservation(Customer cust, int pax, LocalDateTime dateTime) {
 		ArrayList<Reservation> reservationList;
@@ -129,7 +130,7 @@ public class ReservationHandler extends Handler {
 	}
 
 	/**
-	 * Checks if a customer has made a reservation at the given time
+	 * Checks if a customer has made a reservation at the given datetime
 	 * 
 	 * @param cust
 	 * @param dateTime
@@ -152,11 +153,11 @@ public class ReservationHandler extends Handler {
 	}
 
 	/**
-	 * Remove a customer's reservation at the given time
+	 * Cancel a customer's reservation given their information and reservation datetime.
 	 * 
 	 * @param cust
 	 * @param dateTime
-	 * @return whether removal of reservation is succsesful
+	 * @return the pax size of the reservation or -1 if reservation doesn't exist. 
 	 */
 	public int removeReservation(Customer cust, LocalDateTime dateTime) {
 		ArrayList<Reservation> reservationList;
@@ -178,7 +179,7 @@ public class ReservationHandler extends Handler {
 	}
 
 	/**
-	 * Retrieve list of reservation
+	 * Retrieve list of reservation at current datetime
 	 * 
 	 * @param dateTime
 	 * @return ArrayList<Reservation> of all reservations at the current dateTime
@@ -188,7 +189,7 @@ public class ReservationHandler extends Handler {
 	}
 
 	/**
-	 * Retrieve list of reservation
+	 * Retrieve list of reservation 1 hour after current datetime
 	 * 
 	 * @param dateTime
 	 * @return ArrayList<Reservation> of all reservations 1 hour before c1urrent
@@ -201,10 +202,10 @@ public class ReservationHandler extends Handler {
 	}
 
 	/**
-	 * Retrieve list of reservation
+	 * Retrieve list of reservation 1 hour before current datetime
 	 * 
 	 * @param dateTime
-	 * @return ArrayList<Reservation> of all reservations 1 hour after current
+	 * @return ArrayList<Reservation> of all reservations 1 before after current
 	 *         dateTime
 	 */
 	public ArrayList<Reservation> retrieveBeforeReservationList(LocalDateTime dateTime) {
