@@ -6,7 +6,15 @@ import project2002.Restaurant.UIType;
 
 /**
  * CustomerUI class for interacting with the user with regards to the customer
- * options
+ * options. This includes:
+ * 
+ * 1. Creating order for new customer
+ * 
+ * 2. Creating order for customer with prior reservation
+ * 
+ * 3. Closing a customer order
+ * 
+ * 4. Back
  * 
  * @author Zhi Kai
  * @version 1.0
@@ -135,7 +143,7 @@ public class CustomerUI extends UI {
 	/**
 	 * Assigns customer manager to UI;
 	 * 
-	 * @param m
+	 * @param m customer manager
 	 */
 	@Override
 	protected void assignUIManager(Manager m) {

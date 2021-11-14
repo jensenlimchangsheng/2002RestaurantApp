@@ -3,7 +3,6 @@ package project2002;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-// import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -41,13 +40,25 @@ import project2002.Restaurant.UIType;
  */
 public class TableUI extends UI {
 
+	/**
+	 * The table manager for this table UI.
+	 */
 	private TableManager tableManager;
 
+	/**
+	 * Constructor for table UI.
+	 * 
+	 * @param scanner used to retrieve user inputs
+	 * @return tableUI
+	 */
 	public TableUI(Scanner scanner) {
 		super(scanner);
 		this.type = UIType.TABLE;
 	}
 
+	/**
+	 * Printing table options.
+	 */
 	@Override
 	protected void printOptions() {
 		int choice = 0;
@@ -288,50 +299,58 @@ public class TableUI extends UI {
 	/**
 	 * Parse a date time string as input by the user.
 	 * 
-	 * @param update True if called again
-	 * @return LocalDateTime if successful, else TODO: @zhikai can help verify?
+	 * @param update prints a different prompt if update is true
+	 * @return LocalDateTime
 	 */
 	LocalDateTime getDateTime(boolean update) {
+		boolean validInput = false;
 		LocalDateTime dateTime = null;
 		String dateString = null;
 		String timeString = null;
+		while (!validInput) {
+			if (!update) {
+				dateString = getString("Please enter a date dd/MM/yyyy");
+				timeString = getString("Please enter a time HH");
+			} else {
+				dateString = getString("Please enter a new date dd/MM/yyyy");
+				timeString = getString("Please enter a new time HH");
+			}
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
+			// Try block to check for exceptions
 
-		if (!update) {
-			dateString = getString("Please enter a date dd/MM/yyyy");
-			timeString = getString("Please enter a time HH");
-		} else {
-			dateString = getString("Please enter a new date dd/MM/yyyy");
-			timeString = getString("Please enter a new time HH");
+			try {
+
+				// Getting the Date from String
+				dateTime = LocalDateTime.parse(dateString + " " + timeString, format);
+				validInput = true;
+			}
+
+			// Block 1
+			// Catch block to handle exceptions occuring
+			// if the String pattern is invalid
+			catch (IllegalArgumentException e) {
+
+				// Display the exception
+				System.out.println("Exception: " + e);
+			}
+
+			// Block 2
+			// If the String was unable to be parsed
+			catch (DateTimeParseException e) {
+
+				// Display the exception
+				System.out.println("Exception: " + e);
+			}
 		}
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
-		// Try block to check for exceptions
 
-		try {
-
-			// Getting the Date from String
-			dateTime = LocalDateTime.parse(dateString + " " + timeString, format);
-
-		}
-
-		// Block 1
-		// Catch block to handle exceptions occuring
-		// if the String pattern is invalid
-		catch (IllegalArgumentException e) {
-
-			// Display the exception
-			System.out.println("Exception: " + e);
-		}
-
-		// Block 2
-		// If the String was unable to be parsed
-		catch (DateTimeParseException e) {
-
-			// Display the exception
-			System.out.println("Exception: " + e);
-		}
 		return dateTime;
 	}
 
+	/**
+	 * Assigns table manager to UI;
+	 * 
+	 * @param m table manager
+	 */
 	@Override
 	protected void assignUIManager(Manager m) {
 		tableManager = (TableManager) m;

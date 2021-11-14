@@ -3,8 +3,9 @@ package project2002;
 import java.util.Scanner;
 
 import project2002.Restaurant.UIType;
+
 /**
- * TODO: claim your class pls 
+ * TODO: claim your class pls
  */
 public class SalesReportUI extends UI {
 	/**
@@ -12,9 +13,9 @@ public class SalesReportUI extends UI {
 	 */
 	private SalesReportManager srManager;
 
-
 	/**
 	 * constructor for this sales report UI
+	 * 
 	 * @param scanner the scanner that we want to input into our UI
 	 */
 	public SalesReportUI(Scanner scanner) {
@@ -38,8 +39,8 @@ public class SalesReportUI extends UI {
 			case 1:
 				y = this.getInt("Which Year would you like to print?");
 				m = this.getInt("Which month would you like to print?\n" + "1. January\n" + "2. Feburary\n"
-				+ "3. March\n" + "4. April\n" + "5. May\n" + "6. June\n" + "7. July\n" + "8. August\n"
-				+ "9. September\n" + "10. October\n" + "11. November\n" + "12. December");
+						+ "3. March\n" + "4. April\n" + "5. May\n" + "6. June\n" + "7. July\n" + "8. August\n"
+						+ "9. September\n" + "10. October\n" + "11. November\n" + "12. December");
 				while (m > 12 || m < 1) {
 					m = this.getInt("Invalid input please try again");
 				}
