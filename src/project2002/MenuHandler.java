@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Represents Menu Handler from the restaurant.
+ * Represents Menu Handler from the restaurant where all operations of menu item and promoset are done here.
  * 
  * @author Jiam Tzi Yu
  * @version 1.0
@@ -173,7 +173,7 @@ public class MenuHandler extends Handler {
 	}
 
 	/**
-	 * Prints the array of menu items.
+	 * Prints the array of menu items after sorting the menuID in order.
 	 */
 	public void printMenu() {
 		System.out.println(

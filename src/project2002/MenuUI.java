@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 import project2002.Restaurant.UIType;
 /**
-Represents each menu item from the restaurant.
-A menu item can consist of MAIN, SIDE, DRINK, DESSERT, PROMO.
+The user interface for users to perform actions regarding menu.
 @author Jiam Tzi Yu
 @version 1.0
 @since 2021-11-09
@@ -13,7 +12,7 @@ A menu item can consist of MAIN, SIDE, DRINK, DESSERT, PROMO.
 
 public class MenuUI extends UI {
 	/**
-	 * The menu manager for this menu UI.
+	 * The menu manager associated with this menu UI which bridges and coordinates the communication between menuUI and menuHandler.
 	 */
 	private MenuManager menuManager;
 
@@ -55,7 +54,7 @@ public class MenuUI extends UI {
 
 
 	/**
-	 * Printing menu options.
+	 * Printing menu options where there are 7 options: print menu, add/remove/update item, add/remove/update promo.
 	 */
 	public void printOptions() {
 		int choice = 0;
@@ -183,7 +182,7 @@ public class MenuUI extends UI {
 	}
 
 	/**
-	 * Assigns manager to UI;
+	 * Assigns manager to UI.
 	 * @param m
 	 */
 	protected void assignUIManager(Manager m) {
@@ -191,7 +190,7 @@ public class MenuUI extends UI {
 	}
 
 	/**
-	 * UI for updating menu items' attributes
+	 * A sub UI within Menu UI for updating menu items' attributes.
 	 * @param name This menu item's name.
 	 * @param ID This menu item's ID.
 	 */
