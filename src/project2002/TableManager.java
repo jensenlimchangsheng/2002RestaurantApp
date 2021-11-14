@@ -81,8 +81,7 @@ public class TableManager extends Manager {
 	 * @param number   phone number as a secondary tool for verification.
 	 * @param dateTime LocalDateTime object for which the reservation is booked for,
 	 *                 will be passed in by TableUI.
-	 * @return whether there reservation is successfully added. * TODO: what each
-	 *         status means
+	 * @return whether there reservation is successfully added. -1 suggests invaid pax size, -2 suggests reservation for new datetime is full, 1 suggest successful update
 	 */
 	public int addReservation(int pax, String name, int number, LocalDateTime dateTime) {
 		Customer cust = new Customer(name, number);
@@ -136,8 +135,8 @@ public class TableManager extends Manager {
 	 *                 will be passed in by TableUI.
 	 * @param newPax   new number of guests expected at the table
 	 * @param dateTime LocalDateTime object for which the reservation is booked for,
-	 *                 will be passed in by TableUI. TODO: what each status means
-	 * @return Reseration update status.
+	 *                 will be passed in by TableUI.
+	 * @return Reseration update status. -1 suggests invaid pax size, -2 suggests reservation for new datetime is full, 1 suggest successful update and -3 suggesets that old reservation cannot be removed.
 	 */
 	public int updateReservation(String name, int number, LocalDateTime dateTime, int newPax,
 			LocalDateTime newDateTime) {
@@ -155,8 +154,9 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Automatically update tables at given dateTime * TODO: is "given" the correct
-	 * word, do you want to elaborate?
+	 * Automatically reserve tables an hour after given dateTime (now). 
+	 * Extracts the reservation list 1 hour prior to current datetime. 
+	 * Removes these reservations as they have been overdue / lapsed. 
 	 * 
 	 * @return TableIDs that have been reserved.
 	 */
@@ -175,11 +175,13 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Automatically remove tables at given dateTime TODO: is "given" the correct
-	 * word, do you want to elaborate?
+	 * Automatically remove tables an hour before given dateTime (now). 
+	 * Extracts the reservation list 1 hour prior to current datetime. 
+	 * Removes these reservations as they have been overdue / lapsed. 
 	 * 
 	 * @return TableIDs that have been removed.
 	 */
+
 	public ArrayList<String> removeReservedTables() {
 		LocalDateTime dateTime = LocalDateTime.now();
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH");
