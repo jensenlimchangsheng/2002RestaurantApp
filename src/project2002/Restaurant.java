@@ -88,9 +88,7 @@ public class Restaurant {
 	 * Assigns the handlers to their respective managers
 	 */
 	private void assignHandler(ArrayList<Manager> mlist) {
-		System.out.println("Assigning managers:");
 		for (Manager m : mlist) {
-			System.out.println(m.getUIType().toString());
 			ArrayList<handlerType> hlist = m.getHandlerList();
 			for (handlerType h : hlist) {
 				m.assignHandler(handlerdict.get(h));
