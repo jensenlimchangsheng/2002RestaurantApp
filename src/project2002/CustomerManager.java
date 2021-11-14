@@ -37,7 +37,7 @@ public class CustomerManager extends Manager {
 	/**
 	 * Constructor for customer manager
 	 * 
-	 * @return customermanager object
+	 * @return CustomerManager object
 	 */
 	public CustomerManager() {
 		handlerList.add(handlerType.ORDER);
@@ -60,7 +60,7 @@ public class CustomerManager extends Manager {
 		int orderID = 0;
 		Staff staff = new Staff(name, id, title);
 		String tableID = table.seatNewCustomer(pax); // assigns a table and returns the tableID
-		if (tableID == "NoTablesAvailable")
+		if (tableID.equals("NoTablesAvailable"))
 			return 0;
 		else
 			System.out.printf("The following table has been assigned %s\n", tableID);
