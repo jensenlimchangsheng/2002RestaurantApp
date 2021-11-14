@@ -20,6 +20,9 @@ public class TableManager extends Manager {
 	ReservationHandler reservationHandler;
 	TableUI tableUI;
 
+	/**
+	 * Constructor for table manager
+	 */
 	public TableManager() {
 
 		handlerList.add(handlerType.TABLE);
@@ -28,7 +31,8 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Adds a table to the restaurant
+	 * Adds a table to the restaurant with default status "VACANT". This table can
+	 * now be booked.
 	 * 
 	 * @param tableID
 	 * @param pax
@@ -36,41 +40,49 @@ public class TableManager extends Manager {
 	 */
 	public String addNewTable(String tableID, int pax) {
 		String result = tableHandler.addNewTable(tableID, pax);
-		if (result == tableID) {
+		if (result.equals(tableID)) {
 			reservationHandler.addTableToSize(pax);
 		}
 		return result;
 	}
 
 	/**
-	 * Removes a table from the restaurant
+	 * Removes a table from the restaurant. Only permitted if the table is "VACANT".
 	 * 
 	 * @param tableID
-	 * @return table removal status
+	 * @return table removal status code: 1 if table is removed. 0 if table is not
+	 *         present -1 if table is currently booked or occupied.
 	 */
 	public int removeTable(String tableID) {
 		return tableHandler.removeTable(tableID);
 	}
 
 	/**
-	 * Update table pax
+	 * Update table pax size. This allows the table size to be increased.
 	 * 
 	 * @param tableID
 	 * @param pax
-	 * @return Table update status
+	 * @return table update status code: 1 if table is updated. 0 if table is not
+	 *         present -1 if table is currently booked or occupied, -2 for fatal
+	 *         error (unexpected result)
 	 */
 	public int updateTable(String tableID, int pax) {
 		return tableHandler.updateTable(tableID, pax);
 	}
 
 	/**
-	 * Add reservation
+	 * Add reservation with customer's details, table size required and the
+	 * associated date time.
 	 * 
-	 * @param pax
-	 * @param name
-	 * @param number
-	 * @param dateTime
-	 * @return whether there reservation is successfully added.
+	 * @param pax      number of customers to be seated. Can be both odd or even
+	 *                 values, classes will round up to nearest even number.
+	 * @param name     customer name string to use when retrival for the record.
+	 *                 Needs to be exact.
+	 * @param number   phone number as a secondary tool for verification.
+	 * @param dateTime LocalDateTime object for which the reservation is booked for,
+	 *                 will be passed in by TableUI.
+	 * @return whether there reservation is successfully added. * TODO: what each
+	 *         status means
 	 */
 	public int addReservation(int pax, String name, int number, LocalDateTime dateTime) {
 		Customer cust = new Customer(name, number);
@@ -83,10 +95,12 @@ public class TableManager extends Manager {
 	/**
 	 * Remove reservation and update table status to vacant.
 	 * 
-	 * @param name
-	 * @param number
-	 * @param dateTime
-	 * @return whether there reservation is successfully removed.
+	 * @param name     customer name string to use when retrival for the record.
+	 *                 Needs to be exact.
+	 * @param number   phone number as a secondary tool for verification.
+	 * @param dateTime LocalDateTime object for which the reservation is booked for,
+	 *                 will be passed in by TableUI.
+	 * @return the number of guests originally booked for if successful, else -1.
 	 */
 	public int removeReservation(String name, int number, LocalDateTime dateTime) {
 		Customer cust = new Customer(name, number);
@@ -99,9 +113,12 @@ public class TableManager extends Manager {
 	/**
 	 * Checks if a customer has made a reservation at the given dateTime
 	 * 
-	 * @param cust
-	 * @param dateTime
-	 * @return whether there is a reservation - True of reservation exists, False
+	 * @param name     customer name string to use when retrival for the record.
+	 *                 Needs to be exact.
+	 * @param number   phone number as a secondary tool for verification.
+	 * @param dateTime LocalDateTime object for which the reservation is booked for,
+	 *                 will be passed in by TableUI.
+	 * @return whether there is a reservation - True if reservation exists, False
 	 *         otherwise.
 	 */
 	public boolean checkReservation(String name, int number, LocalDateTime dateTime) {
@@ -112,8 +129,14 @@ public class TableManager extends Manager {
 	/**
 	 * Update customer reservation
 	 * 
-	 * @param cust
-	 * @param dateTime
+	 * @param name     customer name string to use when retrival for the record.
+	 *                 Needs to be exact.
+	 * @param number   phone number as a secondary tool for verification.
+	 * @param dateTime LocalDateTime object for which the reservation is booked for,
+	 *                 will be passed in by TableUI.
+	 * @param newPax   new number of guests expected at the table
+	 * @param dateTime LocalDateTime object for which the reservation is booked for,
+	 *                 will be passed in by TableUI. TODO: what each status means
 	 * @return Reseration update status.
 	 */
 	public int updateReservation(String name, int number, LocalDateTime dateTime, int newPax,
@@ -132,7 +155,8 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Automatically update tables at given dateTime
+	 * Automatically update tables at given dateTime * TODO: is "given" the correct
+	 * word, do you want to elaborate?
 	 * 
 	 * @return TableIDs that have been reserved.
 	 */
@@ -151,7 +175,8 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Automatically remove tables at given dateTime
+	 * Automatically remove tables at given dateTime TODO: is "given" the correct
+	 * word, do you want to elaborate?
 	 * 
 	 * @return TableIDs that have been removed.
 	 */
@@ -170,10 +195,10 @@ public class TableManager extends Manager {
 	}
 
 	/**
-	 * Return table availability for a given pax size
+	 * Return current table availability for a given pax size
 	 * 
-	 * @param pax
-	 * @return table availability.
+	 * @param pax number of customers expected.
+	 * @return True if table is available, else false.
 	 */
 	boolean checkTableAvailability(int pax) {
 		return tableHandler.checkAvailability(pax);
