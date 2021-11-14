@@ -9,6 +9,36 @@ import java.util.ArrayList;
 
 import project2002.Restaurant.UIType;
 
+/**
+ * TableUI for managing user interactions related to tables. This includes:
+ * 
+ * 1. Print All Tables
+ * 
+ * 2. Add New Tables
+ * 
+ * 3. Remove Table
+ * 
+ * 4. Update Table
+ * 
+ * 5. Book Table
+ * 
+ * 6. Cancel Reservation
+ * 
+ * 7. Update Reservation
+ * 
+ * 8. Check Reservation
+ * 
+ * 9. Reserve Tables
+ * 
+ * 10. Remove Reserved Tables
+ * 
+ * 11. Back
+ * 
+ * @author Shun Yao
+ * @author Jermyn
+ * @version 1.0
+ * @since 2021-11-07
+ */
 public class TableUI extends UI {
 
 	private TableManager tableManager;
@@ -243,6 +273,7 @@ public class TableUI extends UI {
 
 	/**
 	 * Returns the system time now as a LocalDateTime object
+	 * 
 	 * @return current system time as a LocalDateTime object
 	 */
 	LocalDateTime getCurrDateTime() {
@@ -256,9 +287,9 @@ public class TableUI extends UI {
 
 	/**
 	 * Parse a date time string as input by the user.
+	 * 
 	 * @param update True if called again
-	 * @return LocalDateTime if successful, else
-	 * TODO: @zhikai can help verify?
+	 * @return LocalDateTime if successful, else TODO: @zhikai can help verify?
 	 */
 	LocalDateTime getDateTime(boolean update) {
 		LocalDateTime dateTime = null;

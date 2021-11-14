@@ -1,6 +1,4 @@
-/**
- * contains all the sales reports based on year, month and day for the restaurant
- */
+
 package project2002;
 
 import java.util.*;
@@ -8,7 +6,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.io.FileWriter;
 import java.io.IOException;
-
+/**
+ * contains all the sales reports based on year, month and day for the restaurant
+ * TODO: claim your class eh
+ */
 public class SalesReport {
 	/**
 	 * contains the orders for the retaurant for a certain year

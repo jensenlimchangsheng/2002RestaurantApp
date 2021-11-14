@@ -7,7 +7,7 @@ import project2002.Restaurant.UIType;
 /**
 Represents the menu manager from the restaurant.
 The menu manager bridges and coordinates the communication between menuUI and menuHandler.
-@author Jiam Tzi Yu
+@author Tzi Yu
 @version 1.0
 @since 2021-11-09
 */

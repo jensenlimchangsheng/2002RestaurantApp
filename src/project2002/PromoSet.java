@@ -4,7 +4,7 @@ import project2002.MenuUI.ItemType;
 /**
  * Promoset subclass of Menu Item where it contains the attributes special request to allow customers to specify if special request.
  * 
- * @author Jiam Tzi Yu
+ * @author Tzi Yu
  * @version 1.0
  * @since 2021-11-09
  */

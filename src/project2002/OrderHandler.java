@@ -1,6 +1,4 @@
-/**
- * Represent the handler that handles all the orders in the restaurant
- */
+
 package project2002;
 
 import java.util.*;
@@ -9,6 +7,10 @@ import java.io.IOException;
 
 import project2002.Restaurant.handlerType;
 
+/**
+ * Represent the handler that handles all the orders in the restaurant
+ * TODO: @jensen update your method calls and change Orders to orders, OrderCounter to orderCounter
+ */
 public class OrderHandler extends Handler {
 	/**
 	 * contains an arraylist of orders that are in the restaurant at the current
@@ -107,7 +109,7 @@ public class OrderHandler extends Handler {
 		if (temp == -1) {
 			return false;
 		} else {
-			return Orders.get(temp).RemoveItems(item, Qty);
+			return Orders.get(temp).removeItems(item, Qty);
 		}
 	}
 

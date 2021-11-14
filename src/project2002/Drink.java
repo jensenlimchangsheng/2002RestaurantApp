@@ -4,7 +4,7 @@ import project2002.MenuUI.ItemType;
 /**
  * Drink subclass of Menu Item where it contains the attributes hot to allow customers to specify if they want hot version of the same drink.
  * 
- * @author Jiam Tzi Yu
+ * @author Tzi Yu
  * @version 1.0
  * @since 2021-11-09
  */

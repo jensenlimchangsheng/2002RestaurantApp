@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Represents Menu Handler from the restaurant where all operations of menu item and promoset are done here.
  * 
- * @author Jiam Tzi Yu
+ * @author Tzi Yu
  * @version 1.0
  * @since 2021-11-09
  */

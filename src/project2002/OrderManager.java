@@ -2,7 +2,9 @@ package project2002;
 
 import project2002.Restaurant.UIType;
 import project2002.Restaurant.handlerType;
-
+/**
+ * TODO: @jensen, come claim your class with author, version, date updated and description 
+ */
 public class OrderManager extends Manager {
 	OrderHandler orderHandler;
 	MenuHandler menu;

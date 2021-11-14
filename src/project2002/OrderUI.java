@@ -1,12 +1,13 @@
-/**
- * The user interface regarding any order issues in the restaurant
- */
+
 package project2002;
 
 import java.util.Scanner;
 
 import project2002.Restaurant.UIType;
-
+/**
+ * The user interface regarding any order issues in the restaurant
+ * TODO: likewise, author, version,date updated detials!
+ */
 public class OrderUI extends UI {
 	/**
 	 * to implement the order manager which controls the restaurant orders

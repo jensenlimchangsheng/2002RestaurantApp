@@ -1,10 +1,11 @@
-/**
- * a sales report manager to help link the sales report user interface and the sales report 
- */
+
 package project2002;
 
 import project2002.Restaurant.UIType;
-
+/**
+ * a sales report manager to help link the sales report user interface and the sales report 
+ * TODO: claim your class pls
+ */
 public class SalesReportManager extends Manager {
 	/**
 	 * the sales report that is connected to this manager

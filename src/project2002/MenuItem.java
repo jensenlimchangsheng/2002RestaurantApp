@@ -4,7 +4,7 @@ import project2002.MenuUI.ItemType;
 /**
  Represents each menu item from the restaurant.
  A menu item can consist of MAIN, SIDE, DRINK, DESSERT, PROMO.
- @author Jiam Tzi Yu
+ @author Tzi Yu
  @version 1.0
  @since 2021-11-09
  */

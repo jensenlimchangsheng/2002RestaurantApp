@@ -3,7 +3,9 @@ package project2002;
 import java.util.Scanner;
 
 import project2002.Restaurant.UIType;
-
+/**
+ * TODO: claim your class pls 
+ */
 public class SalesReportUI extends UI {
 	/**
 	 * the sales report manager that is tied to this sales report UI

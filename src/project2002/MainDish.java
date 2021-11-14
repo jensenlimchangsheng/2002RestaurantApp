@@ -4,7 +4,7 @@ import project2002.MenuUI.ItemType;
 /**
  * Main subclass of Menu Item where it contains the attributes doneness to allow customers to specify their doneness preference.
  * 
- * @author Jiam Tzi Yu
+ * @author Tzi Yu
  * @version 1.0
  * @since 2021-11-09
  */

@@ -1,11 +1,14 @@
-/**
- * Represent a single order in the restaurant
- */
 package project2002;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
+
+/**
+ * Represent a single order in the restaurant
+ * TODO: @jensen change methods and attributes to snakeCase, e.g. your hashmap should be items, table ID as tableID..., AddItems as addItems
+ * TODO: @jensen fixed related dependencies where the method is called 
+ */
 public class Order {
 	/** The unique OrderID for each order */
 	private int OrderID;
@@ -131,17 +134,17 @@ public class Order {
 	/**
 	 * to remove a menu item from the order when a customer wants to edit their order
 	 * @param item the menu item that you want to remove from this respective order
-	 * @param Qty the amount of this menu item you would like to remove from this order
+	 * @param qty the amount of this menu item you would like to remove from this order
 	 * @return a boolean which shows whether the item was successfully removed the item or not
 	 */
-	public boolean RemoveItems(MenuItem item, int Qty) {
-		if (Items.get(item) == null || Items.get(item) < Qty) {
+	public boolean removeItems(MenuItem item, int qty) {
+		if (Items.get(item) == null || Items.get(item) < qty) {
 			return false;
-		} else if (Items.get(item) < Qty || Items.get(item) == Qty) {
+		} else if (Items.get(item) < qty || Items.get(item) == qty) {
 			Items.remove(item);
 			return true;
 		} else {
-			Items.put(item, Items.get(item) - Qty);
+			Items.put(item, Items.get(item) - qty);
 			return true;
 		}
 	}
